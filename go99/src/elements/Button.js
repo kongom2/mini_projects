@@ -2,11 +2,24 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { text, _onClick, children, margin, width, padding } = props;
+  const {
+    text,
+    _onClick,
+    children,
+    margin,
+    width,
+    padding,
+    size,
+    bg,
+    fontColor,
+  } = props;
   const styles = {
     margin: margin,
     width: width,
     padding: padding,
+    size: size,
+    bg: bg,
+    fontColor: fontColor,
   };
 
   return (
@@ -25,15 +38,18 @@ Button.defaultProps = {
   is_float: false,
   margin: false,
   width: "100%",
+  size: "14px",
   padding: "12px 0px",
+  bg: "#d85147",
+  fontColor: "#ffffff",
 };
 
 const ElButton = styled.button`
   width: ${(props) => props.width};
-  background-color: #d85147;
-  color: #ffffff;
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.fontColor};
   font-weight: bold;
-  font-size: 18px;
+  font-size: ${(props) => props.size};
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border-radius: 6px;

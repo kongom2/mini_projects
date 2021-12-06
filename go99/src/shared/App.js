@@ -7,11 +7,13 @@ import {
   AddButton,
   Button,
 } from "../elements/elementsIndex";
+import Header from "../components/Header";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
+        <Header></Header>
         <Button widht="368px">Todo99 로그인 하기</Button>
       </Wrap>
     </BackImg>
