@@ -1,7 +1,69 @@
 import React from "react";
+import styled from "styled-components";
 
-const Input = () => {
-  return <React.Fragment>텍스트 컴포넌트</React.Fragment>;
+const Input = (props) => {
+
+    // props
+    const {
+        width, 
+        padding,
+        margin,
+        bg, // bg => background : bg
+        border,
+        height,
+
+        // input props
+        type,
+        _onChange, // input 값 변경 감지
+        placeholder, //placeholder 기입
+        value, // 텍스트 추출
+    } = props;
+
+    // props style
+    const styles = {
+        width: width,
+        margin: margin,
+        padding:padding,
+        bg:bg,
+        border:border,
+        height: height,
+    }
+
+    return (
+        <React.Fragment>
+            <InputStyle
+                {...styles}
+                type={type}
+                onChange={_onChange}
+                placeholder={placeholder}
+                value={value} 
+            ></InputStyle>
+        </React.Fragment>
+    )
 };
 
+// Input DefaultProps 
+Input.defaultProps = {
+    width: '100%',
+    height: '100%',
+    padding: null,
+    margin: null,
+    placeholder: '텍스트를 입력해주세요',
+    bg: '#fff',
+    border: '1px solid #ccc',
+    type:'text'
+}
+
+
+// Input 스타일드 컴포넌트
+const InputStyle = styled.input`
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: ${(props)=>props.width};
+    height:${(props)=>props.height};
+    padding: ${(props)=>props.padding};
+    margin:${(props)=>props.margin};
+    background-color: ${(props)=>props.bg};
+    border: ${(props)=>props.border};
+`
 export default Input;
