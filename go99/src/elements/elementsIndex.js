@@ -4,5 +4,6 @@ import Text from "./Text";
 import Button from "./Button";
 import AddButton from "./AddButton";
 import ImageButton from "./ImageButton";
+import Trackers from "./Trackers";
 
-export {Input,Grid,Text,AddButton,ImageButton,Button}
+export {Input,Grid,Text,AddButton,ImageButton,Button,Trackers}
