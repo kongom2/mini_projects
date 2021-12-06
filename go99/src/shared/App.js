@@ -1,20 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  Grid,
-  Input,
-  Text,
-  AddButton,
-  Button,
-} from "../elements/elementsIndex";
-import Header from "../components/Header";
+import { TrackersList } from "../components/componentIndex";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
-        <Header></Header>
-        <Button widht="368px">Todo99 로그인 하기</Button>
+        <TrackersList></TrackersList>
       </Wrap>
     </BackImg>
   );
