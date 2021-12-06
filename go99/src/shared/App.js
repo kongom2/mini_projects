@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Grid,Input,Text,AddButton} from '../elements/elementsIndex'
+import {Grid,Input,Text,AddButton,ImageButton} from '../elements/elementsIndex'
 
 function App() {
   return (
     <BackImg>
       <Wrap>
-
+        <ImageButton></ImageButton>
       </Wrap>
     </BackImg>
   );
