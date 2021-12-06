@@ -1,12 +1,18 @@
-import React from 'react';
-import styled from 'styled-components'
-import {Grid,Input,Text,AddButton,ImageButton} from '../elements/elementsIndex'
+import React from "react";
+import styled from "styled-components";
+import {
+  Grid,
+  Input,
+  Text,
+  AddButton,
+  Button,
+} from "../elements/elementsIndex";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
-        <ImageButton></ImageButton>
+        <Button widht="368px">Todo99 로그인 하기</Button>
       </Wrap>
     </BackImg>
   );
@@ -15,7 +21,7 @@ function App() {
 // background color or image
 const BackImg = styled.div`
   background-color: #eee;
-`
+`;
 
 // Wrap 스타일드 컴포넌트
 const Wrap = styled.div`
@@ -24,11 +30,10 @@ const Wrap = styled.div`
   max-width: 500px;
   height: 100%;
   min-height: 100vh;
-  margin:0 auto;
+  margin: 0 auto;
   position: relative;
   box-sizing: border-box;
   padding: 120px 30px 40px 30px;
-`
+`;
 
 export default App;
- 
