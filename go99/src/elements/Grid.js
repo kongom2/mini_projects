@@ -3,7 +3,19 @@ import styled from "styled-components";
 
 const Grid = (props) => {
 
-    const {is_flex,width,padding,margin,bg,children,border,height} = props;
+    // props
+    const {
+        is_flex, // is_flex => display:flex; align-items:center
+        width, 
+        padding,
+        margin,
+        bg, // bg => background : bg
+        children, // Grid로 감싼 자식요소
+        border,
+        height
+    } = props;
+   
+    // style
     const styles = {
         is_flex: is_flex,
         width: width,
@@ -12,7 +24,6 @@ const Grid = (props) => {
         padding:padding,
         bg:bg,
         border:border
-        
     }
 
     return(
