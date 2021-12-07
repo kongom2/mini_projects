@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { TrackersList } from "../components/componentIndex";
+import { TrackersList,Header,WeekList,Feedback } from "../components/componentIndex";
+import Grid from "../elements/Grid";
+import Main from "../page/Main";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
-        <TrackersList></TrackersList>
+          <Feedback></Feedback>
       </Wrap>
     </BackImg>
   );
@@ -15,6 +17,7 @@ function App() {
 // background color or image
 const BackImg = styled.div`
   background-color: #eee;
+  height: 150%;
 `;
 
 // Wrap 스타일드 컴포넌트
@@ -27,7 +30,7 @@ const Wrap = styled.div`
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  padding: 120px 30px 40px 30px;
+  padding: 120px 0 40px 0;
 `;
 
 export default App;

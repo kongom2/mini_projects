@@ -9,12 +9,14 @@ const ImageButton = (props) => {
       deleteIcon, // 딜리트 아이콘
       _onClick,
       size,
-      height
+      height,
+      margin
   } = props;
   
   // props style
   const styles = {
       height: height,
+      margin:margin
   }
   
   if(props.deleteIcon) {
@@ -46,7 +48,8 @@ const ImageButton = (props) => {
 ImageButton.defaultProps = {
   delete:false,
   size:'16px',
-  height: '16px'
+  height: '16px',
+  margin:null
 }
 
 // ImageButton 스타일드 컴포넌트
@@ -55,6 +58,7 @@ const Icon = styled.div`
   cursor: pointer;
   transition: all 0.2s;
   height: ${(props)=>props.height};
+  margin: ${(props)=>props.margin};
   // hover 이벤트
   &:hover {
     color:#D85147;

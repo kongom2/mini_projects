@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
@@ -17,6 +17,7 @@ const Input = (props) => {
         _onChange, // input 값 변경 감지
         placeholder, //placeholder 기입
         value, // 텍스트 추출
+        ref
     } = props;
 
     // props style
@@ -32,6 +33,7 @@ const Input = (props) => {
     return (
         <React.Fragment>
             <InputStyle
+                ref={ref}
                 {...styles}
                 type={type}
                 onChange={_onChange}
@@ -45,7 +47,7 @@ const Input = (props) => {
 // Input DefaultProps 
 Input.defaultProps = {
     width: '100%',
-    height: '100%',
+    height: null,
     padding: null,
     margin: null,
     placeholder: '텍스트를 입력해주세요',

@@ -25,7 +25,6 @@ const Trackers = (props) => {
     pointColor = '#888'
   }
   
-  console.log(checkPoint)
 
   const styles = {
     pointColor:pointColor
@@ -48,10 +47,11 @@ Trackers.defaultProps = {
 }
 
 const TrackersStyle = styled.div`
+
   float: left;
   border-radius: 50%;
-  width: 12.2857%;
-  margin: 1% 1%;
+  width: 9.2857%;
+  margin: 2% 2.5%;
   background-color: ${(props)=>props.pointColor};
   cursor: pointer;
   &::after {

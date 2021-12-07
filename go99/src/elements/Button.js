@@ -54,6 +54,7 @@ const ElButton = styled.button`
   box-sizing: border-box;
   border-radius: 6px;
   border: none;
+  cursor: pointer;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
 `;
 export default Button;

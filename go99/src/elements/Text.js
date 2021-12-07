@@ -10,15 +10,19 @@ const Text = (props) => {
       color,
       size,
       margin,
-      align
+      align,
+      height,
+      border
     } = props
 
     // props style
     const styles = {
+      border:border,
       bold:bold, 
       color:color, 
       size:size,
       margin:margin,
+      height:height,
       align:align // center,start,end
     }
 
@@ -40,6 +44,7 @@ Text.defaultProps = {
     size: '18px',
     margin: '0',
     align:null,
+    height:null
   
 }
 
@@ -51,6 +56,8 @@ const TextStyle = styled.p`
     font-size: ${(props) => props.size};
     margin: ${(props) => props.margin};
     align-self:  ${(props) => props.align};
+    height:  ${(props) => props.height};
+    border-radius:  ${(props) => props.border};
     word-break:break-all;
 `
 

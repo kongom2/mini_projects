@@ -13,11 +13,15 @@ const Grid = (props) => {
         border,
         borderBottom,
         height,
+        hide,
+        borderRadius,
         children, // Grid로 감싼 자식요소
     } = props;
    
     // props style
     const styles = {
+        borderRadius:borderRadius,
+        hide:hide,
         is_flex: is_flex,
         width: width,
         height: height,
@@ -44,7 +48,7 @@ Grid.defaultProps = {
     width: '100%',
     padding:false,
     margin:false,
-    bg:'#fff',
+    bg:null,
     height: '100%'
 }
 
@@ -57,8 +61,10 @@ const GridBox = styled.div`
     ${(props)=> props.margin ? `margin : ${props.margin}` : ''};
     ${(props)=> props.bg ? `background : ${props.bg}` : ''};
     ${(props)=> props.is_flex ? 'display:flex; align-items:center;  justify-content: space-between;' : ''};
+    ${(props)=> props.hide ? `display : ${props.hide}` : ''};
     ${(props)=> props.border ? `border : ${props.border}` : 'none'};
     ${(props)=> props.borderBottom ? `border-bottom : ${props.borderBottom}` : 'none'};
+    ${(props)=> props.borderRadius ? `border-radius : ${props.borderRadius}` : 'none'};
 `
 
 export default Grid
