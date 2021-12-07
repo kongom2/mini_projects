@@ -10,6 +10,7 @@ import Login from "../page/Login";
 import Main from "../page/Main";
 import EditProject from "../page/EditProject";
 import Project from "../page/Project";
+import Detail from "../page/Detail";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/edit" exact component={EditProject} />
           <Route path="/project" exact component={Project} />
+          <Route path="/detail" exact component={Detail} />
         </Wrap>
       </BackImg>
     </BrowserRouter>

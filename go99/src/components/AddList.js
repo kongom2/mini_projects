@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
 const AddList = () => {
-
   return (
     <React.Fragment>
       <Grid
@@ -26,5 +25,5 @@ const AddList = () => {
     </React.Fragment>
   );
 };
-  
+
 export default AddList;

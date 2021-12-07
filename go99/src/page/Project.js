@@ -1,6 +1,6 @@
 import React from "react";
 // component, element 불러오기
-import { Header, ProjectList, AddList } from "../components/componentIndex";
+import { ProjectList, AddList } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 
 const Project = () => {
@@ -16,6 +16,10 @@ const Project = () => {
           </Text>
         </Grid>
         <ProjectList />
+        <ProjectList />
+        <ProjectList />
+        <ProjectList />
+
         <ProjectList />
         <ProjectList />
         <ProjectList />

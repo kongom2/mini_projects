@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 // component, element 불러오기
 import {} from "../components/componentIndex";
 import { Text, Input, Button, Grid } from "../elements/elementsIndex";
 
 const Login = () => {
+  const [changeText, setChangeText] = useState("");
+  const [feedback, setFeedback] = useState();
+
   return (
     <React.Fragment>
       <Grid padding="0px 30px">
