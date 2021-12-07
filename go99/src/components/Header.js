@@ -7,7 +7,7 @@ const Header = (props) => {
   if (!is_login) {
     return (
       <React.Fragment>
-        <Grid is_flex padding="10px 0px">
+        <Grid is_flex padding="10px 20px" margin='0 0 40px 0'>
           <Grid>
             <HiChevronLeft size="40" color="black" _onClick={() => {}} />
           </Grid>
@@ -24,7 +24,7 @@ const Header = (props) => {
   }
   return (
     <React.Fragment>
-      <Grid is_flex padding="10px 0px">
+      <Grid is_flex padding="10px 20px" margin='0 0 40px 0'>
         <Grid>
           <HiChevronLeft size="40" color="black" _onClick={() => {}} />
         </Grid>

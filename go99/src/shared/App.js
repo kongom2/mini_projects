@@ -2,21 +2,25 @@ import React from "react";
 import styled from "styled-components";
 
 // 라우터 불러오기
-import { Route } from "react-router-dom"; 
+import { Route,BrowserRouter } from "react-router-dom"; 
 
 // 페이지 불러오기
+import {Header} from '../components/componentIndex'
 import Login from "../page/Login";
-import { TodoList,Feedback } from "../components/componentIndex";
+import Main from "../page/Main";
+
 
 function App() {
   return (
-    <React.Fragment>
+    <BrowserRouter>
       <BackImg>
         <Wrap>
-          <Feedback></Feedback>
+          <Header></Header>
+          <Route path="/login" exact component={Login} />
+          <Route path="/"  exact component={Main} />
         </Wrap>
       </BackImg>
-    </React.Fragment>
+    </BrowserRouter>
   );
 }
 
@@ -36,7 +40,7 @@ const Wrap = styled.div`
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  padding: 120px 0 40px 0;
+
 `;
 
 export default App;

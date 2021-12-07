@@ -44,7 +44,13 @@ const Feedback = () => {
         <Text bold size='1rem'>"{changeText}"</Text>
       </Grid>
       <Grid height='auto'hide={changeText === '' ?null : 'none' } >
-        <Input value={feedback} _onChange={onChange} placeholder='이번주 미흡했던 부분을 적어주세요!!' margin='0 0 20px 0' padding='15px'></Input>
+        <Input 
+          value={feedback} 
+          _onChange={onChange} 
+          placeholder='이번주 미흡했던 부분을 적어주세요!!' 
+          margin='0 0 20px 0' 
+          padding='15px'
+        ></Input>
         <Button 
           _onClick={addComments}
         >입력</Button>
