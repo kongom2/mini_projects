@@ -11,6 +11,7 @@ import Main from "../page/Main";
 import EditProject from "../page/EditProject";
 import Project from "../page/Project";
 import Detail from "../page/Detail";
+import Signup from "../page/Signup";
 
 function App() {
   return (
@@ -18,11 +19,14 @@ function App() {
       <BackImg>
         <Wrap>
           <Header></Header>
-          <Route path="/" exact component={Main} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/edit" exact component={EditProject} />
+          <Route path="/" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+
           <Route path="/project" exact component={Project} />
-          <Route path="/detail" exact component={Detail} />
+          <Route path="/project/:projectID/edit" exact component={EditProject} />
+          
+          <Route path="/main/:projectID" exact component={Main} />
+          <Route path="/main/:projectID/detail" exact component={Detail} />
         </Wrap>
       </BackImg>
     </BrowserRouter>
