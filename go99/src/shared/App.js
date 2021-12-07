@@ -24,9 +24,9 @@ function App() {
 
           <Route path="/project" exact component={Project} />
           <Route path="/project/:projectID/edit" exact component={EditProject} />
-          
+
           <Route path="/main/:projectID" exact component={Main} />
-          <Route path="/main/:projectID/detail" exact component={Detail} />
+          <Route path="/main/:projectID/:detailID" exact component={Detail} />
         </Wrap>
       </BackImg>
     </BrowserRouter>

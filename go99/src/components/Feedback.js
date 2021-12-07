@@ -28,7 +28,7 @@ const Feedback = () => {
   };
 
   return (
-    <Grid height="240px" padding="20px" bg="#eee" borderRadius="10px">
+    <Grid height="240px" padding="20px" bg="#eee" borderRadius="0 0 10px 10px">
       <Grid is_flex height="auto" margin="20px 0">
         <Text align="center" margin="0 0 0 0" size="1.5rem" bold>
           피드백

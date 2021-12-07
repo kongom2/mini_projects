@@ -6,7 +6,7 @@ import { Text, Grid } from "../elements/elementsIndex";
 const Detail = () => {
   return (
     <React.Fragment>
-      <Grid padding="0px 30px">
+      <Grid padding="104px 20px 0 20px">
         <Grid padding="0px 0px 32px 16px">
           <Text size="36px" color="#455154" bold>
             오늘 할 일
