@@ -5,5 +5,15 @@ import Button from "./Button";
 import AddButton from "./AddButton";
 import ImageButton from "./ImageButton";
 import Trackers from "./Trackers";
+import CheckCircle from "./CheckCircle";
 
-export {Input,Grid,Text,AddButton,ImageButton,Button,Trackers}
+export {
+  Input,
+  Grid,
+  Text,
+  AddButton,
+  ImageButton,
+  Button,
+  Trackers,
+  CheckCircle,
+};

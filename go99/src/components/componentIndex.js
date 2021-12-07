@@ -1,6 +1,9 @@
 import TrackersList from "./TrackersList";
-import Header from "./Header";
-import WeekList from "./WeekList";
-import Feedback from "./Feedback";
 
-export {TrackersList,Header,WeekList,Feedback}
+import Feedback from "./Feedback";
+import AddList from "./AddList";
+import ProjectList from "./ProjectList";
+import TodoList from "./TodoList";
+
+export { TrackersList, Feedback, AddList, ProjectList, TodoList };
+
