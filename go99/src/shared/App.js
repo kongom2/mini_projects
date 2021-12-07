@@ -1,14 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+
+// 라우터 불러오기
+import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+
+// 페이지 불러오기
+import Login from "../page/Login";
+
 import { TodoList } from "../components/componentIndex";
 
 function App() {
   return (
-    <BackImg>
-      <Wrap>
-        <TodoList></TodoList>
-      </Wrap>
-    </BackImg>
+    <React.Fragment>
+      <BackImg>
+        <Wrap>
+          <TodoList></TodoList>
+        </Wrap>
+      </BackImg>
+    </React.Fragment>
   );
 }
 
