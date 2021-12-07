@@ -8,23 +8,26 @@ const Trackers = (props) => {
     _onClick,
     checkPoint // 0개 ~ 5개이상
   } = props;
+  
+  const [num,setNum] = useState(checkPoint)
+
+
 
   let pointColor = '#eee'
 
-  if(checkPoint === 0) {
+  if(num === 0) {
     pointColor = '#eee'
-  } else if(checkPoint === 1) {
+  } else if(num === 1) {
     pointColor = '#ddd'
-  } else if(checkPoint === 2) {
+  } else if(num === 2) {
     pointColor = '#ccc'
-  } else if(checkPoint === 3) {
+  } else if(num === 3) {
     pointColor = '#bbb'
-  } else if(checkPoint === 4) {
+  } else if(num === 4) {
     pointColor = '#aaa'
-  } else if(checkPoint > 4) {
+  } else if(num > 4) {
     pointColor = '#888'
   }
-  
 
   const styles = {
     pointColor:pointColor

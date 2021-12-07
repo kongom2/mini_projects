@@ -1,10 +1,24 @@
-import React from "react";
+import React,{useEffect} from "react";
+import axios from "axios";
 import styled from "styled-components";
 // component, element 불러오기
 import { ProjectList, AddList } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 
+
+
 const Project = () => {
+
+  useEffect(()=>{
+    axios.get('https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0')
+    .then((result) => {
+      console.log(result.data)
+    })
+    .catch((err) => {
+      console.log('에러',err)
+    })
+  },[])
+
   return (
     <React.Fragment>
       <Grid padding="104px 20px">
