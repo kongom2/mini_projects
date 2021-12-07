@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 // 라우터 불러오기
-import { Route,BrowserRouter } from "react-router-dom"; 
+import { Route, BrowserRouter } from "react-router-dom";
 
 // 페이지 불러오기
-import {Header} from '../components/componentIndex'
+import { Header } from "../components/componentIndex";
 import Login from "../page/Login";
 import Main from "../page/Main";
-
+import EditProject from "../page/EditProject";
 
 function App() {
   return (
@@ -16,8 +16,9 @@ function App() {
       <BackImg>
         <Wrap>
           <Header></Header>
+          <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />
-          <Route path="/"  exact component={Main} />
+          <Route path="/edit" exact component={EditProject} />
         </Wrap>
       </BackImg>
     </BrowserRouter>
@@ -40,7 +41,6 @@ const Wrap = styled.div`
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-
 `;
 
 export default App;
