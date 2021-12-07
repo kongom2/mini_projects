@@ -9,7 +9,7 @@ const Button = (props) => {
     margin,
     width,
     padding,
-    size,
+    fontSize,
     bg,
     fontColor,
   } = props;
@@ -17,7 +17,7 @@ const Button = (props) => {
     margin: margin,
     width: width,
     padding: padding,
-    size: size,
+    fontSize: fontSize,
     bg: bg,
     fontColor: fontColor,
   };
@@ -38,7 +38,7 @@ Button.defaultProps = {
   is_float: false,
   margin: false,
   width: "100%",
-  size: "14px",
+  fontSize: "14px",
   padding: "12px 0px",
   bg: "#d85147",
   fontColor: "#ffffff",
@@ -49,7 +49,7 @@ const ElButton = styled.button`
   background-color: ${(props) => props.bg};
   color: ${(props) => props.fontColor};
   font-weight: bold;
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.fontSize};
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border-radius: 6px;
