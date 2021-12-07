@@ -40,12 +40,14 @@ const Signup = (props) => {
 
     return(
         <React.Fragment>
-            <Grid padding='0 20px'>
-                <Text size='2rem' bold margin='0 0 40px 0'>회원가입</Text>
+            <Grid padding='0 30px'>
+                <Text size="36px" color="#455154" bold margin='0px 0px 32px 16px'>회원가입</Text>
                 <Input 
                     margin={id === '' ? '0 0 30px 0' : '0 0 20px 0'}
                     padding='15px' 
-                    placeholder='이메일을   입력해주세요' 
+                    bg="#F4F6F6"
+                    border="0px"
+                    placeholder='이메일을 입력해주세요' 
                     _onChange={(e)=>{setId(e.target.value)}}
                 ></Input>
                 <Grid hide={id === '' ? 'none' : null}>
@@ -58,13 +60,17 @@ const Signup = (props) => {
                 <Input 
                     margin='0 0 30px 0' 
                     padding='15px'
+                    bg="#F4F6F6"
+                    border="0px"
                     placeholder='닉네임을 입력해주세요' 
                     _onChange={(e)=>{setUserName(e.target.value)}}
                 ></Input>
                 <Input 
                     type='password' 
                     margin='0 0 30px 0' 
-                    padding='15px' 
+                    padding='16px' 
+                    border="0px"
+                    bg="#F4F6F6"
                     placeholder='비밀번호를 입력해주세요' 
                     _onChange={(e)=>{setPwd(e.target.value)}}
                 ></Input>
@@ -78,7 +84,9 @@ const Signup = (props) => {
                 <Input 
                     type='password' 
                     margin='0 0 40px 0' 
-                    padding='15px' 
+                    padding='16px'
+                    border="0px"
+                    bg="#F4F6F6"
                     placeholder='비밀번호를 다시 입력해주세요' 
                     _onChange={(e)=>{setPwdCheck(e.target.value)}}
                 ></Input>
@@ -90,8 +98,10 @@ const Signup = (props) => {
                     >{pwd === pwdCheck ? '비밀번호가 같습니다.' : '비밀번호가 다릅니다.'}</Text>
                 </Grid>
                 <Button
+                    padding='16px'
+                    fontSize="16px"
                     _onClick={singUp}
-                >회원가입</Button>
+                >ToDo99 회원가입</Button>
             </Grid>
         </React.Fragment>
     )
