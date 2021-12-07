@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  Text,
-  ImageButton,
-  Grid,
-  AddButton,
-  Input,
-} from "../elements/elementsIndex";
+import { Text, ImageButton, Grid } from "../elements/elementsIndex";
 
 const ProjectList = () => {
   return (
