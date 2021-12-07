@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { TrackersList, Feedback, AddList } from "../components/componentIndex";
+import { AddList, ProjectList } from "../components/componentIndex";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
         <AddList></AddList>
+        <ProjectList></ProjectList>
+        <ProjectList></ProjectList>
+        <ProjectList></ProjectList>
       </Wrap>
     </BackImg>
   );
