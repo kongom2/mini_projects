@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { TrackersList } from "../components/componentIndex";
+import { TrackersList, Feedback } from "../components/componentIndex";
 
 function App() {
   return (
     <BackImg>
       <Wrap>
-        <TrackersList></TrackersList>
+        <Feedback></Feedback>
       </Wrap>
     </BackImg>
   );
