@@ -3,15 +3,12 @@ import React from "react";
 import { Header } from "../components/componentIndex";
 import { Text, Input, Button, Grid } from "../elements/elementsIndex";
 
-const Signup = () => {
+const EditProject = () => {
   return (
     <React.Fragment>
       <Header></Header>
       <Grid>
-        <Text size="36px">회원가입</Text>
-        <Input />
-        <Input />
-        <Input />
+        <Text size="36px">프로젝트 수정</Text>
         <Input />
         <Button></Button>
       </Grid>
@@ -19,4 +16,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default EditProject;
