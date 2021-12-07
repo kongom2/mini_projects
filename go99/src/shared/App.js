@@ -1,9 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 
 // 라우터 불러오기
 import { Route, BrowserRouter } from "react-router-dom";
-
+import axios from "axios";
 // 페이지 불러오기
 import { Header } from "../components/componentIndex";
 import Login from "../page/Login";
@@ -14,6 +14,7 @@ import Detail from "../page/Detail";
 import Signup from "../page/Signup";
 
 function App() {
+
   return (
     <BrowserRouter>
       <BackImg>

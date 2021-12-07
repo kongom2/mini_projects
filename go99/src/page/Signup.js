@@ -40,7 +40,7 @@ const Signup = (props) => {
 
     return(
         <React.Fragment>
-            <Grid padding='0 20px'>
+            <Grid padding='104px 20px 0 20px'>
                 <Text size="36px" color="#455154" bold margin='0px 0px 32px 16px'>회원가입</Text>
                 <Input 
                     margin={id === '' ? '0 0 30px 0' : '0 0 20px 0'}
