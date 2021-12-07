@@ -2,20 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 // 라우터 불러오기
-import { Route } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
+import { Route } from "react-router-dom"; 
 
 // 페이지 불러오기
 import Login from "../page/Login";
-
-import { TodoList } from "../components/componentIndex";
+import { TodoList,Feedback } from "../components/componentIndex";
 
 function App() {
   return (
     <React.Fragment>
       <BackImg>
         <Wrap>
-          <TodoList></TodoList>
+          <Feedback></Feedback>
         </Wrap>
       </BackImg>
     </React.Fragment>

@@ -1,5 +1,4 @@
-import React,{useState,useRef} from "react";
-import styled from "styled-components";
+import React,{useState} from "react";
 import { Grid,Text,Input,Button,ImageButton } from "../elements/elementsIndex";
 
 
@@ -15,12 +14,12 @@ const Feedback = () => {
     setFeedback(e.target.value)
   }
 
-  const deleteFeedback = () => {
-    setFeedback(null)
-    setChangeText()
+  const editFeedback = () => {
+    setChangeText('')
   }
 
-  const editFeedback = () => {
+  const deleteFeedback = (e) => {
+    setFeedback('')
     setChangeText('')
   }
 

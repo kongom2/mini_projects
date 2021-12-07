@@ -19,6 +19,7 @@ const Grid = (props) => {
 
   // props style
   const styles = {
+    hide:hide,
     is_flex: is_flex,
     width: width,
     height: height,
@@ -65,6 +66,8 @@ const GridBox = styled.div`
   ${(props) => (props.border ? `border : ${props.border}` : "none")};
   ${(props) =>
     props.borderBottom ? `border-bottom : ${props.borderBottom}` : "none"};
-`;
+  ${(props) => (props.hide ? `display:none` : "none")};
+  `
+;
 
 export default Grid;
