@@ -8,7 +8,7 @@ const AddList = () => {
         is_flex
         border="1px solid #D2D2D2"
         padding="16px"
-        borderRadius="10px"
+        borderRadius="10px 10px 0 0"
       >
         <Input
           padding="16px"

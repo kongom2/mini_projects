@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 // component, element 불러오기
 import {} from "../components/componentIndex";
 import { Text, Input, Button, Grid } from "../elements/elementsIndex";
 
 const Login = () => {
-  const [changeText, setChangeText] = useState("");
-  const [feedback, setFeedback] = useState();
+  const history = useHistory();
 
   return (
     <React.Fragment>
-      <Grid padding="0px 30px">
+      <Grid padding="104px 30px">
         <Grid padding="0px 0px 32px 16px">
           <Text size="36px" color="#455154" bold>
             Welcome
@@ -41,7 +41,9 @@ const Login = () => {
         />
         <Button
           // 클릭 이벤트
-          _onClick={() => {}}
+          _onClick={() => {
+            history.push("/project");
+          }}
           padding="16px"
           margin="10px 0 5px 0"
           fontSize="16px"
@@ -50,7 +52,9 @@ const Login = () => {
         </Button>
         <Button
           // 클릭 이벤트
-          _onClick={() => {}}
+          _onClick={() => {
+            history.push("/signup");
+          }}
           padding="16px"
           margin="5px 0px"
           fontSize="16px"
