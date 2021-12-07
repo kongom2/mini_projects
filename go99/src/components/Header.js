@@ -46,7 +46,8 @@ const Header = (props) => {
 Header.propTypes = {};
 
 const HeaderWrap = styled.div`
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   position: fixed;
   top: 0px;
   background-color: #fff;

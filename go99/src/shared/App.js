@@ -1,9 +1,13 @@
 import React,{useEffect} from "react";
 import styled from "styled-components";
 
+
 // 라우터 불러오기
 import { Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
+import { ConnectedRouter } from "connected-react-router"
+import { history } from '../redux/configureStore';
+
 // 페이지 불러오기
 import { Header } from "../components/componentIndex";
 import Login from "../page/Login";
@@ -16,7 +20,7 @@ import Signup from "../page/Signup";
 function App() {
 
   return (
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <BackImg>
         <Wrap>
           <Header></Header>
@@ -30,7 +34,7 @@ function App() {
           <Route path="/main/:projectID/:detailID" exact component={Detail} />
         </Wrap>
       </BackImg>
-    </BrowserRouter>
+    </ConnectedRouter>
   );
 }
 

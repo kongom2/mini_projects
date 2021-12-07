@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Text, ImageButton, Grid } from "../elements/elementsIndex";
 import { useSelector } from "react-redux";
 
-const ProjectList = () => {
-  const projectData = useSelector((state) => state.project.project);
+const ProjectList = (props) => {
+  const projectData = useSelector((state) => state.project.project_list);
+  console.log(projectData)
   return (
     <React.Fragment>
       {projectData.map((p, idx) => {
@@ -21,16 +22,6 @@ const ProjectList = () => {
           </Grid>
         );
       })}
-      <Grid padding="16px">
-        <Grid is_flex>
-          <Text size="36px" bold="bold" color="#455154" margin="0px 10px">
-            항해99
-          </Text>
-          <ImageButton margin="0px 0px 0px auto" />
-          <ImageButton margin="0px 10px" deleteIcon />
-        </Grid>
-        <Hr />
-      </Grid>
     </React.Fragment>
   );
 };
