@@ -13,6 +13,7 @@ const Button = (props) => {
     bg,
     fontColor,
   } = props;
+  
   const styles = {
     margin: margin,
     width: width,
