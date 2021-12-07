@@ -12,11 +12,13 @@ const Text = (props) => {
       margin,
       align,
       height,
-      border
+      border,
+      textAlign,
     } = props
 
     // props style
     const styles = {
+      textAlign:textAlign,
       border:border,
       bold:bold, 
       color:color, 
@@ -50,6 +52,7 @@ Text.defaultProps = {
 
 // Text 스타일드 컴포넌트
 const TextStyle = styled.p`
+    text-align:${(props) => props.textAlign};
     margin: ${(props) => props.margin};
     font-weight: ${(props) => (props.bold) ? '600': '200'};
     color: ${(props) => props.color};

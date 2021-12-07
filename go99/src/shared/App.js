@@ -8,7 +8,8 @@ import { Route,BrowserRouter } from "react-router-dom";
 import {Header} from '../components/componentIndex'
 import Login from "../page/Login";
 import Main from "../page/Main";
-
+import Signup from "../page/Signup";
+  
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Header></Header>
           <Route path="/login" exact component={Login} />
           <Route path="/"  exact component={Main} />
+          <Route path="/signup"  exact component={Signup} />
         </Wrap>
       </BackImg>
     </BrowserRouter>
