@@ -1,15 +1,26 @@
 import React from "react";
 // component, element 불러오기
-import { Header } from "../components/componentIndex";
-import { Text, ProjectList, AddList, Grid } from "../elements/elementsIndex";
+import { Header, ProjectList, AddList } from "../components/componentIndex";
+import { Text, Grid } from "../elements/elementsIndex";
 
 const Project = () => {
   return (
     <React.Fragment>
-      <Header></Header>
-      <Grid>
-        <Text size="36px">kongom2님의 프로젝트 리스트</Text>
-        <ProjectList></ProjectList>
+      <Grid padding="0px 30px">
+        <Grid padding="0px 0px 32px 16px">
+          <Text size="36px" color="#455154" bold>
+            kongom2 님의
+          </Text>
+          <Text size="36px" color="#455154" bold>
+            프로젝트 리스트
+          </Text>
+        </Grid>
+        <ProjectList />
+        <ProjectList />
+        <ProjectList />
+        <ProjectList />
+        <ProjectList />
+
         <AddList></AddList>
       </Grid>
     </React.Fragment>

@@ -9,6 +9,7 @@ import { Header } from "../components/componentIndex";
 import Login from "../page/Login";
 import Main from "../page/Main";
 import EditProject from "../page/EditProject";
+import Project from "../page/Project";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />
           <Route path="/edit" exact component={EditProject} />
+          <Route path="/project" exact component={Project} />
         </Wrap>
       </BackImg>
     </BrowserRouter>
