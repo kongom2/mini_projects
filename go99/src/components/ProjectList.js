@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { Text, ImageButton, Grid } from "../elements/elementsIndex";
+import { actionCreators as projectActions } from "../redux/modules/project";
 import { useSelector, useDispatch } from "react-redux";
-import { loadProject } from "../redux/modules/project";
 
 const ProjectList = () => {
-  const [arr, setArr] = useState([]);
+  // 디스패치 선언
+  const dispatch = useDispatch();
 
+  // 데이터 선택
+  const project_list = useSelector((state) => state.project.list);
+  const projects_id = useSelector((state) => state.project.projects_id);
+  console.log(projects_id);
+
+  // const deleteProject = () => {
+  //   dispatch(projectActions.deleteProjectDB(projects_id));
+  // };
+
+  // DB에서 불러오기
   useEffect(() => {
-    axios
-      .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
-      .then((res) => {
-        const projectData = res.data.project;
-        setArr(projectData);
-      })
-      .catch((err) => {
-        console.log("에러", err);
-      });
+    dispatch(projectActions.getProjectDB());
   }, []);
 
   return (
     <React.Fragment>
-      {arr.map((item, index) => {
+      {project_list.map((item, index) => {
         return (
           <Grid padding="16px" key={index}>
             <Grid is_flex>
-              <Text size="36px" bold="bold" color="#455154" margin="0px 10px">
+              <Text
+                size="36px"
+                bold="bold"
+                color="#455154"
+                margin="0px 10px"
+                _onClick={() => {}}
+              >
                 {item.projects_name}
               </Text>
-              <ImageButton margin="0px 0px 0px auto" />
-              <ImageButton margin="0px 10px" deleteIcon />
+              <ImageButton margin="0px 0px 0px auto" _onClick={() => {}} />
+              <ImageButton margin="0px 10px" deleteIcon _onClick={() => {}} />
             </Grid>
             <Hr />
           </Grid>

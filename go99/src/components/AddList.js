@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
+import { actionCreators as projectActions } from "../redux/modules/project";
+import { useSelector, useDispatch } from "react-redux";
+
 const AddList = () => {
+  const dispatch = useDispatch();
+
+  const addProject = () => {
+    dispatch(projectActions.addProjectDB());
+  };
   return (
     <React.Fragment>
       <Grid
@@ -13,7 +21,7 @@ const AddList = () => {
         <Input
           padding="16px"
           margin="0 20px 0 0"
-          placeholder="오늘의 느낀점을 남겨주세요"
+          placeholder="99일간의 프로젝트를 추가해 주세요"
           onKeyPress={() => {}}
         />
         <AddButton

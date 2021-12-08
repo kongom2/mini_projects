@@ -1,28 +1,18 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
 import { ProjectList, AddList } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 
 const Project = () => {
-  // useEffect(() => {
-  //   axios
-  //     .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
-  //     .then((result) => {
-  //       console.log(result.data.project);
-  //     })
-  //     .catch((err) => {
-  //       console.log("에러", err);
-  //     });
-  // }, []);
-
+  const loginUser = "로그인한 유저"; // useSelector((state) => state.user.loginUser);
   return (
     <React.Fragment>
       <Grid padding="104px 20px">
         <Grid padding="0px 0px 32px 16px">
           <Text size="36px" color="#455154" bold>
-            kongom2 님의
+            {loginUser} 님의
           </Text>
           <Text size="36px" color="#455154" bold>
             프로젝트 리스트

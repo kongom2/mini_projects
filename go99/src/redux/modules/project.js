@@ -2,6 +2,9 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/axios";
 
+// api이후 삭제
+import axios from "axios";
+
 // Actions
 const GET_PROJECT = "GET_PROJECT"; // 프로젝트 조회하기
 const ADD_PROJECT = "ADD_PROJECT"; // 프로젝트 추가하기
@@ -28,12 +31,21 @@ const initialState = {
   list: [],
 };
 
+const initialStateProject = {
+  projects_name: "",
+  projects_id: "",
+  date: "",
+};
+
 // DB
-const loadProjectDB = () => {
+const getProjectDB = () => {
   return function (dispatch, getState, { history }) {
-    apis.getProjects
+    // apis.getProjects
+    axios
+      .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
-        let project_list = res.data;
+        let project_list = res.data.project;
+        console.log(res.data);
         dispatch(getProject(project_list));
       })
       .catch((err) => {
@@ -43,10 +55,12 @@ const loadProjectDB = () => {
 };
 const addProjectDB = () => {
   return function (dispatch, getState, { history }) {
-    apis.addProjects
+    // apis.addProjects
+    axios
+      .post("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
-        let project_title = res.data.project_id;
-        dispatch(addProject(project_title));
+        // let project_title = res.data.project_id;
+        dispatch(addProject(initialStateProject.projects));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
@@ -55,7 +69,9 @@ const addProjectDB = () => {
 };
 const editProjectDB = () => {
   return function (dispatch, getState, { history }) {
-    apis.editProjects
+    // apis.editProjects
+    axios
+      .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
         dispatch(editProject());
       })
@@ -66,9 +82,13 @@ const editProjectDB = () => {
 };
 const deleteProjectDB = () => {
   return function (dispatch, getState, { history }) {
-    apis.deleteProjects
+    // apis.deleteProjects
+    axios
+      .delete("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
-        dispatch(deleteProject());
+        console.log(res.data.project);
+        let projects_id = res.data.project.project_id;
+        dispatch(deleteProject(projects_id));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
@@ -112,8 +132,8 @@ const actionCreators = {
   addProject,
   editProject,
   deleteProject,
+  getProjectDB,
   addProjectDB,
-  loadProjectDB,
   editProjectDB,
   deleteProjectDB,
 };
