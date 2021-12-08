@@ -7,12 +7,20 @@ import { loadProject } from "../redux/modules/project";
 
 const ProjectList = () => {
   const [arr, setArr] = useState([]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4f3b92594bdc43d7b14a17cce7a085b28784cd78
 
   useEffect(() => {
     axios
       .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
         const projectData = res.data.project;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4f3b92594bdc43d7b14a17cce7a085b28784cd78
         setArr(projectData);
       })
       .catch((err) => {
