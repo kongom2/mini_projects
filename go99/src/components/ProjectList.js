@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { Text, ImageButton, Grid } from "../elements/elementsIndex";
 import { actionCreators as projectActions } from "../redux/modules/project";
 import { useSelector, useDispatch } from "react-redux";
 
 const ProjectList = () => {
-  // 디스패치 선언
+  // 디스패치, 히스토리 선언
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
@@ -33,7 +35,9 @@ const ProjectList = () => {
                 bold="bold"
                 color="#455154"
                 margin="0px 10px"
-                _onClick={() => {}}
+                _onClick={() => {
+                  history.push(`main/${item.projects_name}`);
+                }}
               >
                 {item.projects_name}
               </Text>

@@ -2,9 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-
   // props
-  const { children, bold, color, size, margin, align, height, border } = props;
+  const {
+    children,
+    bold,
+    color,
+    size,
+    margin,
+    align,
+    height,
+    border,
+    _onClick,
+  } = props;
 
   // props style
   const styles = {
@@ -19,7 +28,9 @@ const Text = (props) => {
 
   return (
     <React.Fragment>
-      <TextStyle {...styles}>{children}</TextStyle>
+      <TextStyle {...styles} onClick={_onClick}>
+        {children}
+      </TextStyle>
     </React.Fragment>
   );
 };
@@ -27,6 +38,7 @@ const Text = (props) => {
 // Text DefaultProps
 Text.defaultProps = {
   children: null,
+  _onClick: () => {},
   bold: false,
   color: "#333",
   size: "18px",
