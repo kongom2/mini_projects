@@ -1,24 +1,28 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: '',
+  baseURL: "",
   // 헤더에 넣을 정보
   headers: {
-    'content-type': 'application/json;charset=UTF-8',
-    accept: 'application/json',
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
     // authorization: `Bearer ${localStorage.getItem("token")}`
   },
 });
 
 // ???
 instance.interceptors.request.use(function (config) {
-	const accessToken = document.cookie.split('=')[1];
-	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
-	return config;
+  const accessToken = document.cookie.split("=")[1];
+  config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
+  return config;
 });
 
 export const apis = {
+  // 로그인
+  // user  = {userID:id , pw:pw}
+  login: (user) => instance.post("/api/login", user),
+  signUp: (user) => instance.post("/api/register", user),
 
     // 로그인
     // user  = {userID:id , pw:pw}
