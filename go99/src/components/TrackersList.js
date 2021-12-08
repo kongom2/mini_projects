@@ -1,29 +1,29 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
+import { useDispatch,useSelector } from 'react-redux'
+import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import { Grid,Trackers,Button } from "../elements/elementsIndex";
+import { actionCreators as circleActions } from '../redux/modules/main'
+import { apis } from '../api/axios';
 
 const TrackersList = (props) => {
+
+  // 디스패치 히스토리
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const arr = Array.apply(null,new Array(99)).map(Number.prototype.valueOf,0)
+  useEffect(() => {
+    dispatch(circleActions.setCirclesDB())
+  }, []);
 
-
-  const [num,setNum] = useState(0)
-  const count = () => {
-    setNum(num+1)
-  }
-
-  const event = (e) =>{
-    count()
-    console.log(num)
-    
-  }
+  // 리덕스에서 circles를 가져옵니다.
+  const circleArr = useSelector((state) => state.main.circles);
 
   return (
-      <Grid _onClick={event} height='auto'>
-          {arr.map((list,idx) => {
+      <Grid height='auto'>
+          {circleArr.map((list,idx) => {
             return(
-              <Trackers checkPoint={num} _onClick={() => {history.push(`/main/항해99/${idx+1}`)}} key={idx}></Trackers>
+              <Trackers list={list} _onClick={() => {history.push(`/main/항해99/${list.circles_id}`)}} key={idx}></Trackers>
             )
           })}
       </Grid>

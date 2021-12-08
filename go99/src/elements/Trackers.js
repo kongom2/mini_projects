@@ -6,12 +6,12 @@ const Trackers = (props) => {
   // props
   const {
     _onClick,
-    checkPoint // 0개 ~ 5개이상
+    list
   } = props;
   
-  const [num,setNum] = useState(checkPoint)
+  const checkNum = list.check_count
 
-
+  const [num,setNum] = useState(checkNum? checkNum : 0)
 
   let pointColor = '#eee'
 
@@ -36,7 +36,6 @@ const Trackers = (props) => {
   return (
     <React.Fragment>
         <TrackersStyle
-          checkPoint={checkPoint}
           {...styles}
           onClick={_onClick}
         ></TrackersStyle>
@@ -46,7 +45,7 @@ const Trackers = (props) => {
 
 // Grid DefaultProps 
 Trackers.defaultProps = {
-  checkPoint:0,
+  
 }
 
 const TrackersStyle = styled.div`

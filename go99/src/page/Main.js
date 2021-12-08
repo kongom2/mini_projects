@@ -1,12 +1,14 @@
-import React,{Ref} from "react";
+import React,{useEffect} from "react";
+import { useDispatch,useSelector } from 'react-redux'
+import axios from "axios";
 import { Grid,Text } from "../elements/elementsIndex";
 import { TrackersList,WeekList } from "../components/componentIndex";
+import { history } from "../redux/configureStore";
+import { actionCreators as circleActions } from '../redux/modules/main'
 
 
 const Main = (props) => {
-
     
-
     return(
         <React.Fragment>
             <Grid padding='104px 20px 0 20px' margin='0 0 10% 0'>

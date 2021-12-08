@@ -26,7 +26,8 @@ export const apis = {
     signUp: (user) => instance.post('/api/register', user),
 
     // 프로젝트 리스트 
-    getProjects: () => instance.get('/api/projects'),
+    // id = {userID : id}
+    getProjects: (id) => instance.get(`/api/projects/?userID:=${id}`),
     // title = {userID:id, projects_title = title}
     addProjects: (title) => instance.post('/api/projects',title),
     editProjects: (title) => instance.put('/api/projects',title),
@@ -34,7 +35,8 @@ export const apis = {
 
     // 메인페이지(서클즈 조회)
     // get으로 userID: userID 를 보낼수 있을까요?
-    getCircles: (project_id) => instance.get(`/api/projects/${project_id}/circles`),
+    // 쿼리로 id보내기
+    getCircles: (project_id,user_id) => instance.get(`/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`),
 
     // 투두리스트
     // get으로 circles_id: id 를 보낼수 있을까요?
@@ -49,7 +51,7 @@ export const apis = {
     // check시에 체크사항이 바로 반영이 되나요??
     checkTodo: (todos_id,check) => instance.patch(`/api/todos/${todos_id}`,check),
 
-    // 투두리스트
+    // 피드백 투두리스트
     getFeedBack: (circles_id) => instance.get(`/api/circles/${circles_id}/feedback`),
     // contents = {projects_title = title, circles_id: circleID, contents:contents}
     addFeedBack: (circles_id,contents) => instance.post(`/api/circles/${circles_id}/feedback`,contents),
