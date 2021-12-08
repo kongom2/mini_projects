@@ -19,10 +19,6 @@ instance.interceptors.request.use(function (config) {
 });
 
 export const apis = {
-  // 로그인
-  // user  = {userID:id , pw:pw}
-  login: (user) => instance.post("/api/login", user),
-  signUp: (user) => instance.post("/api/register", user),
 
     // 로그인
     // user  = {userID:id , pw:pw}
@@ -38,7 +34,6 @@ export const apis = {
     deleteProjects: (title) => instance.delete('/api/projects',title),
 
     // 메인페이지(서클즈 조회)
-    // get으로 userID: userID 를 보낼수 있을까요?
     // 쿼리로 id보내기
     getCircles: (project_id,user_id) => instance.get(`/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`),
 

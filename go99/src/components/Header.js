@@ -28,7 +28,7 @@ const Header = (props) => {
               text="로그아웃"
               bg="#F4F6F6"
               width="100px"
-              fontColor="#000000"
+              fontColor="#555"
               _onClick={() => {}}
             ></Button>
           </Grid>

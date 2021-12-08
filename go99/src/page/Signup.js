@@ -31,7 +31,7 @@ const Signup = (props) => {
 
         console.log(id,pwd,pwdCheck,userName)
         alert('이제부터 GOGO 99 !!')
-        history.push('/login')
+        history.push('/')
     }
 
 

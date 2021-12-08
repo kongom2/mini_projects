@@ -21,6 +21,7 @@ const initialState = {
 // middlewear
 const setCirclesDB = (list) => {
     return function (dispatch,getState,{history}) {
+        // const project_id = 'project_id'
         // const id = 'id'
         // apis
         // .getCircles((`/api/projects/?userID:=${id}`)).then((res) => {
@@ -34,9 +35,7 @@ const setCirclesDB = (list) => {
         axios
         .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
         .then((res) => {
-            // 페이지 렌더링시 서버에 요청하여 해당 프로젝트의 circles리스트를 가져옵니다.
             const circleArr = res.data.result
-            // 가져온 리스트를 리덕스로 디스패치합니다.
             console.log("정상적으로 circle를 가져왔습니다.");
             dispatch(setCircles(circleArr))
         })

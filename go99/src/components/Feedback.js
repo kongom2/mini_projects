@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useDispatch,useSelector } from 'react-redux'
+import { actionCreators as feedbackActions } from '../redux/modules/feedBack'
 import {
   Grid,
   Text,
@@ -7,8 +9,18 @@ import {
   ImageButton,
 } from "../elements/elementsIndex";
 
-const Feedback = () => {
-  const [changeText, setChangeText] = useState("");
+const Feedback = (props) => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const id = 'user_id'
+    dispatch(feedbackActions.setFeedBackDB(id))
+  },[])
+
+  const feedBack = useSelector((state) => state.feedBack.contents);
+
+  const [changeText, setChangeText] = useState(feedBack);
   const [feedback, setFeedback] = useState();
 
   const addComments = () => {
