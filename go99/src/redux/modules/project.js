@@ -1,25 +1,63 @@
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+
 // Actions
-const LOAD = "project/LOAD"; // 프로젝트 불러오기
+const SET_PROJECT = "SET_PROJECT"; // 프로젝트 조회하기
+const ADD_PROJECT = "ADD_PROJECT"; // 프로젝트 추가하기
+const EDIT_PROJECT = "EDIT_PROJECT"; // 프로젝트 수정하기
+const DELETE_PROJECT = "DELETE_PROJECT"; // 프로젝트 수정하기
 
 // Action Creators
-export function loadProject(project) {
-  return { type: LOAD, project };
-}
+const setProject = createAction(SET_PROJECT, (project_list) => ({
+  project_list,
+}));
+const addProject = createAction(ADD_PROJECT, (project_title) => ({
+  project_title,
+}));
+const editProject = createAction(EDIT_PROJECT, (project_id, project_title) => ({
+  project_id,
+  project_title,
+}));
+const deleteProject = createAction(DELETE_PROJECT, (project_id) => ({
+  project_id,
+}));
 
+// initialState
 const initialState = {
-  project_list: [
-
-  ],
+  list: [],
 };
 
 // Reducer
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case "project/LOAD": {
-      console.log(action.project)
-      return { ...state,...action.project };
-    }
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    [SET_PROJECT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(...action.payload.project_list);
+      }),
+    [ADD_PROJECT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(action.payload.project);
+      }),
+    [EDIT_PROJECT]: (state, action) =>
+      produce(state, (draft) => {
+        let idx = draft.list.findIndex(
+          (p) => p.id === action.payload.project_id
+        );
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.project };
+      }),
+    [DELETE_PROJECT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(action.payload.project);
+      }),
+  },
+  initialState
+);
+
+const actionCreators = {
+  setProject,
+  addProject,
+  editProject,
+  deleteProject,
+};
+
+export { actionCreators };
