@@ -19,10 +19,13 @@ const getProject = createAction(GET_PROJECT, (project_list) => ({
 const addProject = createAction(ADD_PROJECT, (projects_name) => ({
   projects_name,
 }));
-const editProject = createAction(EDIT_PROJECT, (project_id, projects_name) => ({
-  project_id,
-  projects_name,
-}));
+const editProject = createAction(
+  EDIT_PROJECT,
+  (projects_id, projects_name) => ({
+    projects_id,
+    projects_name,
+  })
+);
 const deleteProject = createAction(DELETE_PROJECT, (projects_id) => ({
   projects_id,
 }));
@@ -38,7 +41,6 @@ const initialStateProject = {
   // projects_id: "",
   // date: "",
 };
-
 // DB
 const getProjectDB = () => {
   return function (dispatch, getState, { history }) {

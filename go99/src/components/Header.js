@@ -4,19 +4,19 @@ import { Grid, Button } from "../elements/elementsIndex";
 import { HiChevronLeft } from "react-icons/hi";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
-import { useDispatch,useSelector } from 'react-redux'
-import { deleteCookie,getCookie,setCookie } from "../shared/Cookie"
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCookie, getCookie, setCookie } from "../shared/cookie";
 
 const Header = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const logOut = (props) => {
-    dispatch(userActions.logoutDB())
-  }
-  const cookie = getCookie("is_login")
-  const is_login = useSelector((state) => state.user.is_login)
-  console.log(cookie)
+    dispatch(userActions.logoutDB());
+  };
+  const cookie = getCookie("is_login");
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(cookie);
   // 토큰의 유무로 분기점 설정
   if (cookie) {
     return (
@@ -48,11 +48,10 @@ const Header = (props) => {
   }
   return (
     <React.Fragment>
-        <HeaderWrap>
-          <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#fff">
-          </Grid>
-        </HeaderWrap>
-      </React.Fragment>
+      <HeaderWrap>
+        <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#fff"></Grid>
+      </HeaderWrap>
+    </React.Fragment>
   );
 };
 
