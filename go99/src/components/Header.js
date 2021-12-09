@@ -5,7 +5,7 @@ import { HiChevronLeft } from "react-icons/hi";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCookie, getCookie, setCookie } from "../shared/Cookie";
+import { deleteCookie, getCookie, setCookie } from "../shared/cookie";
 
 const Header = (props) => {
   const dispatch = useDispatch();
