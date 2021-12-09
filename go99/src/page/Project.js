@@ -12,28 +12,19 @@ const Project = () => {
   const dispatch = useDispatch();
   const [projects_name, setProjectText] = useState("");
 
-  const onChange = (e) => {
-    console.log(e.target.value);
-    setProjectText(e.target.value);
-  };
-  const write = () => {
-    console.log(projects_name);
-    dispatch(projectActions.addProjectDB(projects_name));
-    setProjectText("");
-  };
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token")
-  //   apis
-  //   .loginCheck(token)
-  //   .then((res) => {
-  //       console.log('야호')
-  //       return res
-  //   })
-  //   .catch((err) => {
-  //       alert('로그인 정보가 없습니다!')
-  //       history.push('/')
-  //   })
-  // },[])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    apis
+      .loginCheck(token)
+      .then((res) => {
+        console.log("야호");
+        return res;
+      })
+      .catch((err) => {
+        alert("로그인 정보가 없습니다!");
+        history.push("/");
+      });
+  }, []);
 
   const loginUser = "로그인한 유저"; // useSelector((state) => state.user.loginUser);
   return (

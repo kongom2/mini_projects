@@ -22,10 +22,6 @@ const Login = () => {
           alert('비밀번호를 입력해주세요.')
           return;
       }
-      if(!emailCheck(id)) {
-          alert('유효하지 않은 이메일 형식입니다.')
-          return;
-      }
       dispatch(userActions.loginDB(id,pwd))
   }
 
