@@ -8,23 +8,37 @@ import { apis } from "../api/axios";
 import { history } from "../redux/configureStore";
 import { actionCreators as projectActions } from "../redux/modules/project";
 
-const Project = () => {
+const Project = (props) => {
   const dispatch = useDispatch();
+
+  const user_name = useSelector((state) =>
+    state.user.user !== null ? state.user.user.id : null
+  );
   const [projects_name, setProjectText] = useState("");
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    apis
-      .loginCheck(token)
-      .then((res) => {
-        console.log("야호");
-        return res;
-      })
-      .catch((err) => {
-        alert("로그인 정보가 없습니다!");
-        history.push("/");
-      });
-  }, []);
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setProjectText(e.target.value);
+  };
+  const write = () => {
+    console.log(projects_name);
+    dispatch(projectActions.addProjectDB(projects_name));
+    setProjectText("");
+  };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   apis
+  //     .loginCheck(token)
+  //     .then((res) => {
+  //       console.log("야호");
+  //       return res;
+  //     })
+  //     .catch((err) => {
+  //       alert("로그인 정보가 없습니다!");
+  //       history.push("/");
+  //     });
+  // }, []);
 
   const loginUser = "로그인한 유저"; // useSelector((state) => state.user.loginUser);
   return (
@@ -32,7 +46,7 @@ const Project = () => {
       <Grid padding="104px 20px">
         <Grid padding="0px 0px 32px 16px">
           <Text size="36px" color="#455154" bold>
-            {loginUser} 님의
+            {user_name} 님의
           </Text>
           <Text size="36px" color="#455154" bold>
             프로젝트 리스트
