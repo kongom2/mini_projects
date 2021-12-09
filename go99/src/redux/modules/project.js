@@ -109,7 +109,6 @@ export default handleActions(
     [GET_PROJECT]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.project_list;
-        // .push(...action.payload.project_list);
       }),
     [ADD_PROJECT]: (state, action) =>
       produce(state, (draft) => {
