@@ -1,7 +1,7 @@
 import { createAction, handleAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
+import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 
 import { auth } from "../../shared/firebase";
 import firebase from "firebase/compat/app";
