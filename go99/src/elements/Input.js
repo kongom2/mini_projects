@@ -11,7 +11,7 @@ const Input = (props) => {
     border,
     height,
     fontSize,
-
+    
     // input props
     type,
     _onChange, // input 값 변경 감지
@@ -39,7 +39,7 @@ const Input = (props) => {
         type={type}
         onChange={_onChange}
         placeholder={placeholder}
-        value={value}
+        defaultValue={value}
       ></InputStyle>
     </React.Fragment>
   );
