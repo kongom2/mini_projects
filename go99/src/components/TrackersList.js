@@ -12,7 +12,8 @@ const TrackersList = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(circleActions.setCirclesDB())
+    const title = props.project_title
+    dispatch(circleActions.setCirclesDB(title))
   }, []);
 
   // 리덕스에서 circles를 가져옵니다.

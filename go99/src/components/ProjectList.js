@@ -24,6 +24,7 @@ const ProjectList = () => {
         return (
           <Grid padding="16px" key={index}>
             <Grid is_flex>
+              <div style={{cursor:'pointer'}}>
               <Text
                 size="36px"
                 bold="bold"
@@ -35,6 +36,7 @@ const ProjectList = () => {
               >
                 {item.projects_name}
               </Text>
+              </div>
               <ImageButton margin="0px 0px 0px auto" _onClick={() => {}} />
               <ImageButton margin="0px 10px" deleteIcon _onClick={() => {}} />
             </Grid>

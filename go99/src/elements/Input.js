@@ -11,12 +11,8 @@ const Input = (props) => {
     border,
     height,
     fontSize,
-<<<<<<< HEAD
     onSubmit,
 
-=======
-    
->>>>>>> c265ae8e2247f4f8b0db0092a06950be010248f7
     // input props
     type,
     _onChange, // input 값 변경 감지
@@ -44,16 +40,12 @@ const Input = (props) => {
         type={type}
         onChange={_onChange}
         placeholder={placeholder}
-<<<<<<< HEAD
-        value={value}
+        defaultValue={value}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             onSubmit(e);
           }
         }}
-=======
-        defaultValue={value}
->>>>>>> c265ae8e2247f4f8b0db0092a06950be010248f7
       ></InputStyle>
     </React.Fragment>
   );

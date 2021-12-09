@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import { useSelector, useDispatch } from "react-redux";
 import { current,produce } from "immer";
 import { apis } from '../../api/axios';
 
@@ -12,19 +13,17 @@ const SET_CIRCLE = "SET_CIRCLE"; // 프로젝트 조회하기
 // Action Creators
 const setCircles = createAction(SET_CIRCLE, (list) => ({list}));
 
-
 // initialState
 const initialState = {
   circles: [],
 };
-
 // middlewear
-const setCirclesDB = (list) => {
+const setCirclesDB = (title) => {
     return function (dispatch,getState,{history}) {
-        // const project_id = 'project_id'
-        // const id = 'id'
+        const user_id = (getState().user.user !== null)? getState().user.user.id : '로그인 정보 없음'
+        const project_id = title
         // apis
-        // .getCircles((`/api/projects/?userID:=${id}`)).then((res) => {
+        // .getCircles(project_id,user_id).then((res) => {
         //     const circleArr = res.data.result
         //     console.log("정상적으로 circle를 가져왔습니다.");
         //     dispatch(setCircles(circleArr))

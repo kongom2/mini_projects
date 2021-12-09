@@ -2,9 +2,11 @@ import { createAction,handleAction,handleActions } from "redux-actions"
 import { produce } from "immer"
 
 import { deleteCookie,getCookie,setCookie } from "../../shared/Cookie"
+import { apis } from '../../api/axios';
 
 import {auth} from "../../shared/firebase"
 import firebase from "firebase/compat/app"
+
 // 액션
 const LOG_OUT = "LOG_OUT"
 const GET_USER = "GET_USER"
@@ -29,7 +31,24 @@ const initialStat = {
 const loginDB = (id,pwd) => {
     return function(dispatch,getState,{history}) {
         
+        // // 로그인 api
+        // const user = {userId:id, pw1:pwd}
+        // apis
+        // .login(user)
+        // .then((res) => {
+        //     const jwtToken = res.data.token;
+        //     localStorage.setItem('token', jwtToken)
 
+        //     dispatch(setUser({id:id,user_name:id}));
+        //     alert('로그인이 완료되었습니다!')
+        //     history.push('/project')
+        // }).catch((err) => {
+        //     console.log(err);
+        //     window.alert("회원정보가 일치하지 않습니다.!");
+        //     return;
+        // });
+
+        // 파이어베이스
         auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
             auth.signInWithEmailAndPassword(id, pwd)
             .then((user) => {
@@ -40,11 +59,31 @@ const loginDB = (id,pwd) => {
             .catch((error) => {
             });
         })
+
     }
 }
 
 const signupDB = (id,userName,pwd,pwdCheck) => {
     return function (dispatch,getState,{history}) {
+
+        // //api
+        // const user = {
+        //     userId : id,
+        //     nickname: userName,
+        //     pw1: pwd,
+        //     pw2: pwdCheck,
+        // }
+        // apis
+        // .signUp(user)
+        // .then(() => {
+        //     window.alert("회원가입을 축하드립니다!");
+        //     history.push("/");
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        //     window.alert("회원가입이 이루어지지 않았습니다.");
+        // })
+
         auth.
         createUserWithEmailAndPassword(id, pwd)
         .then((user) => {
@@ -69,27 +108,36 @@ const signupDB = (id,userName,pwd,pwdCheck) => {
 
 const loginCheckDB = () => {
     return function (dispatch,getState,{history}) {
-
-        auth.onAuthStateChanged((user) => {
-            if(user) {
-                dispatch(setUser({
-                    user_name:user.displayName,
-                    id:user.email,
-                }))
-            } else {
-                dispatch(logOut())
-            }
+        const localToken = localStorage.getItem("token")
+        const token = {userToken: localToken}
+        apis
+        .loginCheck(token)
+        .then((res) =>{
+            console.log(res)
+            dispatch(setUser([res]));
         })
+        .catch((err) => {
+            console.log(err);
+            alert('로그인 정보가 없습니다.')
+            history.push('/')
+        })
+        
     }
 }
 
 // 토큰삭제
 const logoutDB = () => {
     return function (dispatch,getState,{history}) {
-        auth.signOut().then(()=> {
+        auth
+        .signOut()
+        .then(()=> {
             dispatch(logOut());
             alert('로그아웃 되었습니다.')
             history.replace('/')
+        })
+        .catch((err) => {
+            console.log(err)
+            alert('삭제가 안되요')
         })
     }
 }
@@ -100,12 +148,11 @@ export default handleActions(
         [SET_USER]: (state,action) => produce(state,(draft)=>{
             setCookie("is_login","SUCCESS")
             draft.user = action.payload.user;
-            console.log(draft.user)
-            console.log('실행은 됬음')
             draft.is_login = true
         }),
         [LOG_OUT]: (state,action) => produce(state,(draft)=>{
             deleteCookie('is_login');
+            // localStorage.removeItem('token');
             draft.user = null;
             draft.is_login = false;
         }),

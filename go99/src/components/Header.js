@@ -5,6 +5,7 @@ import { HiChevronLeft } from "react-icons/hi";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
 import { useDispatch,useSelector } from 'react-redux'
+import { deleteCookie,getCookie,setCookie } from "../shared/Cookie"
 
 const Header = (props) => {
   const dispatch = useDispatch()
@@ -13,11 +14,11 @@ const Header = (props) => {
   const logOut = (props) => {
     dispatch(userActions.logoutDB())
   }
-
+  const cookie = getCookie("is_login")
   const is_login = useSelector((state) => state.user.is_login)
-  
+  console.log(cookie)
   // 토큰의 유무로 분기점 설정
-  if (is_login) {
+  if (cookie) {
     return (
       <React.Fragment>
         <HeaderWrap>
@@ -48,18 +49,7 @@ const Header = (props) => {
   return (
     <React.Fragment>
         <HeaderWrap>
-          <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#F4F6F6">
-            <Grid
-              width="40px"
-              height="40px"
-              margin="0 auto 0 0"
-              _onClick={() => {
-                history.goBack();
-              }}
-              cursor="pointer"
-            >
-              <HiChevronLeft size="40" color="#D85147" />
-            </Grid>
+          <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#fff">
           </Grid>
         </HeaderWrap>
       </React.Fragment>

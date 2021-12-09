@@ -9,11 +9,18 @@ import {apis} from '../api/axios'
 
 const Main = (props) => {
     
+    const {history} = props
+    const pathName = history.location.pathname
+    const name = pathName.split('/')
+
+    console.log(name)
+
     // useEffect(() => {
     //     const token = localStorage.getItem("token")
     //     apis
-    //     .loginCheck('/api/users/me', token)
+    //     .loginCheck(token)
     //     .then((res) => {
+    //         console.log('야호')
     //         return res
     //     })
     //     .catch((err) => {
@@ -29,7 +36,7 @@ const Main = (props) => {
                 <Text size='3rem' bold>항해 99 !!</Text>  {/* 이후에 project값 */}
             </Grid>
             <Grid padding='0 20px' width='100%' height='auto' is_flex>
-                <TrackersList></TrackersList>
+                <TrackersList project_title={name[2]}></TrackersList>
             </Grid>
         </React.Fragment>
     )

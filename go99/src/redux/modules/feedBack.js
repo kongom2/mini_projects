@@ -26,15 +26,25 @@ const initialState = {
 };
 
 // middlewear
-const setFeedBackDB = (id) => {
+const setFeedBackDB = (circles_id) => {
     return function (dispatch,getState,{history}) {
+        // // api
         // apis
-        // .getFeedBack(`/api/circles/${circles_id}/feedback`)
+        // .getFeedBack(circles_id)
+        // .then((res) => {
+        //     console.log('정상적으로 피드백을 가져왔습니다.')
+        //     const feedback = res.feedback
+        //     dispatch(setFeedBack(feedback))
+        // })
+        // .catch((err) => {
+        //     console.log("에러", err);
+        // });
+
         axios
         .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
         .then((res) => {
             console.log('정상적으로 피드백을 가져왔습니다.')
-            const feedback = 'ss'
+            const feedback = ''
             dispatch(setFeedBack(feedback))
         })
         .catch((err) => {
@@ -43,10 +53,20 @@ const setFeedBackDB = (id) => {
     }
 }
 
-const addFeedBackDB = (id) => {
+const addFeedBackDB = (circles_id,data) => {
     return function (dispatch,getState,{history}) {
+        // // api
         // apis
-        //.addFeedBack(`/api/circles/${circles_id}/feedback`,contents)
+        // .addFeedBack(circles_id,data)
+        // .then((res) => {
+        //     const feedback = res.feedback
+        //     dispatch(addFeedBack(feedback))
+        //     alert('피드백이 등록되었습니다')
+        // })
+        // .catch((err) => {
+        //     console.log("에러", err);
+        // });
+
         axios
         .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
         .then((res) => {
@@ -61,10 +81,20 @@ const addFeedBackDB = (id) => {
     }
 }
 
-const editFeedBackDB = (id) => {
+const editFeedBackDB = (circles_id,data) => {
     return function (dispatch,getState,{history}) {
+        // // api
         // apis
-        //.editFeedBack(`/api/circles/${circles_id}/feedback`,contents)
+        // .editFeedBack(circles_id,data)
+        // .then((res) => {
+        //     const feedback = res.feedback
+        //     dispatch(editFeedBack(feedback))
+        //     alert('피드백이 등록되었습니다')
+        // })
+        // .catch((err) => {
+        //     console.log("에러", err);
+        // });
+
         axios
         .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
         .then((res) => {
@@ -80,10 +110,27 @@ const editFeedBackDB = (id) => {
     }
 }
 
-const deleteFeedBackDB = (id) => {
+const deleteFeedBackDB = (circles_id,projects_title) => {
     return function (dispatch,getState,{history}) {
+        const id = {
+            projects_title:projects_title,
+            circles_id:circles_id,
+        }
+
+        // //api
         // apis
-        //.deleteFeedBack(`/api/circles/${circles_id}/feedback`,id)
+        // .deleteFeedBack(circles_id,id)
+        // .then((res) => {
+        //     console.log('피드백을 삭제합니다.')
+        //     const feedback = ''
+        //     dispatch(deleteFeedBack(feedback))
+        //     alert('피드백이 삭제되었습니다')
+        //     window.location.reload()
+        // })
+        // .catch((err) => {
+        //     console.log("에러", err);
+        // });
+
         axios
         .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
         .then((res) => {
