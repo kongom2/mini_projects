@@ -44,8 +44,6 @@ const Project = () => {
         <AddList
           placeholder="99일간의 프로젝트를 추가해 주세요"
           value={projects_name}
-          _onChange={onChange}
-          onSubmit={write}
         ></AddList>
       </AddListWrap>
     </React.Fragment>
