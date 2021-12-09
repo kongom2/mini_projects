@@ -4,12 +4,23 @@ import { Grid, AddButton, Input } from "../elements/elementsIndex";
 import { actionCreators as projectActions } from "../redux/modules/project";
 import { useSelector, useDispatch } from "react-redux";
 
-const AddList = () => {
+const AddList = (props) => {
   const dispatch = useDispatch();
+  const [projects_name, setProjectText] = useState("");
 
-  const addProject = () => {
-    dispatch(projectActions.addProjectDB());
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setProjectText(e.target.value);
   };
+  const write = () => {
+    console.log(projects_name);
+    dispatch(projectActions.addProjectDB(projects_name));
+    setProjectText("");
+  };
+
+  useEffect(() => {
+    dispatch(projectActions.addProjectDB(projects_name));
+  }, []);
   return (
     <React.Fragment>
       <Grid
@@ -22,7 +33,9 @@ const AddList = () => {
           padding="16px"
           margin="0 20px 0 0"
           placeholder="99일간의 프로젝트를 추가해 주세요"
-          onKeyPress={() => {}}
+          value={projects_name}
+          _onChange={onChange}
+          onSubmit={write}
         />
         <AddButton
           width="50px"

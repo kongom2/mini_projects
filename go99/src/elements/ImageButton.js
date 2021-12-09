@@ -1,30 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
+import { actionCreators as projectActions } from "../redux/modules/project";
+import { useSelector, useDispatch } from "react-redux";
 
 const ImageButton = (props) => {
   // props
   const {
-      deleteIcon, // 딜리트 아이콘
-      _onClick,
-      size,
-      height,
-      margin
+    deleteIcon, // 딜리트 아이콘
+    _onClick,
+    _onChange,
+    onSubmit,
+    size,
+    height,
+    margin,
   } = props;
 
   // props style
   const styles = {
-      height: height,
-      margin:margin
-  }
-  
-
+    height: height,
+    margin: margin,
+  };
 
   if (props.deleteIcon) {
     return (
       <React.Fragment>
         <Icon {...styles}>
-          <AiFillDelete size={size} onClick={_onClick}></AiFillDelete>
+          <AiFillDelete
+            size={size}
+            onClick={_onClick}
+            onChange={_onChange}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                onSubmit(e);
+              }
+            }}
+          ></AiFillDelete>
         </Icon>
       </React.Fragment>
     );
@@ -33,7 +45,16 @@ const ImageButton = (props) => {
   return (
     <React.Fragment>
       <Icon {...styles}>
-        <AiFillEdit size={size} onClick={_onClick}></AiFillEdit>
+        <AiFillEdit
+          size={size}
+          onClick={_onClick}
+          onChange={_onChange}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              onSubmit(e);
+            }
+          }}
+        ></AiFillEdit>
       </Icon>
     </React.Fragment>
   );
@@ -41,11 +62,13 @@ const ImageButton = (props) => {
 
 // ImageButton DefaultProps
 ImageButton.defaultProps = {
-  delete:false,
-  size:'16px',
-  height: '16px',
-  margin:null
-}
+  delete: false,
+  size: "16px",
+  height: "16px",
+  margin: null,
+  _onChange: () => {},
+  onSubmit: () => {},
+};
 
 // ImageButton 스타일드 컴포넌트
 const Icon = styled.div`
@@ -53,8 +76,8 @@ const Icon = styled.div`
   display: inline-block;
   cursor: pointer;
   transition: all 0.2s;
-  height: ${(props)=>props.height};
-  margin: ${(props)=>props.margin};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
   // hover 이벤트
   &:hover {
     color: #d85147;

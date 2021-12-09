@@ -12,12 +12,6 @@ const ProjectList = () => {
 
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
-  const projects_id = useSelector((state) => state.project.projects_id);
-  console.log(projects_id);
-
-  // const deleteProject = () => {
-  //   dispatch(projectActions.deleteProjectDB(projects_id));
-  // };
 
   // DB에서 불러오기
   useEffect(() => {

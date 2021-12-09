@@ -15,8 +15,9 @@ const DELETE_PROJECT = "DELETE_PROJECT"; // 프로젝트 수정하기
 const getProject = createAction(GET_PROJECT, (project_list) => ({
   project_list,
 }));
-const addProject = createAction(ADD_PROJECT, (project_title) => ({
-  project_title,
+const addProject = createAction(ADD_PROJECT, (projects_id, projects_name) => ({
+  projects_id,
+  projects_name,
 }));
 const editProject = createAction(EDIT_PROJECT, (project_id, project_title) => ({
   project_id,
@@ -53,41 +54,44 @@ const getProjectDB = () => {
       });
   };
 };
-const addProjectDB = () => {
+const addProjectDB = (projects_name) => {
   return function (dispatch, getState, { history }) {
     // apis.addProjects
     axios
-      .post("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
+      .post("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0", {
+        projects_name,
+      })
       .then((res) => {
-        // let project_title = res.data.project_id;
-        dispatch(addProject(initialStateProject.projects));
+        console.log(res.data.project);
+        dispatch(addProject(res.data.project));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
       });
   };
 };
-const editProjectDB = () => {
+const editProjectDB = (projects_name, projects_id) => {
   return function (dispatch, getState, { history }) {
     // apis.editProjects
     axios
       .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
-        dispatch(editProject());
+        dispatch(editProject(projects_name, projects_id));
+        window.alert("프로젝트이름 수정 완료!");
       })
       .catch((err) => {
         console.log("Load 에러!", err);
       });
   };
 };
-const deleteProjectDB = () => {
+const deleteProjectDB = (projects_id) => {
   return function (dispatch, getState, { history }) {
     // apis.deleteProjects
     axios
       .delete("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
         console.log(res.data.project);
-        let projects_id = res.data.project.project_id;
+        window.alert("삭제 했습니다!");
         dispatch(deleteProject(projects_id));
       })
       .catch((err) => {
@@ -106,7 +110,11 @@ export default handleActions(
       }),
     [ADD_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(action.payload.project);
+        console.log(draft.list);
+        draft.list[action.payload.project_name].push(
+          action.payload.project_name
+        );
+        // .push(action.payload.project);
       }),
     [EDIT_PROJECT]: (state, action) =>
       produce(state, (draft) => {

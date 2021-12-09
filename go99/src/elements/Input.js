@@ -11,6 +11,7 @@ const Input = (props) => {
     border,
     height,
     fontSize,
+    onSubmit,
 
     // input props
     type,
@@ -40,6 +41,11 @@ const Input = (props) => {
         onChange={_onChange}
         placeholder={placeholder}
         value={value}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            onSubmit(e);
+          }
+        }}
       ></InputStyle>
     </React.Fragment>
   );
@@ -56,6 +62,7 @@ Input.defaultProps = {
   border: "1px solid #ccc",
   type: "text",
   fontSize: "16px",
+  onSubmit: () => {},
 };
 
 // Input 스타일드 컴포넌트
