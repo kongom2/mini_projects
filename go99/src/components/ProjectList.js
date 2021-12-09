@@ -35,8 +35,21 @@ const ProjectList = () => {
               >
                 {item.projects_name}
               </Text>
-              <ImageButton margin="0px 0px 0px auto" _onClick={() => {}} />
-              <ImageButton margin="0px 10px" deleteIcon _onClick={() => {}} />
+              <ImageButton
+                margin="0px 0px 0px auto"
+                _onClick={() => {
+                  console.log("수정버튼");
+                  dispatch(projectActions.editProject(item));
+                }}
+              />
+              <ImageButton
+                margin="0px 10px"
+                deleteIcon
+                key={index}
+                _onClick={() => {
+                  dispatch(projectActions.deleteProject(item.project_id));
+                }}
+              />
             </Grid>
             <Hr />
           </Grid>

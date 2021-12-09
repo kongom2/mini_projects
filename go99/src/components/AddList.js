@@ -18,9 +18,9 @@ const AddList = (props) => {
     setProjectText("");
   };
 
-  useEffect(() => {
-    dispatch(projectActions.addProjectDB(projects_name));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(projectActions.addProjectDB(projects_name));
+  // }, []);
   return (
     <React.Fragment>
       <Grid

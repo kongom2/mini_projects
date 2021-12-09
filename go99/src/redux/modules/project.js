@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/axios";
+import { firestore } from "../../shared/firebase";
 
 // api이후 삭제
 import axios from "axios";
@@ -15,27 +16,27 @@ const DELETE_PROJECT = "DELETE_PROJECT"; // 프로젝트 수정하기
 const getProject = createAction(GET_PROJECT, (project_list) => ({
   project_list,
 }));
-const addProject = createAction(ADD_PROJECT, (projects_id, projects_name) => ({
-  projects_id,
+const addProject = createAction(ADD_PROJECT, (projects_name) => ({
   projects_name,
 }));
-const editProject = createAction(EDIT_PROJECT, (project_id, project_title) => ({
+const editProject = createAction(EDIT_PROJECT, (project_id, projects_name) => ({
   project_id,
-  project_title,
+  projects_name,
 }));
-const deleteProject = createAction(DELETE_PROJECT, (project_id) => ({
-  project_id,
+const deleteProject = createAction(DELETE_PROJECT, (projects_id) => ({
+  projects_id,
 }));
 
 // initialState
 const initialState = {
   list: [],
+  editList: [],
 };
 
 const initialStateProject = {
-  projects_name: "",
-  projects_id: "",
-  date: "",
+  // projects_name: "",
+  // projects_id: "",
+  // date: "",
 };
 
 // DB
@@ -46,7 +47,6 @@ const getProjectDB = () => {
       .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {
         let project_list = res.data.project;
-        console.log(res.data);
         dispatch(getProject(project_list));
       })
       .catch((err) => {
@@ -63,7 +63,8 @@ const addProjectDB = (projects_name) => {
       })
       .then((res) => {
         console.log(res.data.project);
-        dispatch(addProject(res.data.project));
+        console.log(projects_name);
+        dispatch(addProject(projects_name));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
@@ -110,23 +111,17 @@ export default handleActions(
       }),
     [ADD_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(draft.list);
-        draft.list[action.payload.project_name].push(
-          action.payload.project_name
-        );
-        // .push(action.payload.project);
+        // draft.list.push(action.payload.projects_name);
+        draft.list.push(action.payload.projects_name);
       }),
     [EDIT_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex(
-          (p) => p.id === action.payload.project_id
-        );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.project };
+        draft.editList = action.payload.projects_name;
       }),
     [DELETE_PROJECT]: (state, action) =>
       produce(state, (draft) => {
         const del_list = draft.list.filter((p) => {
-          if (p.project_Id !== action.payload.project_id) {
+          if (p.projects_id !== action.payload.projects_id) {
             return p;
           }
         });
@@ -145,6 +140,7 @@ const actionCreators = {
   addProjectDB,
   editProjectDB,
   deleteProjectDB,
+  // addProjectFB,
 };
 
 export { actionCreators };
