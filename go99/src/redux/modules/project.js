@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/axios";
-import { firestore } from "../../shared/firebase";
 
 // api이후 삭제
 import axios from "axios";
@@ -44,7 +43,7 @@ const initialStateProject = {
 // DB
 const getProjectDB = () => {
   return function (dispatch, getState, { history }) {
-    // apis.getProjects
+    console.log(apis.getProjects);
     axios
       .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
       .then((res) => {

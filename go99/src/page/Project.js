@@ -1,28 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
 import { ProjectList, AddList } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
-import {apis} from '../api/axios'
+import { apis } from "../api/axios";
 import { history } from "../redux/configureStore";
+import { actionCreators as projectActions } from "../redux/modules/project";
 
 const Project = () => {
+  const dispatch = useDispatch();
+  const [projects_name, setProjectText] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     apis
-    .loginCheck(token)
-    .then((res) => {
-        console.log('야호')
-        return res
-    })
-    .catch((err) => {
-        alert('로그인 정보가 없습니다!')
-        history.push('/')
-    })
-  },[])
-
+      .loginCheck(token)
+      .then((res) => {
+        console.log("야호");
+        return res;
+      })
+      .catch((err) => {
+        alert("로그인 정보가 없습니다!");
+        history.push("/");
+      });
+  }, []);
 
   const loginUser = "로그인한 유저"; // useSelector((state) => state.user.loginUser);
   return (
@@ -39,7 +41,12 @@ const Project = () => {
         <ProjectList />
       </Grid>
       <AddListWrap>
-        <AddList></AddList>
+        <AddList
+          placeholder="99일간의 프로젝트를 추가해 주세요"
+          value={projects_name}
+          _onChange={onChange}
+          onSubmit={write}
+        ></AddList>
       </AddListWrap>
     </React.Fragment>
   );
