@@ -12,7 +12,7 @@ const ProjectList = () => {
 
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
-  console.log(project_list);
+
   // DB에서 불러오기
   useEffect(() => {
     dispatch(projectActions.getProjectDB());

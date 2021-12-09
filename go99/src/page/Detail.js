@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
-import { apis } from "../api/axios";
+import {apis} from '../api/axios'
 import { history } from "../redux/configureStore";
 
 // component, element 불러오기
@@ -8,9 +8,10 @@ import { AddList, TodoList, Feedback } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 
 const Detail = (props) => {
-  const { history } = props;
-  const pathName = history.location.pathname;
-  const name = pathName.split("/");
+
+  const {history} = props
+  const pathName = history.location.pathname
+  const name = pathName.split('/')
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -27,6 +28,8 @@ const Detail = (props) => {
   },[])
 
   return (
+
+    
     <React.Fragment>
       <Grid padding="104px 20px 350px 20px">
         <Grid padding="0px 0px 32px 16px">
@@ -34,6 +37,14 @@ const Detail = (props) => {
             오늘 할 일
           </Text>
         </Grid>
+        <TodoList />
+        <TodoList />
+        <TodoList />
+        <TodoList />
+        <TodoList />
+        <TodoList />
+        <TodoList />
+        <TodoList />
         <TodoList />
       </Grid>
       <CommentBox>
