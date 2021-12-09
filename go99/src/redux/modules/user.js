@@ -6,7 +6,6 @@ import { deleteCookie,getCookie,setCookie } from "../../shared/Cookie"
 import {auth} from "../../shared/firebase"
 import firebase from "firebase/compat/app"
 // 액션
-const LOG_IN = "LOG_IN"
 const LOG_OUT = "LOG_OUT"
 const GET_USER = "GET_USER"
 const SET_USER = "SET_USER"
@@ -20,42 +19,40 @@ const setUser = createAction(SET_USER,(user)=>({user}));
 const initialStat = {
      user:null,
      is_login:false,
-
 }
 
-const user_initial = {
-    user_name:'hthh'
-}
+// const user_initial = {
+//     user_name:''
+// }
 
 // 미들웨어 액션
-const loginFB = (id,pwd) => {
+const loginDB = (id,pwd) => {
     return function(dispatch,getState,{history}) {
         
+
         auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
             auth.signInWithEmailAndPassword(id, pwd)
             .then((user) => {
-
-                dispatch(setUser({user_name:user.user.displayName,id:id,user_profile:'',uid:user.user.uid}));
-                history.push('/')
+                dispatch(setUser({id:id}));
+                alert('로그인이 완료되었습니다!')
+                history.push('/project')
             })
             .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode,errorMessage)
             });
         })
     }
 }
 
-const joinFB = (id,pwd,user_name) => {
+const signupDB = (id,userName,pwd,pwdCheck) => {
     return function (dispatch,getState,{history}) {
         auth.
         createUserWithEmailAndPassword(id, pwd)
         .then((user) => {
             auth.currentUser.updateProfile({
-                displayName: user_name
+                displayName: userName
             }).then(()=>{
-                dispatch(setUser({user_name:user_name,id:id,user_profile:'',uid:user.user.uid}));
+                dispatch(setUser({user_name:userName, id:id}));
+                alert('이제부터 GOGO 99 !!')
                 history.push('/')
             }).catch((error)=>{
                 console.log(error)
@@ -70,7 +67,7 @@ const joinFB = (id,pwd,user_name) => {
     }
 }
 
-const loginCheckFB = () => {
+const loginCheckDB = () => {
     return function (dispatch,getState,{history}) {
 
         auth.onAuthStateChanged((user) => {
@@ -78,8 +75,6 @@ const loginCheckFB = () => {
                 dispatch(setUser({
                     user_name:user.displayName,
                     id:user.email,
-                    user_profile:'',
-                    uid:user.uid
                 }))
             } else {
                 dispatch(logOut())
@@ -88,10 +83,12 @@ const loginCheckFB = () => {
     }
 }
 
-const logoutFB = () => {
+// 토큰삭제
+const logoutDB = () => {
     return function (dispatch,getState,{history}) {
         auth.signOut().then(()=> {
             dispatch(logOut());
+            alert('로그아웃 되었습니다.')
             history.replace('/')
         })
     }
@@ -103,6 +100,8 @@ export default handleActions(
         [SET_USER]: (state,action) => produce(state,(draft)=>{
             setCookie("is_login","SUCCESS")
             draft.user = action.payload.user;
+            console.log(draft.user)
+            console.log('실행은 됬음')
             draft.is_login = true
         }),
         [LOG_OUT]: (state,action) => produce(state,(draft)=>{
@@ -118,7 +117,7 @@ export default handleActions(
 );
 
 const actionCreators = {
-    logOut,getUser,joinFB,loginFB,loginCheckFB,logoutFB
+    logOut,getUser,signupDB,loginDB,loginCheckDB,logoutDB
 }
 
 export {actionCreators }
