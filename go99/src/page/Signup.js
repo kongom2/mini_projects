@@ -1,10 +1,13 @@
 import React,{useState} from "react";
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { Text,Grid,Input,Button } from "../elements/elementsIndex";
 import { emailCheck,checkPassword } from "../shared/signupCheck";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Signup = (props) => {
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const [id, setId] = useState('')
     const [pwd, setPwd] = useState('')
@@ -30,8 +33,7 @@ const Signup = (props) => {
         }
 
         console.log(id,pwd,pwdCheck,userName)
-        alert('이제부터 GOGO 99 !!')
-        history.push('/')
+        dispatch(userActions.signupDB(id,userName,pwd,pwdCheck))
     }
 
 

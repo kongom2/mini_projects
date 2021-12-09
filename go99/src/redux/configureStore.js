@@ -6,10 +6,12 @@ import { connectRouter } from "connected-react-router";
 import project from "./modules/project";
 import main from "./modules/main";
 import feedBack from "./modules/feedBack";
+import user from "./modules/user";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+    user:user,
     feedBack:feedBack,
     main:main,
     project:project,

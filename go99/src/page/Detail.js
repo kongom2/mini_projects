@@ -36,7 +36,7 @@ const CommentBox = styled.div`
   max-width: 500px;
   height: 100px;
   position: fixed;
-  bottom: 240px;
+  bottom: 200px;
   background-color: #fff;
 `;
 

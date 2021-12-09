@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import { useDispatch,useSelector } from 'react-redux'
 import { actionCreators as feedbackActions } from '../redux/modules/feedBack'
 import {
@@ -8,40 +8,53 @@ import {
   Button,
   ImageButton,
 } from "../elements/elementsIndex";
+import styled from "styled-components";
 
 const Feedback = (props) => {
-
+  const id = 'user_id'
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
-    const id = 'user_id'
     dispatch(feedbackActions.setFeedBackDB(id))
+    setFeedback('')
   },[])
-
-  const feedBack = useSelector((state) => state.feedBack.contents);
-
-  const [changeText, setChangeText] = useState(feedBack);
+  
+  const  comment = useSelector((state) => state.feedBack.contents);
+  const  empty = useSelector((state) => state.feedBack.empty);
+  const [modal,setModal] = useState(false)
   const [feedback, setFeedback] = useState();
 
   const addComments = () => {
-    setChangeText(feedback);
+    dispatch(feedbackActions.addFeedBackDB(feedback))
+    
   };
+
   const onChange = (e) => {
     setFeedback(e.target.value);
   };
 
+  const editModal = () => {
+    if(!modal) {
+      setModal(true)
+    }
+  } 
+
   const editFeedback = () => {
-    setChangeText("");
+    dispatch(feedbackActions.editFeedBackDB(id))
+    setModal(false)
   };
 
-  const deleteFeedback = (e) => {
-    setFeedback("");
-    setChangeText("");
+  const deleteFeedback = () => {
+    if(!comment) {
+      alert('삭제될 데이터가 없습니다.')
+      return
+    }
+    dispatch(feedbackActions.deleteFeedBackDB(id))
   };
 
   return (
-    <Grid height="240px" padding="20px" bg="#F4F6F6">
-      <Grid is_flex height="auto" margin="20px 0">
+    <Grid height="200px" padding="20px" bg="#F4F6F6">
+      <Grid is_flex height="auto" margin="0 0 10px 0">
         <Text align="center" margin="0 0 0 0" size="1.5rem" bold>
           피드백
         </Text>
@@ -49,7 +62,7 @@ const Feedback = (props) => {
           margin="0 5px 0 auto"
           size="24px"
           height="24px"
-          _onClick={editFeedback}
+          _onClick={editModal}
         ></ImageButton>
         <ImageButton
           size="24px"
@@ -63,15 +76,15 @@ const Feedback = (props) => {
         bg="#fff"
         height="auto"
         padding="20px"
-        hide={changeText === "" ? "none" : null}
+        hide={empty === "" ? "none" : null}
       >
         <Text bold size="1rem">
-          "{changeText}"
+          "{comment}"
         </Text>
       </Grid>
-      <Grid height="auto" hide={changeText === "" ? null : "none"}>
+      <Grid height="auto" hide={empty === "" ? null : "none"}>
         <Input
-          value={feedback}
+          value={empty === '' ? null : ''}
           _onChange={onChange}
           placeholder="이번주 미흡했던 부분을 적어주세요!!"
           margin="0 0 20px 0"
@@ -79,8 +92,36 @@ const Feedback = (props) => {
         ></Input>
         <Button _onClick={addComments}>입력</Button>
       </Grid>
+      
+      <Modal style={{display:modal? 'block' : 'none'}}>
+        <ModalInner>
+          <Text margin="0 0 20px 0" size="1.5rem" bold>텍스트를 수정해주세요</Text>
+          <Input value={empty} margin="0 0 20px 0" padding="15px"></Input>
+          <Button _onClick={editFeedback}>수정</Button>
+        </ModalInner>
+      </Modal>
+
     </Grid>
   );
 };
+
+const Modal = styled.div`
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.32);
+`
+const ModalInner = styled.div`
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  height:auto;
+  padding:20px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 250px;
+`
 
 export default Feedback;

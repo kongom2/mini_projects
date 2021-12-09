@@ -5,10 +5,23 @@ import { Grid,Text } from "../elements/elementsIndex";
 import { TrackersList,WeekList } from "../components/componentIndex";
 import { history } from "../redux/configureStore";
 import { actionCreators as circleActions } from '../redux/modules/main'
-
+import {apis} from '../api/axios'
 
 const Main = (props) => {
     
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token")
+    //     apis
+    //     .loginCheck('/api/users/me', token)
+    //     .then((res) => {
+    //         return res
+    //     })
+    //     .catch((err) => {
+    //         alert('로그인 정보가 없습니다!')
+    //         history.push('/')
+    //     })
+    // },[])
+
     return(
         <React.Fragment>
             <Grid padding='104px 20px 0 20px' margin='0 0 10% 0'>
