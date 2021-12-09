@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
+import { actionCreators as projectActions } from "../redux/modules/project";
 import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
-  // props
-  const {
-    onSubmit,
+  const dispatch = useDispatch();
+  const [projects_name, setProjectText] = useState("");
 
-    // input props
-    type,
-    _onChange, // input 값 변경 감지
-    placeholder, //placeholder 기입
-    value, // 텍스트 추출
-    ref,
-  } = props;
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setProjectText(e.target.value);
+  };
+  const write = () => {
+    console.log(projects_name);
+    dispatch(projectActions.addProjectDB(projects_name));
+    setProjectText("");
+  };
 
+  // useEffect(() => {
+  //   dispatch(projectActions.addProjectDB(projects_name));
+  // }, []);
   return (
     <React.Fragment>
       <Grid
@@ -27,16 +32,10 @@ const AddList = (props) => {
         <Input
           padding="16px"
           margin="0 20px 0 0"
-          ref={ref}
-          type={type}
-          onChange={_onChange}
-          placeholder={placeholder}
-          defaultValue={value}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              onSubmit(e);
-            }
-          }}
+          placeholder="99일간의 프로젝트를 추가해 주세요"
+          value={projects_name}
+          _onChange={onChange}
+          onSubmit={write}
         />
         <AddButton
           width="50px"
@@ -46,22 +45,6 @@ const AddList = (props) => {
       </Grid>
     </React.Fragment>
   );
-};
-
-// Input DefaultProps
-Input.defaultProps = {
-  width: "100%",
-  height: null,
-  padding: null,
-  margin: null,
-  placeholder: "텍스트를 입력해주세요",
-  bg: "#fff",
-  border: "1px solid #ccc",
-  type: "text",
-  fontSize: "16px",
-  onSubmit: () => {},
-  _onChange: () => {},
-  value: () => {},
 };
 
 export default AddList;

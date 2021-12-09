@@ -1,7 +1,7 @@
 import { createAction,handleAction,handleActions } from "redux-actions"
 import { produce } from "immer"
 
-import { deleteCookie,getCookie,setCookie } from "../../shared/Cookie"
+import { deleteCookie,getCookie,setCookie } from "../../shared/cookie"
 import { apis } from '../../api/axios';
 
 import {auth} from "../../shared/firebase"
@@ -83,7 +83,7 @@ const signupDB = (id,userName,pwd,pwdCheck) => {
         })
         .catch((err) => {
             console.log(err)
-            window.alert(err.responseJSON.errorMessage);
+            window.alert(err);
         })
 
         // auth.
@@ -130,17 +130,8 @@ const loginCheckDB = () => {
 // 토큰삭제
 const logoutDB = () => {
     return function (dispatch,getState,{history}) {
-        auth
-        .signOut()
-        .then(()=> {
-            dispatch(logOut());
-            alert('로그아웃 되었습니다.')
-            history.replace('/')
-        })
-        .catch((err) => {
-            console.log(err)
-            alert('삭제가 안되요')
-        })
+        dispatch(logOut());
+        alert('로그아웃 되었습니다.')
     }
 }
 
