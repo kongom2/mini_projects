@@ -9,19 +9,19 @@ import { history } from "../redux/configureStore";
 
 const Project = () => {
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token")
-  //   apis
-  //   .loginCheck(token)
-  //   .then((res) => {
-  //       console.log('야호')
-  //       return res
-  //   })
-  //   .catch((err) => {
-  //       alert('로그인 정보가 없습니다!')
-  //       history.push('/')
-  //   })
-  // },[])
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    apis
+    .loginCheck(token)
+    .then((res) => {
+        console.log('야호')
+        return res
+    })
+    .catch((err) => {
+        alert('로그인 정보가 없습니다!')
+        history.push('/')
+    })
+  },[])
 
 
   const loginUser = "로그인한 유저"; // useSelector((state) => state.user.loginUser);

@@ -24,7 +24,7 @@ const Signup = (props) => {
             return;
         }
         if(!checkPassword(pwd)) {
-            alert('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.')
+            alert('숫자+영문자 조합으로 6자리 이상 입력해주세요.')
             return;
         }
         if(pwd !== pwdCheck) {
@@ -32,7 +32,6 @@ const Signup = (props) => {
             return;
         }
 
-        console.log(id,pwd,pwdCheck,userName)
         dispatch(userActions.signupDB(id,userName,pwd,pwdCheck))
     }
 
