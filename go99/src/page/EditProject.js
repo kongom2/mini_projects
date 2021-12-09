@@ -17,7 +17,7 @@ const EditProject = () => {
           _onChange={() => {}}
           padding="16px"
           margin="5px 0 10px 0"
-          fontSize="16px"
+          fontSize="16px" 
           placeholder="프로젝트 이름을 입력해주세요"
           bg="#F4F6F6"
           border="0px"

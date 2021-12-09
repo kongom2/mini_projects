@@ -24,32 +24,34 @@ const ProjectList = () => {
         return (
           <Grid padding="16px" key={index}>
             <Grid is_flex>
-              <Text
-                size="36px"
-                bold="bold"
-                color="#455154"
-                margin="0px 10px"
-                _onClick={() => {
-                  history.push(`main/${item.projects_name}`);
-                }}
-              >
-                {item.projects_name}
-              </Text>
-              <ImageButton
-                margin="0px 0px 0px auto"
-                _onClick={() => {
-                  console.log("수정버튼");
-                  dispatch(projectActions.editProject(item));
-                }}
-              />
-              <ImageButton
-                margin="0px 10px"
-                deleteIcon
-                key={index}
-                _onClick={() => {
-                  dispatch(projectActions.deleteProject(item.project_id));
-                }}
-              />
+              <div style={{ cursor: "pointer" }}>
+                <Text
+                  size="36px"
+                  bold="bold"
+                  color="#455154"
+                  margin="0px 10px"
+                  _onClick={() => {
+                    history.push(`main/${item.projects_name}`);
+                  }}
+                >
+                  {item.projects_name}
+                </Text>
+                <ImageButton
+                  margin="0px 0px 0px auto"
+                  _onClick={() => {
+                    console.log("수정버튼");
+                    dispatch(projectActions.editProject(item));
+                  }}
+                />
+                <ImageButton
+                  margin="0px 10px"
+                  deleteIcon
+                  key={index}
+                  _onClick={() => {
+                    dispatch(projectActions.deleteProject(item.project_id));
+                  }}
+                />
+              </div>
             </Grid>
             <Hr />
           </Grid>

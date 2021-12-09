@@ -53,8 +53,8 @@ export const apis = {
     // 피드백 투두리스트
     getFeedBack: (circles_id) => instance.get(`/api/circles/${circles_id}/feedback`),
     // contents = {projects_title = title, circles_id: circleID, contents:contents}
-    addFeedBack: (circles_id,contents) => instance.post(`/api/circles/${circles_id}/feedback`,contents),
-    editFeedBack: (circles_id,contents  ) => instance.put(`/api/circles/${circles_id}/feedback`,contents),
+    addFeedBack: (circles_id,data) => instance.post(`/api/circles/${circles_id}/feedback`,data),
+    editFeedBack: (circles_id,data  ) => instance.put(`/api/circles/${circles_id}/feedback`,data),
     // id = { projects_title = title , circles_id: circleID }
     deleteFeedBack: (circles_id,id) => instance.delete(`/api/circles/${circles_id}/feedback`,id),
 

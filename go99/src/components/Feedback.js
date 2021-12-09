@@ -11,21 +11,30 @@ import {
 import styled from "styled-components";
 
 const Feedback = (props) => {
-  const id = 'user_id'
   const dispatch = useDispatch()
-  
+  const circles_id = props.circles_id
+  const projects_title = props.project_title
+
   useEffect(() => {
-    dispatch(feedbackActions.setFeedBackDB(id))
+    const circles_id = props.circles_id
+    dispatch(feedbackActions.setFeedBackDB(circles_id))
     setFeedback('')
   },[])
   
-  const  comment = useSelector((state) => state.feedBack.contents);
-  const  empty = useSelector((state) => state.feedBack.empty);
+  const comment = useSelector((state) => state.feedBack.contents);
+  const empty = useSelector((state) => state.feedBack.empty);
   const [modal,setModal] = useState(false)
   const [feedback, setFeedback] = useState();
 
+  const data = {
+    projects_title:projects_title,
+    circles_id:circles_id,
+    contents:feedback
+  }
+
   const addComments = () => {
-    dispatch(feedbackActions.addFeedBackDB(feedback))
+
+    dispatch(feedbackActions.addFeedBackDB(circles_id,data))
     
   };
 
@@ -40,7 +49,7 @@ const Feedback = (props) => {
   } 
 
   const editFeedback = () => {
-    dispatch(feedbackActions.editFeedBackDB(id))
+    dispatch(feedbackActions.editFeedBackDB(circles_id,data))
     setModal(false)
   };
 
@@ -49,7 +58,7 @@ const Feedback = (props) => {
       alert('삭제될 데이터가 없습니다.')
       return
     }
-    dispatch(feedbackActions.deleteFeedBackDB(id))
+    dispatch(feedbackActions.deleteFeedBackDB(circles_id,projects_title))
   };
 
   return (
