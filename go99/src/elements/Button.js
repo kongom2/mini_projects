@@ -12,9 +12,13 @@ const Button = (props) => {
     fontSize,
     bg,
     fontColor,
+    border,
+    hover
   } = props;
   
   const styles = {
+    hover:hover,
+    border:border,
     margin: margin,
     width: width,
     padding: padding,
@@ -43,6 +47,8 @@ Button.defaultProps = {
   padding: "12px 0px",
   bg: "#d85147",
   fontColor: "#ffffff",
+  border:'none',
+  hover:null
 };
 
 const ElButton = styled.button`
@@ -54,8 +60,13 @@ const ElButton = styled.button`
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border-radius: 6px;
-  border: none;
+  border: ${(props) => props.border};
   cursor: pointer;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  transition: all 0.2s;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  &:hover {
+    color: ${(props) => props.hover? '#d85147' : 'none'};
+    transition: all 0.2s; 
+  }
 `;
 export default Button;
