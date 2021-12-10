@@ -1,10 +1,9 @@
-import React,{useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 
 
 // 라우터 불러오기
-import { Route, BrowserRouter,Switch } from "react-router-dom";
-import axios from "axios";
+import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router"
 import { history } from '../redux/configureStore';
 

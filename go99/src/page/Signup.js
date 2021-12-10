@@ -48,7 +48,7 @@ const Signup = (props) => {
                     padding='15px' 
                     bg="#F4F6F6"
                     border="0px"
-                    placeholder='이메일을 입력해주세요' 
+                    placeholder='아이디를 입력해주세요' 
                     _onChange={(e)=>{setId(e.target.value)}}
                 ></Input>
                 <Grid hide={id === '' ? 'none' : null}>

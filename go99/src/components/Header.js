@@ -14,10 +14,8 @@ const Header = (props) => {
   const logOut = (props) => {
     dispatch(userActions.logoutDB());
   };
-  const id = window.sessionStorage.getItem('id')
-  const cookie = getCookie("is_login");
-  const is_login = useSelector((state) => state.user.is_login);
-
+  
+  const id = localStorage.getItem("token")
   // 토큰의 유무로 분기점 설정
   if (id) {
     return (
@@ -30,6 +28,7 @@ const Header = (props) => {
               margin="0 auto 0 0"
               _onClick={() => {
                 history.goBack();
+                  
               }}
               cursor="pointer"
             >

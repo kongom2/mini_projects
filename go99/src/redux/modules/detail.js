@@ -1,12 +1,14 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/axios";
+import axios from "axios";
 
 // Actions
 const GET_TODOS = "GET_TODOS"; // 프로젝트 조회하기
 const ADD_TODOS = "ADD_TODOS"; // 프로젝트 추가하기
-// const EDIT_TODOS = "EDIT_TODOS"; // 프로젝트 수정하기
-// const DELETE_TODOS = "DELETE_TODOS"; // 프로젝트 수정하기
+const EDIT_TODOS = "EDIT_TODOS"; // 프로젝트 추가하기
+const DELETE_TODOS = "DELETE_TODOS"; // 프로젝트 추가하기
+const PATCH_CIRCLE = "PATCH_CIRCLE"; // 프로젝트 추가하기
 
 // Action Creators
 const getTodos = createAction(GET_TODOS, (todos_list) => ({ todos_list }));
@@ -17,8 +19,10 @@ const addTodos = createAction(ADD_TODOS,
     circles_id,
   })
 );
-// const editTodos = createAction(EDIT_TODOS, () => ({}));
-// const deleteTodos = createAction(DELETE_TODOS, () => ({}));
+const editTodos = createAction(EDIT_TODOS, (list) => ({list}));
+const deleteTodos = createAction(DELETE_TODOS, (list) => ({list}));
+const patchCircle = createAction(PATCH_CIRCLE, (todos_id,list) => ({ todos_id,list }));
+
 
 // initialState
 const initialState = {
@@ -42,64 +46,88 @@ const getTodosDB = (circles_id) => {
       });
   };
 };
-<<<<<<< HEAD
-const addTodosDB = (list) => {
-=======
 
 const addTodosDB = (circles_id, data) => {
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
   return function (dispatch, getState, { history }) {
 
     console.log(circles_id,data)
     apis
-<<<<<<< HEAD
-      .addTodo(list)
-      .then((res) => {
-        console.log("addTodosDB 접근 확인");
-        console.log(res.data);
-
-        dispatch(addTodos(list));
-=======
       .addTodo(circles_id, data)
       .then((res) => {
+        console.log(res)
         dispatch(addTodos(data));
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       })
       .catch((err) => {
         console.log("Load 에러!", err);
-        alert('이전 날짜의 TodoList는 수정할 수 없습니다.')
+        alert('오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.')
       });
   };
 };
-// const editTodosDB = () => {
-//   return function (dispatch, getState, { history }) {
-//     // apis.
-//     axios
-//       .get("https://run.mocky.io/v3/854a3fee-04db-4a80-a5f6-88ce1800662a")
-//       .then((res) => {
-//         console.log("editTodosDB 접근 확인");
-//         dispatch(editTodos());
-//       })
-//       .catch((err) => {
-//         console.log("Load 에러!", err);
-//       });
-//   };
-// };
-// const deleteTodosDB = () => {
-//   return function (dispatch, getState, { history }) {
-//     // apis.
-//     axios
-//       .delete("https://run.mocky.io/v3/854a3fee-04db-4a80-a5f6-88ce1800662a")
-//       .then((res) => {
-//         console.log("deleteTodosDB 접근 확인");
-//         console.log(res.data);
-//         dispatch(deleteTodos());
-//       })
-//       .catch((err) => {
-//         console.log("Load 에러!", err);
-//       });
-//   };
-// };
+
+const editTodosDB = (todos_id,contents,circles) => {
+  return function (dispatch, getState, { history }) {
+
+    const circles_id = {
+      todo_content:contents,
+      circles_id: circles,
+      todos_id:todos_id
+    }
+
+    apis
+      .editTodo(todos_id,circles_id)
+      .then((res) => {
+        console.log(res)
+        dispatch(editTodos(res));
+      })
+      .catch((err) => {
+        console.log("Load 에러!", err);
+      });
+  };
+};
+
+const deleteTodosDB = (todos_id,circles_id) => {
+  return function (dispatch, getState, { history }) {
+
+    const circles = {
+      data:{
+        circles_id:circles_id
+      }
+    }
+
+    apis
+      .deleteTodo(todos_id,circles)
+      .then((res) => {
+        console.log(res)
+        dispatch(deleteTodos(res));
+      })
+      .catch((err) => {
+        console.log("Load 에러!", err);
+
+      });
+  };
+};
+
+const patchCircleDB = (todoCheck,todos_id,circles_id) => {
+  return function (dispatch, getState, { history }) {
+
+    const data ={
+      todo_check : todoCheck,
+      circles_id : circles_id,
+    }
+
+    apis
+      .checkTodo(todos_id, data)
+      .then((res) => {
+        console.log(res.data)
+        dispatch(patchCircle(todos_id,res.data))
+      })
+      .catch((err) => {
+        console.log("Load 에러!", err);
+        alert('오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.')
+      });
+  };
+};
+
 
 // Reducer
 export default handleActions(
@@ -110,30 +138,26 @@ export default handleActions(
       }),
     [ADD_TODOS]: (state, action) =>
       produce(state, (draft) => {
-<<<<<<< HEAD
-        // draft.list[action.payload.todos_id].unshift(
-        //   action.payload.todo_content
-        // );
-        draft.list = action.payload.todo_content;
-        // draft.list.push(action.payload.todo_content);
-=======
         console.log(action.payload.todos_id)
         draft.list.push(action.payload.todos_id);
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       }),
-    // [EDIT_TODOS]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.editList = action.payload. Todos_name;
-    //   }),
-    // [DELETE_TODOS]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     const del_list = draft.list.filter((p) => {
-    //       if (p.Todos_id !== action.payload.todoss_id) {
-    //         return p;
-    //       }
-    //     });
-    //     return { list: del_list };
-    //   }),
+
+    [EDIT_TODOS]: (state, action) =>
+      produce(state, (draft) => {
+
+        draft.list = action.payload.list.data.result
+    }),
+    [DELETE_TODOS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list = action.payload.list.data.result
+
+    }),
+    [PATCH_CIRCLE]: (state, action) =>
+      produce(state, (draft) => { 
+        let idx = draft.list.findIndex((p) => p.todos_id === action.payload.todos_id)
+        let arr = [...state.list]
+        draft.list = action.payload.list.result
+      }),
   },
   initialState
 );
@@ -144,13 +168,15 @@ const actionCreators = {
   // Action Creators
   getTodos,
   addTodos,
-  // editTodos,
-  // deleteTodos,
-  // 미들웨어
   getTodosDB,
   addTodosDB,
-  // editTodosDB,
-  // deleteTodosDB,
+  patchCircleDB,
+  patchCircle,
+  deleteTodosDB,
+  deleteTodos,
+  editTodos,
+  editTodosDB
+
 };
 
 export { actionCreators }; // 내보내기

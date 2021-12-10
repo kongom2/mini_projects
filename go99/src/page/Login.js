@@ -27,11 +27,11 @@ const Login = () => {
 
   const is_session = localStorage.getItem("token")
 
-  useEffect(() => {
-    if(is_session) {
-      history.replace('/project')
-    }
-  },[])
+  // useEffect(() => {
+  //   if(is_session) {
+  //     history.replace('/project')
+  //   }
+  // },[])
 
   return (
     <React.Fragment>

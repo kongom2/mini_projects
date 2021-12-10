@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react";
-=======
 import React, { useEffect,useState } from "react";
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
@@ -19,24 +15,9 @@ import { history } from "../redux/configureStore";
 
 const Project = (props) => {
   const dispatch = useDispatch();
-  const id = window.sessionStorage.getItem("id");
+  const id = window.sessionStorage.getItem("nickname");
   const [projects_name, setProjectText] = useState("");
 
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   apis
-  //     .loginCheck(token)
-  //     .then((res) => {
-  //       console.log("야호");
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       alert("로그인 정보가 없습니다!");
-  //       history.push("/");
-  //     });
-  // }, []);
-=======
 
   const is_session = localStorage.getItem("token")
 
@@ -46,7 +27,6 @@ const Project = (props) => {
       history.replace("/");
     }
   }, []);
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
 
   return (
     <React.Fragment>
@@ -62,11 +42,7 @@ const Project = (props) => {
         <ProjectList />
       </Grid>
       <AddListWrap>
-<<<<<<< HEAD
-        <ProjectAddList></ProjectAddList>
-=======
         <ProjectAddList ></ProjectAddList>
->>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       </AddListWrap>
     </React.Fragment>
   );
