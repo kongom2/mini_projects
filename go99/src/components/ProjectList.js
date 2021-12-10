@@ -12,27 +12,47 @@ const ProjectList = () => {
 
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
-
+  const user_name = useSelector((state) =>
+    state.user.user !== null ? state.user.user.id : null
+  );
   // DB에서 불러오기
   useEffect(() => {
-    dispatch(projectActions.getProjectDB());
+    dispatch(projectActions.getProjectDB(user_name));
   }, []);
 
   const [modal,setModal] = useState(false)
+  const [name,setName] = useState('')
+  const [projectName,setProjectName] = useState('')
+  const [newProjectName,setNewProjectName] = useState('')
 
   const editModal = () => {
     if(!modal) {
       setModal(true)
     }
-  } 
+  }
 
   const editText = () => {
+    // 필요한거? 프로젝트 아이디/새 포르젝트 네임
+    dispatch(projectActions.editProjectDB(name,user_name,newProjectName))
     setModal(false)
+  };
+
+  const onChange = (e) => {
+    setNewProjectName(e.target.value);
   };
 
   return (
     <React.Fragment>
       {project_list.map((item, index) => {
+
+        const projects_id = item.projects_id
+        const projects_title = item.project_title
+        const deleteDB = () => {
+          dispatch(projectActions.deleteProjectDB(projects_id,user_name))
+        } 
+        const test = () => {
+          console.log('1')
+        }
         return (
           <Grid padding="16px" key={index}>
             <Grid is_flex>
@@ -43,25 +63,27 @@ const ProjectList = () => {
                   color="#455154"
                   margin="0px 10px"
                   _onClick={() => {
-                    history.push(`main/${item.projects_name}`);
+                    history.push(`main/${item.project_title}`);
                   }}
                 >
-                  {item.projects_name}
+                  {item.project_title}
                 </Text>
                 </Pointer>
                 <ImageButton
                 size='24px'
                   margin="0px 0px 0px auto"
-                  _onClick={editModal}
+                  _onClick={() => {
+                    editModal()
+                    setName(projects_id)
+                    setProjectName(projects_title)
+                  }}
                 />
                 <ImageButton
                   size='24px'
                   margin="0px 10px 0px 15px"
                   deleteIcon
                   key={index}
-                  _onClick={() => {
-                    dispatch(projectActions.deleteProject(item.project_id));
-                  }}
+                  _onClick={deleteDB}
                 />
             </Grid>
             <Hr />
@@ -69,13 +91,15 @@ const ProjectList = () => {
           
         );
       })}
-      <Modal style={{display:modal? 'block' : 'none'}}>
+      {modal
+      ?<Modal style={{display:modal? 'block' : 'none'}}>
         <ModalInner>
           <Text margin="0 0 20px 0" size="1.5rem" bold>텍스트를 수정해주세요</Text>
-          <Input margin="0 0 20px 0" padding="15px"></Input>
+          <Input _onChange={onChange} value={projectName} margin="0 0 20px 0" padding="15px"></Input>
           <Button _onClick={editText}>수정</Button>
         </ModalInner>
       </Modal>
+      :null}
     </React.Fragment>
   );
 };

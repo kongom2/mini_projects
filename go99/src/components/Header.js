@@ -16,7 +16,7 @@ const Header = (props) => {
   };
   const cookie = getCookie("is_login");
   const is_login = useSelector((state) => state.user.is_login);
-  console.log(cookie);
+
   // 토큰의 유무로 분기점 설정
   if (cookie) {
     return (

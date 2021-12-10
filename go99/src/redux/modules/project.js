@@ -26,8 +26,8 @@ const editProject = createAction(
     projects_name,
   })
 );
-const deleteProject = createAction(DELETE_PROJECT, (projects_id) => ({
-  projects_id,
+const deleteProject = createAction(DELETE_PROJECT, (list,userId) => ({
+  list,userId
 }));
 
 // initialState
@@ -41,14 +41,18 @@ const initialStateProject = {
   // projects_id: "",
   // date: "",
 };
+
 // DB
-const getProjectDB = () => {
+const getProjectDB = (id) => {
   return function (dispatch, getState, { history }) {
     // apis.getProjects
-    axios
-      .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
+    const user = {
+      userId:id
+    }
+    apis
+      .getProjects(id)
       .then((res) => {
-        let project_list = res.data.project;
+        let project_list = res.data.projects
         dispatch(getProject(project_list));
       })
       .catch((err) => {
@@ -56,50 +60,59 @@ const getProjectDB = () => {
       });
   };
 };
-const addProjectDB = (projects_name) => {
+
+const addProjectDB = (title) => {
   return function (dispatch, getState, { history }) {
-    // apis.addProjects
-    axios
-      .post("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0", {
-        projects_name,
-      })
-      .then((res) => {
-        console.log(res.data.project);
-        console.log(projects_name);
-        dispatch(addProject(projects_name));
+    
+    apis
+    .addProjects(title)
+    .then((res) => {
+        const list = res.data
+        dispatch(addProject(list));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
       });
   };
 };
-const editProjectDB = (projects_name, projects_id) => {
+
+const editProjectDB = (projects_id,userId,project_title) => {
   return function (dispatch, getState, { history }) {
-    // apis.editProjects
-    axios
-      .get("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
-      .then((res) => {
-        dispatch(editProject(projects_name, projects_id));
-        window.alert("프로젝트이름 수정 완료!");
-      })
-      .catch((err) => {
-        console.log("Load 에러!", err);
-      });
+    console.log(projects_id,userId,project_title)
+
+    const data = {
+      userId: userId,
+      project_title: project_title
+    }
+    apis
+    .editProjects(projects_id,data)
+    .then((res) => {
+      const list = res.data
+      dispatch(editProject(list));
+      window.alert("프로젝트이름 수정 완료!");
+    })
+    .catch((err) => {
+      console.log("Load 에러!", err);
+    });
   };
 };
-const deleteProjectDB = (projects_id) => {
+
+const deleteProjectDB = (projects_id,userId) => {
   return function (dispatch, getState, { history }) {
-    // apis.deleteProjects
-    axios
-      .delete("https://run.mocky.io/v3/db4f9609-1596-47ca-a4f8-3454ac265db0")
-      .then((res) => {
-        console.log(res.data.project);
-        window.alert("삭제 했습니다!");
-        dispatch(deleteProject(projects_id));
-      })
-      .catch((err) => {
-        console.log("Load 에러!", err);
-      });
+
+    console.log(projects_id,userId) // 일단 숫자형 데이터
+
+    apis
+    .deleteProjects(projects_id,userId)  
+    .then((res) => {
+      const list = res.data
+      console.log(list);
+      window.alert("삭제 했습니다!");
+      dispatch(deleteProject(list,userId));
+    })
+    .catch((err) => {
+      console.log("Load 에러!", err);
+    });
   };
 };
 
@@ -109,25 +122,22 @@ export default handleActions(
     [GET_PROJECT]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.project_list;
-        // .push(...action.payload.project_list);
       }),
     [ADD_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        // draft.list.push(action.payload.projects_name);
-        draft.list.push(action.payload.projects_name);
+        draft.list = action.payload.projects_name
       }),
     [EDIT_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        draft.editList = action.payload.projects_name;
+        draft.list = action.payload.projects_id;
       }),
     [DELETE_PROJECT]: (state, action) =>
       produce(state, (draft) => {
-        const del_list = draft.list.filter((p) => {
-          if (p.projects_id !== action.payload.projects_id) {
-            return p;
-          }
-        });
-        return { list: del_list };
+        console.log('딜리트 리듀서 실행')
+        const list = action.payload.list
+        const id = action.payload.userId
+        const deleteList = list.filter(x => x.userId === id)
+        draft.list = deleteList
       }),
   },
   initialState

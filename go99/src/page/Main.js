@@ -11,11 +11,7 @@ const Main = (props) => {
   const { history } = props;
   const pathName = history.location.pathname;
   const name = pathName.split("/");
-
-  const user_name = useSelector((state) =>
-    state.user.user !== null ? state.user.user.id : null
-  );
-
+  const id = window.sessionStorage.getItem('id')
   //   useEffect(() => {
   //     const token = localStorage.getItem("token");
   //     apis
@@ -33,8 +29,8 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <Grid padding="104px 20px 0 20px" margin="0 0 10% 0">
-        <Text size="2rem" bold>
-          {user_name}님의
+        <Text id="2rem" bold>
+          {id}님의
         </Text>{" "}
         {/* 이후에 id값 */}
         <Text size="3rem" bold>

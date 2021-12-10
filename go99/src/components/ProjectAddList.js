@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
 import { actionCreators as projectActions } from "../redux/modules/project";
@@ -6,22 +6,28 @@ import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
 
-  const {_onClick} = props
+  const user_name = useSelector((state) =>
+    state.user.user !== null ? state.user.user.id : null
+  );
 
   const dispatch = useDispatch();
   const [projects_name, setProjectText] = useState("");
-  console.log(_onClick)
+
   const onChange = (e) => {
     setProjectText(e.target.value);
   };
-  const write = () => {
-    dispatch(projectActions.addProjectDB(projects_name));
-    setProjectText("");
-  };
 
-  // useEffect(() => {
-  //   dispatch(projectActions.addProjectDB(projects_name));
-  // }, []);
+  const inputRef = useRef()
+
+  const addProject =() => {
+    const data = {
+      project_title:projects_name,
+      userId:user_name,
+    }
+    setProjectText("");
+    dispatch(projectActions.addProjectDB(data));
+  }
+
   return (
     <React.Fragment>
       <Grid
@@ -34,14 +40,14 @@ const AddList = (props) => {
           padding="16px"
           margin="0 20px 0 0"
           placeholder="99일간의 프로젝트를 추가해 주세요"
+          ref={inputRef}
           value={projects_name}
           _onChange={onChange}
-          onSubmit={write}
         />
         <AddButton
           width="50px"
           padding="0 10.4px"
-          _onClick={_onClick}
+          _onClick={addProject}
         ></AddButton>
       </Grid>
     </React.Fragment>

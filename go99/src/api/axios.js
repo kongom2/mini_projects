@@ -27,11 +27,11 @@ export const apis = {
 
     // 프로젝트 리스트 
     // id = {userID : id}
-    getProjects: (id) => instance.get(`/api/projects/?userID:=${id}`),
+    getProjects: (id) => instance.get(`/api/projects/?userId=${id}`),
     // title = {userID:id, projects_title = title}
     addProjects: (title) => instance.post('/api/projects',title),
-    editProjects: (title) => instance.put('/api/projects',title),
-    deleteProjects: (title) => instance.delete('/api/projects',title),
+    editProjects: (projects_id,data) => instance.put(`api/projects/${projects_id}`,data),
+    deleteProjects: (projects_id,userId) => instance.delete(`api/projects/${projects_id}`,userId),
 
     // 메인페이지(서클즈 조회)
     // 쿼리로 id보내기

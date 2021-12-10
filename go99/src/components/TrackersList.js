@@ -7,13 +7,18 @@ import { apis } from '../api/axios';
 
 const TrackersList = (props) => {
 
+  const projectTitle = props.project_title
+  const porjectList = useSelector((state) => state.project.list)
+  console.log(projectTitle)
+  console.log(porjectList)
+  const recent = porjectList.filter(x => x.project_title === projectTitle)
+  const id = recent[0].projects_id
   // 디스패치 히스토리
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const title = props.project_title
-    dispatch(circleActions.setCirclesDB(title))
+    dispatch(circleActions.setCirclesDB(id))
   }, []);
 
   // 리덕스에서 circles를 가져옵니다.

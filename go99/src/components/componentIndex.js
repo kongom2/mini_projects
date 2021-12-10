@@ -4,5 +4,6 @@ import AddList from "./AddList";
 import ProjectList from "./ProjectList";
 import TodoList from "./TodoList";
 import Header from "./Header";
+import ProjectAddList from "./ProjectAddList";
 
-export { TrackersList, Feedback, AddList, ProjectList, TodoList, Header};
+export { TrackersList, Feedback, AddList, ProjectList, TodoList, Header,ProjectAddList};
