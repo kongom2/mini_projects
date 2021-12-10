@@ -5,7 +5,11 @@ import { actionCreators as detailActions } from "../redux/modules/detail";
 import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
+
+  const {_onClick} = props
+
   const dispatch = useDispatch();
+<<<<<<< HEAD
 
   // const addProject = () => {
   //   dispatch(detailActions.addProjectDB());
@@ -23,6 +27,16 @@ const AddList = (props) => {
     console.log(todo_content);
     dispatch(detailActions.addTodosDB(todos_id, todo_content));
     setTodoText("");
+=======
+  const [projects_name, setProjectText] = useState("");
+  console.log(_onClick)
+  const onChange = (e) => {
+    setProjectText(e.target.value);
+  };
+  const write = () => {
+    dispatch(projectActions.addProjectDB(projects_name));
+    setProjectText("");
+>>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
   };
 
   return (
@@ -41,7 +55,15 @@ const AddList = (props) => {
           _onChange={onChange}
           onSubmit={write}
         />
+<<<<<<< HEAD
         <AddButton width="50px" padding="0 10.4px" onClick={write}></AddButton>
+=======
+        <AddButton
+          width="50px"
+          padding="0 10.4px"
+          _onClick={_onClick}
+        ></AddButton>
+>>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
       </Grid>
     </React.Fragment>
   );

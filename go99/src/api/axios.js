@@ -23,6 +23,7 @@ export const apis = {
   login: (user) => instance.post("/api/login", user),
   signUp: (user) => instance.post("/api/register", user),
 
+<<<<<<< HEAD
   // 프로젝트 리스트
   // id = {userID : id}
   getProjects: (id) => instance.get(`/api/projects/?userID:=${id}`),
@@ -30,6 +31,24 @@ export const apis = {
   addProjects: (title) => instance.post("/api/projects", title),
   editProjects: (title) => instance.put("/api/projects", title),
   deleteProjects: (title) => instance.delete("/api/projects", title),
+=======
+    // 로그인
+    // user  = {userID:id , pw:pw}
+    login : (user) => instance.post('/api/login', user),
+    signUp: (user) => instance.post('/api/register', user),
+
+    // 프로젝트 리스트 
+    // id = {userID : id}
+    getProjects: (id) => instance.get(`/api/projects/?userId=${id}`),
+    // title = {userID:id, projects_title = title}
+    addProjects: (title) => instance.post('/api/projects',title),
+    editProjects: (projects_id,data) => instance.put(`api/projects/${projects_id}`,data),
+    deleteProjects: (projects_id,userId) => instance.delete(`api/projects/${projects_id}`,userId),
+
+    // 메인페이지(서클즈 조회)
+    // 쿼리로 id보내기
+    getCircles: (project_id,user_id) => instance.get(`/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`),
+>>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
 
   // 메인페이지(서클즈 조회)
   // 쿼리로 id보내기

@@ -1,30 +1,23 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
+=======
+import React, { useEffect,useState } from "react";
+>>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
-import { ProjectList, AddList } from "../components/componentIndex";
+import { ProjectList, AddList,ProjectAddList } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 import { actionCreators as projectActions } from "../redux/modules/project";
 import { apis } from "../api/axios";
 import { history } from "../redux/configureStore";
+import { actionCreators as projectActions } from "../redux/modules/user";
 
 const Project = (props) => {
   const dispatch = useDispatch();
-
-  const user_name = useSelector((state) =>
-    state.user.user !== null ? state.user.user.id : null
-  );
+  const id = window.sessionStorage.getItem('id')
   const [projects_name, setProjectText] = useState("");
 
-  const onChange = (e) => {
-    console.log(e.target.value);
-    setProjectText(e.target.value);
-  };
-  const write = () => {
-    console.log(projects_name);
-    dispatch(projectActions.addProjectDB(projects_name));
-    setProjectText("");
-  };
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -45,7 +38,7 @@ const Project = (props) => {
       <Grid padding="104px 20px">
         <Grid padding="0px 0px 32px 16px">
           <Text size="36px" color="#455154" bold>
-            {user_name} 님의
+            {id} 님의
           </Text>
           <Text size="36px" color="#455154" bold>
             프로젝트 리스트
@@ -54,12 +47,16 @@ const Project = (props) => {
         <ProjectList />
       </Grid>
       <AddListWrap>
+<<<<<<< HEAD
         <AddList
           placeholder="99일간의 프로젝트를 추가해 주세요"
           value={projects_name}
           _onChange={onChange}
           onSubmit={write}
         />
+=======
+        <ProjectAddList ></ProjectAddList>
+>>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
       </AddListWrap>
     </React.Fragment>
   );

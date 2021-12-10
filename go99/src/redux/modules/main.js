@@ -18,29 +18,24 @@ const initialState = {
   circles: [],
 };
 // middlewear
-const setCirclesDB = (title) => {
+const setCirclesDB = (id) => {
     return function (dispatch,getState,{history}) {
-        const user_id = (getState().user.user !== null)? getState().user.user.id : '로그인 정보 없음'
-        const project_id = title
-        // apis
-        // .getCircles(project_id,user_id).then((res) => {
-        //     const circleArr = res.data.result
-        //     console.log("정상적으로 circle를 가져왔습니다.");
-        //     dispatch(setCircles(circleArr))
-        // })
-        // .catch((err) => {
-        //     console.log("에러", err);
-        // });
-        axios
-        .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
+        console.log(id)
+        // 프로젝트 아이디만 구하면 된다.
+        const project_id = id
+
+        apis
+        .getCircles(project_id)
         .then((res) => {
-            const circleArr = res.data.result
+          console.log(res.data.circles)
+            const circleArr = res.data.circles
             console.log("정상적으로 circle를 가져왔습니다.");
             dispatch(setCircles(circleArr))
         })
         .catch((err) => {
             console.log("에러", err);
         });
+        
     }
 }
 
