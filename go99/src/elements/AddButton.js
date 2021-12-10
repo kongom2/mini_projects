@@ -37,6 +37,7 @@ AddButton.defaultProps = {
   margin: null,
   position: null,
   padding: "0px",
+  _onClick: () => {},
 };
 
 // AddButton 스타일드 컴포넌트

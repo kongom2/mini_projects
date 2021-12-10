@@ -12,6 +12,7 @@ const Input = (props) => {
     height,
     fontSize,
     onSubmit,
+    _onClick,
 
     // input props
     type,
@@ -40,6 +41,7 @@ const Input = (props) => {
         type={type}
         onChange={_onChange}
         placeholder={placeholder}
+        onClick={_onClick}
         defaultValue={value}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
@@ -63,6 +65,8 @@ Input.defaultProps = {
   type: "text",
   fontSize: "16px",
   onSubmit: () => {},
+  _onChange: () => {},
+  _onClick: () => {},
 };
 
 // Input 스타일드 컴포넌트
