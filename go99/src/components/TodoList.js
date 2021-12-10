@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 const TodoList = (props) => {
   // 디스패치, 히스토리 선언
   const dispatch = useDispatch();
-  const history = useHistory();
   const { is_complete } = props;
 
   const todo_list = useSelector((state) => state.detail.list);

@@ -42,15 +42,28 @@ const getTodosDB = (circles_id) => {
       });
   };
 };
+<<<<<<< HEAD
+const addTodosDB = (list) => {
+=======
 
 const addTodosDB = (circles_id, data) => {
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
   return function (dispatch, getState, { history }) {
 
     console.log(circles_id,data)
     apis
+<<<<<<< HEAD
+      .addTodo(list)
+      .then((res) => {
+        console.log("addTodosDB 접근 확인");
+        console.log(res.data);
+
+        dispatch(addTodos(list));
+=======
       .addTodo(circles_id, data)
       .then((res) => {
         dispatch(addTodos(data));
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       })
       .catch((err) => {
         console.log("Load 에러!", err);
@@ -97,8 +110,16 @@ export default handleActions(
       }),
     [ADD_TODOS]: (state, action) =>
       produce(state, (draft) => {
+<<<<<<< HEAD
+        // draft.list[action.payload.todos_id].unshift(
+        //   action.payload.todo_content
+        // );
+        draft.list = action.payload.todo_content;
+        // draft.list.push(action.payload.todo_content);
+=======
         console.log(action.payload.todos_id)
         draft.list.push(action.payload.todos_id);
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       }),
     // [EDIT_TODOS]: (state, action) =>
     //   produce(state, (draft) => {
