@@ -6,11 +6,18 @@ import { history } from "../redux/configureStore";
 // component, element 불러오기
 import { AddList, TodoList, Feedback } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
+import { useSelector, useDispatch } from "react-redux";
 
 const Detail = (props) => {
+  // 디스패치, 히스토리 선언
+
   const { history } = props;
   const pathName = history.location.pathname;
   const name = pathName.split("/");
+
+  // const circles_id = name[3];
+
+  // console.log(circles_id);
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");

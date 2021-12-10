@@ -23,32 +23,27 @@ export const apis = {
   login: (user) => instance.post("/api/login", user),
   signUp: (user) => instance.post("/api/register", user),
 
-<<<<<<< HEAD
+  // 로그인
+  // user  = {userID:id , pw:pw}
+  login: (user) => instance.post("/api/login", user),
+  signUp: (user) => instance.post("/api/register", user),
+
   // 프로젝트 리스트
   // id = {userID : id}
-  getProjects: (id) => instance.get(`/api/projects/?userID:=${id}`),
+  getProjects: (id) => instance.get(`/api/projects/?userId=${id}`),
   // title = {userID:id, projects_title = title}
   addProjects: (title) => instance.post("/api/projects", title),
-  editProjects: (title) => instance.put("/api/projects", title),
-  deleteProjects: (title) => instance.delete("/api/projects", title),
-=======
-    // 로그인
-    // user  = {userID:id , pw:pw}
-    login : (user) => instance.post('/api/login', user),
-    signUp: (user) => instance.post('/api/register', user),
+  editProjects: (projects_id, data) =>
+    instance.put(`api/projects/${projects_id}`, data),
+  deleteProjects: (projects_id, userId) =>
+    instance.delete(`api/projects/${projects_id}`, userId),
 
-    // 프로젝트 리스트 
-    // id = {userID : id}
-    getProjects: (id) => instance.get(`/api/projects/?userId=${id}`),
-    // title = {userID:id, projects_title = title}
-    addProjects: (title) => instance.post('/api/projects',title),
-    editProjects: (projects_id,data) => instance.put(`api/projects/${projects_id}`,data),
-    deleteProjects: (projects_id,userId) => instance.delete(`api/projects/${projects_id}`,userId),
-
-    // 메인페이지(서클즈 조회)
-    // 쿼리로 id보내기
-    getCircles: (project_id,user_id) => instance.get(`/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`),
->>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
+  // 메인페이지(서클즈 조회)
+  // 쿼리로 id보내기
+  getCircles: (project_id, user_id) =>
+    instance.get(
+      `/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`
+    ),
 
   // 메인페이지(서클즈 조회)
   // 쿼리로 id보내기
@@ -59,9 +54,10 @@ export const apis = {
 
   // 투두리스트
   // get으로 circles_id: id 를 보낼수 있을까요?
-  getTodo: () => instance.get("/api/todos"),
+  getTodo: (circles_id) => instance.get(`api/todos?circles_id=${circles_id}`),
   // list = {todos_id :circleID+date(고유아이디) todo_content: content, circles_id: circleID}
-  addTodo: (list) => instance.post("/api/todos", list),
+  addTodo: (circles_id, list) =>
+    instance.post(`/api/todos?circles_id=${circles_id}`, list),
   // data = { todos_id:id , todo_content: content, circles_id: circleID }
   editTodo: (todos_id, data) => instance.put(`/api/todos/${todos_id}`, data),
   // data = { todos_id:id , circles_id: circleID }

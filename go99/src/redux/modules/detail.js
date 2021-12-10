@@ -27,10 +27,10 @@ const initialState = {
 };
 
 // 미들웨어
-const getTodosDB = () => {
+const getTodosDB = (circles_id) => {
   return function (dispatch, getState, { history }) {
     apis
-      .getTodo()
+      .getTodo(circles_id)
       .then((res) => {
         console.log("getTodosDB 접근 확인");
         let todos_list = res.data.result;
@@ -42,18 +42,14 @@ const getTodosDB = () => {
       });
   };
 };
-const addTodosDB = (todos_id, todo_content, circles_id) => {
+const addTodosDB = (list) => {
   return function (dispatch, getState, { history }) {
     apis
-      .addTodo()
+      .addTodo(list)
       .then((res) => {
         console.log("addTodosDB 접근 확인");
         console.log(res.data);
-        let list = {
-          todos_id: todos_id,
-          todo_content: todo_content,
-          circles_id: circles_id,
-        };
+
         dispatch(addTodos(list));
       })
       .catch((err) => {
@@ -103,7 +99,8 @@ export default handleActions(
         // draft.list[action.payload.todos_id].unshift(
         //   action.payload.todo_content
         // );
-        draft.list.push(action.payload.todo_content);
+        draft.list = action.payload.todo_content;
+        // draft.list.push(action.payload.todo_content);
       }),
     // [EDIT_TODOS]: (state, action) =>
     //   produce(state, (draft) => {

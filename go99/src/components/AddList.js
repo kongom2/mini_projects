@@ -1,42 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
 import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
 
 const AddList = (props) => {
-
-  const {_onClick} = props
-
   const dispatch = useDispatch();
-<<<<<<< HEAD
 
-  // const addProject = () => {
-  //   dispatch(detailActions.addProjectDB());
-  // };
+  // circles_id 불러오기
+  const pathName = history.location.pathname;
+  const name = pathName.split("/");
+  const circles_id = name[3];
+  console.log(circles_id);
 
   const [todo_content, setTodoText] = useState();
 
-  const { todos_id } = props;
+  // todos_id 불러오기
+  const todo_list = useSelector((state) => state.detail.list);
 
   const onChange = (e) => {
     console.log(e.target.value);
     setTodoText(e.target.value);
   };
+
+  const inputRef = useRef();
   const write = () => {
     console.log(todo_content);
-    dispatch(detailActions.addTodosDB(todos_id, todo_content));
+    const list = {
+      todos_id: circles_id + Date(),
+      todo_content: todo_content,
+      circles_id: circles_id,
+    };
+    console.log(list);
     setTodoText("");
-=======
-  const [projects_name, setProjectText] = useState("");
-  console.log(_onClick)
-  const onChange = (e) => {
-    setProjectText(e.target.value);
-  };
-  const write = () => {
-    dispatch(projectActions.addProjectDB(projects_name));
-    setProjectText("");
->>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
+    dispatch(detailActions.addTodosDB({ list }));
   };
 
   return (
@@ -51,19 +49,12 @@ const AddList = (props) => {
           padding="16px"
           margin="0 20px 0 0"
           placeholder="오늘의 느낀점을 남겨주세요"
+          ref={inputRef}
           Value={todo_content}
           _onChange={onChange}
           onSubmit={write}
         />
-<<<<<<< HEAD
         <AddButton width="50px" padding="0 10.4px" onClick={write}></AddButton>
-=======
-        <AddButton
-          width="50px"
-          padding="0 10.4px"
-          _onClick={_onClick}
-        ></AddButton>
->>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
       </Grid>
     </React.Fragment>
   );
