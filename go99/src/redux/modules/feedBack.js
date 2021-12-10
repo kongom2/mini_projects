@@ -25,6 +25,7 @@ const initialState = {
 
 // middlewear
 const setFeedBackDB = (circles_id) => {
+<<<<<<< HEAD
   return function (dispatch, getState, { history }) {
     // // api
     // apis
@@ -107,6 +108,91 @@ const editFeedBackDB = (circles_id, data) => {
       });
   };
 };
+=======
+    return function (dispatch,getState,{history}) {
+        // api
+        apis
+        .getFeedBack(circles_id)
+        .then((res) => {
+            console.log('정상적으로 피드백을 가져왔습니다.')
+            const feedback = res.data.feedback
+            dispatch(setFeedBack(feedback))
+        })
+        .catch((err) => {
+            console.log("에러", err);
+        });
+
+    }
+}
+
+const addFeedBackDB = (data) => {
+    return function (dispatch,getState,{history}) {
+        const circles_id = data.circles_id
+        console.log(circles_id)
+        console.log(data)
+        // api
+        apis
+        .addFeedBack(circles_id,data)
+        .then((res) => {
+            console.log(res)
+            const feedback = res.data.feedback
+            dispatch(addFeedBack(feedback))
+            alert('피드백이 등록되었습니다')
+        })
+        .catch((err) => {
+            console.log("에러", err);
+        });
+    }
+}
+
+const editFeedBackDB = (data) => {
+    return function (dispatch,getState,{history}) {
+        console.log(data)
+        const circles_id = data.circles_id
+        // api
+        apis
+        .editFeedBack(circles_id,data)
+        .then((res) => {
+            console.log(res)
+            const feedback = res.data.feedback
+            dispatch(editFeedBack(feedback))
+            alert('피드백이 수정되었습니다')
+        })
+        .catch((err) => {
+            console.log("에러", err);
+        });
+
+    }
+}
+
+const deleteFeedBackDB = (data) => {
+    return function (dispatch,getState,{history}) {
+
+        const circles_id = data.circles_id
+        const id = data.projects_id
+        
+        const deleteData = {
+            projects_id:id,
+            circles_id:circles_id,
+        }
+        console.log(deleteData)
+        //api
+        apis
+        .deleteFeedBack(circles_id,deleteData)
+        .then((res) => {
+            console.log('피드백을 삭제합니다.')
+            console.log(res)
+            const feedback = res.data.feedback
+            dispatch(deleteFeedBack(feedback))
+            alert('피드백이 삭제되었습니다')
+        })
+        .catch((err) => {
+            console.log("에러", err);
+        });
+
+    }
+}
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
 
 const deleteFeedBackDB = (circles_id, projects_title) => {
   return function (dispatch, getState, { history }) {

@@ -23,11 +23,6 @@ export const apis = {
   login: (user) => instance.post("/api/login", user),
   signUp: (user) => instance.post("/api/register", user),
 
-  // 로그인
-  // user  = {userID:id , pw:pw}
-  login: (user) => instance.post("/api/login", user),
-  signUp: (user) => instance.post("/api/register", user),
-
   // 프로젝트 리스트
   // id = {userID : id}
   getProjects: (id) => instance.get(`/api/projects/?userId=${id}`),
@@ -45,19 +40,12 @@ export const apis = {
       `/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`
     ),
 
-  // 메인페이지(서클즈 조회)
-  // 쿼리로 id보내기
-  getCircles: (project_id, user_id) =>
-    instance.get(
-      `/api/projects/${project_id}/circles/?projects_id=${project_id}&user_id=${user_id}`
-    ),
-
   // 투두리스트
   // get으로 circles_id: id 를 보낼수 있을까요?
-  getTodo: (circles_id) => instance.get(`api/todos?circles_id=${circles_id}`),
+  getTodo: (circles_id) => instance.get(`/api/todos?circles_id=${circles_id}`),
   // list = {todos_id :circleID+date(고유아이디) todo_content: content, circles_id: circleID}
-  addTodo: (circles_id, list) =>
-    instance.post(`/api/todos?circles_id=${circles_id}`, list),
+  addTodo: (circles_id, data) =>
+    instance.post(`/api/todos?circles_id=${circles_id}`, data),
   // data = { todos_id:id , todo_content: content, circles_id: circleID }
   editTodo: (todos_id, data) => instance.put(`/api/todos/${todos_id}`, data),
   // data = { todos_id:id , circles_id: circleID }
@@ -77,8 +65,8 @@ export const apis = {
   editFeedBack: (circles_id, data) =>
     instance.put(`/api/circles/${circles_id}/feedback`, data),
   // id = { projects_title = title , circles_id: circleID }
-  deleteFeedBack: (circles_id, id) =>
-    instance.delete(`/api/circles/${circles_id}/feedback`, id),
+  deleteFeedBack: (circles_id, data) =>
+    instance.delete(`/api/circles/${circles_id}/feedback`, data),
 
   // 본인확인
   loginCheck: (token) => instance.post("/api/users/me", token),

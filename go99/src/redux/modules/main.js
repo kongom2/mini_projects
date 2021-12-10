@@ -23,9 +23,10 @@ const setCirclesDB = (id) => {
         console.log(id)
         // 프로젝트 아이디만 구하면 된다.
         const project_id = id
-
+        const userId = window.sessionStorage.getItem('id')
+        console.log(project_id,userId)
         apis
-        .getCircles(project_id)
+        .getCircles(project_id,userId)
         .then((res) => {
           console.log(res.data.circles)
             const circleArr = res.data.circles

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
+=======
+import React, { useEffect,useState } from "react";
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
@@ -9,6 +13,7 @@ import {
 } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
 import { actionCreators as projectActions } from "../redux/modules/project";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { apis } from "../api/axios";
 import { history } from "../redux/configureStore";
 
@@ -17,6 +22,7 @@ const Project = (props) => {
   const id = window.sessionStorage.getItem("id");
   const [projects_name, setProjectText] = useState("");
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
   //   apis
@@ -30,6 +36,17 @@ const Project = (props) => {
   //       history.push("/");
   //     });
   // }, []);
+=======
+
+  const is_session = localStorage.getItem("token")
+
+  React.useEffect(() => {
+    if (!is_session) {
+      alert('로그인 정보가 없습니다!')
+      history.replace("/");
+    }
+  }, []);
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
 
   return (
     <React.Fragment>
@@ -45,7 +62,11 @@ const Project = (props) => {
         <ProjectList />
       </Grid>
       <AddListWrap>
+<<<<<<< HEAD
         <ProjectAddList></ProjectAddList>
+=======
+        <ProjectAddList ></ProjectAddList>
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       </AddListWrap>
     </React.Fragment>
   );

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 
 const AddList = (props) => {
+<<<<<<< HEAD
   const dispatch = useDispatch();
 
   // circles_id 불러오기
@@ -19,11 +20,20 @@ const AddList = (props) => {
   // todos_id 불러오기
   const todo_list = useSelector((state) => state.detail.list);
 
+=======
+
+  const {_onClick, circles_id, todos_id} = props
+
+  const dispatch = useDispatch();
+
+  const [todo_content, setTodoText] = useState();
+
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
   const onChange = (e) => {
-    console.log(e.target.value);
     setTodoText(e.target.value);
   };
 
+<<<<<<< HEAD
   const inputRef = useRef();
   const write = () => {
     console.log(todo_content);
@@ -35,6 +45,26 @@ const AddList = (props) => {
     console.log(list);
     setTodoText("");
     dispatch(detailActions.addTodosDB({ list }));
+=======
+  let date = new Date()
+  let day = date.getDate(); // 시
+  let hours = date.getHours(); // 시
+  let minutes = date.getMinutes();  // 분
+  let seconds = date.getSeconds();  // 초
+  const moment = `${day}${hours}${minutes}${seconds}`
+
+  const data = {  
+    circles_id:circles_id,
+    todo_content:todo_content,
+    todos_id:`${circles_id}_${moment}`
+  }
+
+  console.log(moment)
+  console.log(data)
+
+  const addTodos = () => {
+    dispatch(detailActions.addTodosDB(circles_id, data));
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
   };
 
   return (
@@ -52,9 +82,12 @@ const AddList = (props) => {
           ref={inputRef}
           Value={todo_content}
           _onChange={onChange}
-          onSubmit={write}
         />
+<<<<<<< HEAD
         <AddButton width="50px" padding="0 10.4px" onClick={write}></AddButton>
+=======
+        <AddButton width="50px" padding="0 10.4px" _onClick={addTodos}></AddButton>
+>>>>>>> 0e3444ab298a9a242b0eecaf7628a025974b5dd2
       </Grid>
     </React.Fragment>
   );

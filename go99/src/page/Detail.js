@@ -15,23 +15,14 @@ const Detail = (props) => {
   const pathName = history.location.pathname;
   const name = pathName.split("/");
 
-  // const circles_id = name[3];
+  const is_session = localStorage.getItem("token");
 
-  // console.log(circles_id);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   apis
-  //     .loginCheck(token)
-  //     .then((res) => {
-  //       console.log("야호");
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       alert("로그인 정보가 없습니다!");
-  //       history.push("/");
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    if (!is_session) {
+      alert("로그인 정보가 없습니다!");
+      history.replace("/");
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -41,10 +32,10 @@ const Detail = (props) => {
             오늘 할 일
           </Text>
         </Grid>
-        <TodoList />
+        <TodoList circles_id={name[3]} />
       </Grid>
       <CommentBox>
-        <AddList></AddList>
+        <AddList circles_id={name[3]}></AddList>
         <Feedback project_title={name[2]} circles_id={name[3]}></Feedback>
       </CommentBox>
     </React.Fragment>

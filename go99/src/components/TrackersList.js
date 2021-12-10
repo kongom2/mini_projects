@@ -8,11 +8,10 @@ import { apis } from '../api/axios';
 const TrackersList = (props) => {
 
   const projectTitle = props.project_title
-  const porjectList = useSelector((state) => state.project.list)
-  console.log(projectTitle)
-  console.log(porjectList)
-  const recent = porjectList.filter(x => x.project_title === projectTitle)
-  const id = recent[0].projects_id
+  const project_id = props.project_id
+
+
+  const id = project_id
   // 디스패치 히스토리
   const history = useHistory();
   const dispatch = useDispatch();
@@ -28,7 +27,7 @@ const TrackersList = (props) => {
       <Grid height='auto'>
           {circleArr.map((list,idx) => {
             return(
-              <Trackers list={list} _onClick={() => {history.push(`/main/항해99/${list.circles_id}`)}} key={idx}></Trackers>
+              <Trackers list={list} _onClick={() => {history.push(`/main/${projectTitle}/${list.circles_id}`)}} key={idx}></Trackers>
             )
           })}
       </Grid>

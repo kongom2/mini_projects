@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // component, element 불러오기
 import {useDispatch} from 'react-redux'
@@ -25,7 +25,13 @@ const Login = () => {
       dispatch(userActions.loginDB(id,pwd))
   }
 
+  const is_session = localStorage.getItem("token")
 
+  useEffect(() => {
+    if(is_session) {
+      history.replace('/project')
+    }
+  },[])
 
   return (
     <React.Fragment>
