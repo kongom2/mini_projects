@@ -28,50 +28,32 @@ const initialState = {
 // middlewear
 const setFeedBackDB = (circles_id) => {
     return function (dispatch,getState,{history}) {
-        // // api
-        // apis
-        // .getFeedBack(circles_id)
-        // .then((res) => {
-        //     console.log('정상적으로 피드백을 가져왔습니다.')
-        //     const feedback = res.feedback
-        //     dispatch(setFeedBack(feedback))
-        // })
-        // .catch((err) => {
-        //     console.log("에러", err);
-        // });
-
-        axios
-        .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
+        // api
+        apis
+        .getFeedBack(circles_id)
         .then((res) => {
             console.log('정상적으로 피드백을 가져왔습니다.')
-            const feedback = ''
+            const feedback = res.data.feedback
             dispatch(setFeedBack(feedback))
         })
         .catch((err) => {
             console.log("에러", err);
         });
+
     }
 }
 
-const addFeedBackDB = (circles_id,data) => {
+const addFeedBackDB = (data) => {
     return function (dispatch,getState,{history}) {
-        // // api
-        // apis
-        // .addFeedBack(circles_id,data)
-        // .then((res) => {
-        //     const feedback = res.feedback
-        //     dispatch(addFeedBack(feedback))
-        //     alert('피드백이 등록되었습니다')
-        // })
-        // .catch((err) => {
-        //     console.log("에러", err);
-        // });
-
-        axios
-        .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
+        const circles_id = data.circles_id
+        console.log(circles_id)
+        console.log(data)
+        // api
+        apis
+        .addFeedBack(circles_id,data)
         .then((res) => {
-            console.log('애드 피드백.')
-            const feedback = '새로운 값입니다'
+            console.log(res)
+            const feedback = res.data.feedback
             dispatch(addFeedBack(feedback))
             alert('피드백이 등록되었습니다')
         })
@@ -81,68 +63,51 @@ const addFeedBackDB = (circles_id,data) => {
     }
 }
 
-const editFeedBackDB = (circles_id,data) => {
+const editFeedBackDB = (data) => {
     return function (dispatch,getState,{history}) {
-        // // api
-        // apis
-        // .editFeedBack(circles_id,data)
-        // .then((res) => {
-        //     const feedback = res.feedback
-        //     dispatch(editFeedBack(feedback))
-        //     alert('피드백이 등록되었습니다')
-        // })
-        // .catch((err) => {
-        //     console.log("에러", err);
-        // });
-
-        axios
-        .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
+        console.log(data)
+        const circles_id = data.circles_id
+        // api
+        apis
+        .editFeedBack(circles_id,data)
         .then((res) => {
-            console.log('피드백을 수정합니다.')
-            const feedback = '수정한내용'
+            console.log(res)
+            const feedback = res.data.feedback
             dispatch(editFeedBack(feedback))
             alert('피드백이 수정되었습니다')
-            window.location.reload()
         })
         .catch((err) => {
             console.log("에러", err);
         });
+
     }
 }
 
-const deleteFeedBackDB = (circles_id,projects_title) => {
+const deleteFeedBackDB = (data) => {
     return function (dispatch,getState,{history}) {
-        const id = {
-            projects_title:projects_title,
+
+        const circles_id = data.circles_id
+        const id = data.projects_id
+        
+        const deleteData = {
+            projects_id:id,
             circles_id:circles_id,
         }
-
-        // //api
-        // apis
-        // .deleteFeedBack(circles_id,id)
-        // .then((res) => {
-        //     console.log('피드백을 삭제합니다.')
-        //     const feedback = ''
-        //     dispatch(deleteFeedBack(feedback))
-        //     alert('피드백이 삭제되었습니다')
-        //     window.location.reload()
-        // })
-        // .catch((err) => {
-        //     console.log("에러", err);
-        // });
-
-        axios
-        .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17" )
+        console.log(deleteData)
+        //api
+        apis
+        .deleteFeedBack(circles_id,deleteData)
         .then((res) => {
             console.log('피드백을 삭제합니다.')
-            const feedback = ''
+            console.log(res)
+            const feedback = res.data.feedback
             dispatch(deleteFeedBack(feedback))
             alert('피드백이 삭제되었습니다')
-            window.location.reload()
         })
         .catch((err) => {
             console.log("에러", err);
         });
+
     }
 }
 

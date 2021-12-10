@@ -14,11 +14,12 @@ const Header = (props) => {
   const logOut = (props) => {
     dispatch(userActions.logoutDB());
   };
+  const id = window.sessionStorage.getItem('id')
   const cookie = getCookie("is_login");
   const is_login = useSelector((state) => state.user.is_login);
 
   // 토큰의 유무로 분기점 설정
-  if (cookie) {
+  if (id) {
     return (
       <React.Fragment>
         <HeaderWrap>

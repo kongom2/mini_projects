@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 // 라우터 불러오기
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter,Switch } from "react-router-dom";
 import axios from "axios";
 import { ConnectedRouter } from "connected-react-router"
 import { history } from '../redux/configureStore';
@@ -16,6 +16,7 @@ import EditProject from "../page/EditProject";
 import Project from "../page/Project";
 import Detail from "../page/Detail";
 import Signup from "../page/Signup";
+import NotFound from "../page/NotFound";
 
 function App() {
 
@@ -24,14 +25,17 @@ function App() {
       <BackImg>
         <Wrap>
           <Header></Header>
-          <Route path="/" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
 
-          <Route path="/project" exact component={Project} />
-          <Route path="/project/:projectID/edit" exact component={EditProject} />
+            <Route path="/project" exact component={Project} />
+            <Route path="/project/:projectID/edit" exact component={EditProject} />
 
-          <Route path="/main/:projectID" exact component={Main} />
-          <Route path="/main/:projectID/:detailID" exact component={Detail} />
+            <Route path="/main/:projectID" exact component={Main} />
+            <Route path="/main/:projectID/:detailID" exact component={Detail} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </Wrap>
       </BackImg>
     </ConnectedRouter>

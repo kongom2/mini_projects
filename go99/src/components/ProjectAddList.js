@@ -6,9 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
 
-  const user_name = useSelector((state) =>
-    state.user.user !== null ? state.user.user.id : null
-  );
+  const id = window.sessionStorage.getItem('id')
 
   const dispatch = useDispatch();
   const [projects_name, setProjectText] = useState("");
@@ -22,7 +20,7 @@ const AddList = (props) => {
   const addProject =() => {
     const data = {
       project_title:projects_name,
-      userId:user_name,
+      userId:id,
     }
     setProjectText("");
     dispatch(projectActions.addProjectDB(data));
@@ -40,7 +38,6 @@ const AddList = (props) => {
           padding="16px"
           margin="0 20px 0 0"
           placeholder="99일간의 프로젝트를 추가해 주세요"
-          ref={inputRef}
           value={projects_name}
           _onChange={onChange}
         />

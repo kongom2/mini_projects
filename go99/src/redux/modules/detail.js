@@ -10,8 +10,7 @@ const ADD_TODOS = "ADD_TODOS"; // 프로젝트 추가하기
 
 // Action Creators
 const getTodos = createAction(GET_TODOS, (todos_list) => ({ todos_list }));
-const addTodos = createAction(
-  ADD_TODOS,
+const addTodos = createAction(ADD_TODOS,
   (todos_id, todo_content, circles_id) => ({
     todos_id,
     todo_content,
@@ -27,37 +26,35 @@ const initialState = {
 };
 
 // 미들웨어
-const getTodosDB = () => {
+const getTodosDB = (circles_id) => {
   return function (dispatch, getState, { history }) {
+    console.log(circles_id)
     apis
-      .getTodo()
+      .getTodo(circles_id)
       .then((res) => {
         console.log("getTodosDB 접근 확인");
+        console.log(res)
         let todos_list = res.data.result;
         dispatch(getTodos(todos_list));
-        console.log(todos_list);
       })
       .catch((err) => {
         console.log("Load 에러!", err);
       });
   };
 };
-const addTodosDB = (todos_id, todo_content, circles_id) => {
+
+const addTodosDB = (circles_id, data) => {
   return function (dispatch, getState, { history }) {
+
+    console.log(circles_id,data)
     apis
-      .addTodo()
+      .addTodo(circles_id, data)
       .then((res) => {
-        console.log("addTodosDB 접근 확인");
-        console.log(res.data);
-        let list = {
-          todos_id: todos_id,
-          todo_content: todo_content,
-          circles_id: circles_id,
-        };
-        dispatch(addTodos(list));
+        dispatch(addTodos(data));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
+        alert('이전 날짜의 TodoList는 수정할 수 없습니다.')
       });
   };
 };
@@ -100,14 +97,12 @@ export default handleActions(
       }),
     [ADD_TODOS]: (state, action) =>
       produce(state, (draft) => {
-        // draft.list[action.payload.todos_id].unshift(
-        //   action.payload.todo_content
-        // );
-        draft.list.push(action.payload.todo_content);
+        console.log(action.payload.todos_id)
+        draft.list.push(action.payload.todos_id);
       }),
     // [EDIT_TODOS]: (state, action) =>
     //   produce(state, (draft) => {
-    //     draft.editList = action.payload.Todos_name;
+    //     draft.editList = action.payload. Todos_name;
     //   }),
     // [DELETE_TODOS]: (state, action) =>
     //   produce(state, (draft) => {

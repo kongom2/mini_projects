@@ -12,12 +12,10 @@ const ProjectList = () => {
 
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
-  const user_name = useSelector((state) =>
-    state.user.user !== null ? state.user.user.id : null
-  );
+  const id = window.sessionStorage.getItem('id')
   // DB에서 불러오기
   useEffect(() => {
-    dispatch(projectActions.getProjectDB(user_name));
+    dispatch(projectActions.getProjectDB(id));
   }, []);
 
   const [modal,setModal] = useState(false)
@@ -33,7 +31,7 @@ const ProjectList = () => {
 
   const editText = () => {
     // 필요한거? 프로젝트 아이디/새 포르젝트 네임
-    dispatch(projectActions.editProjectDB(name,user_name,newProjectName))
+    dispatch(projectActions.editProjectDB(name,id,newProjectName))
     setModal(false)
   };
 
@@ -48,7 +46,7 @@ const ProjectList = () => {
         const projects_id = item.projects_id
         const projects_title = item.project_title
         const deleteDB = () => {
-          dispatch(projectActions.deleteProjectDB(projects_id,user_name))
+          dispatch(projectActions.deleteProjectDB(projects_id,id))
         } 
         const test = () => {
           console.log('1')
@@ -63,10 +61,10 @@ const ProjectList = () => {
                   color="#455154"
                   margin="0px 10px"
                   _onClick={() => {
-                    history.push(`main/${item.project_title}`);
+                    history.push(`main/${item.project_title}_${item.projects_id}`);
                   }}
                 >
-                  {item.project_title}
+                  {item.project_title}99
                 </Text>
                 </Pointer>
                 <ImageButton

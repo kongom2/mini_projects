@@ -6,37 +6,34 @@ import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
 
-  const {_onClick} = props
+  const {_onClick, circles_id, todos_id} = props
 
   const dispatch = useDispatch();
-<<<<<<< HEAD
-
-  // const addProject = () => {
-  //   dispatch(detailActions.addProjectDB());
-  // };
 
   const [todo_content, setTodoText] = useState();
 
-  const { todos_id } = props;
-
   const onChange = (e) => {
-    console.log(e.target.value);
     setTodoText(e.target.value);
   };
-  const write = () => {
-    console.log(todo_content);
-    dispatch(detailActions.addTodosDB(todos_id, todo_content));
-    setTodoText("");
-=======
-  const [projects_name, setProjectText] = useState("");
-  console.log(_onClick)
-  const onChange = (e) => {
-    setProjectText(e.target.value);
-  };
-  const write = () => {
-    dispatch(projectActions.addProjectDB(projects_name));
-    setProjectText("");
->>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
+
+  let date = new Date()
+  let day = date.getDate(); // 시
+  let hours = date.getHours(); // 시
+  let minutes = date.getMinutes();  // 분
+  let seconds = date.getSeconds();  // 초
+  const moment = `${day}${hours}${minutes}${seconds}`
+
+  const data = {  
+    circles_id:circles_id,
+    todo_content:todo_content,
+    todos_id:`${circles_id}_${moment}`
+  }
+
+  console.log(moment)
+  console.log(data)
+
+  const addTodos = () => {
+    dispatch(detailActions.addTodosDB(circles_id, data));
   };
 
   return (
@@ -53,17 +50,8 @@ const AddList = (props) => {
           placeholder="오늘의 느낀점을 남겨주세요"
           Value={todo_content}
           _onChange={onChange}
-          onSubmit={write}
         />
-<<<<<<< HEAD
-        <AddButton width="50px" padding="0 10.4px" onClick={write}></AddButton>
-=======
-        <AddButton
-          width="50px"
-          padding="0 10.4px"
-          _onClick={_onClick}
-        ></AddButton>
->>>>>>> b3fedd6fbfc314fc02fdf0913e506f7713428920
+        <AddButton width="50px" padding="0 10.4px" _onClick={addTodos}></AddButton>
       </Grid>
     </React.Fragment>
   );

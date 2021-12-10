@@ -20,9 +20,12 @@ const TodoList = (props) => {
 
   const todo_list = useSelector((state) => state.detail.list);
 
+  //서클아이디
+  const circles_id = props.circles_id
   // DB에서 불러오기
   useEffect(() => {
-    dispatch(detailActions.getTodosDB());
+    const circles_id = props.circles_id
+    dispatch(detailActions.getTodosDB(circles_id));
   }, []);
   const [modal, setModal] = useState(false);
   const [select, setSelect] = useState(false);

@@ -8,15 +8,16 @@ import {
   Button,
   ImageButton,
 } from "../elements/elementsIndex";
+import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
 const Feedback = (props) => {
   const dispatch = useDispatch()
+  const { history } = props;
   const circles_id = props.circles_id
   const projects_title = props.project_title
 
   useEffect(() => {
-    const circles_id = props.circles_id
     dispatch(feedbackActions.setFeedBackDB(circles_id))
     setFeedback('')
   },[])
@@ -25,21 +26,35 @@ const Feedback = (props) => {
   const empty = useSelector((state) => state.feedBack.empty);
   const [modal,setModal] = useState(false)
   const [feedback, setFeedback] = useState();
+  const [newFeedback, setNewFeedback] = useState();
 
-  const data = {
-    projects_title:projects_title,
+  const arr = circles_id.split('_')
+
+  const data ={
+    projects_id:arr[1],
     circles_id:circles_id,
-    contents:feedback
+    feedback:feedback,
+  }
+
+  const editData ={
+    projects_id:arr[1],
+    circles_id:circles_id,
+    feedback:newFeedback,
   }
 
   const addComments = () => {
 
-    dispatch(feedbackActions.addFeedBackDB(circles_id,data))
+    console.log(data)
+    dispatch(feedbackActions.addFeedBackDB(data))
     
   };
 
   const onChange = (e) => {
     setFeedback(e.target.value);
+  };
+
+  const editChange = (e) => {
+    setNewFeedback(e.target.value);
   };
 
   const editModal = () => {
@@ -49,7 +64,8 @@ const Feedback = (props) => {
   } 
 
   const editFeedback = () => {
-    dispatch(feedbackActions.editFeedBackDB(circles_id,data))
+    console.log(editData)
+    dispatch(feedbackActions.editFeedBackDB(editData))
     setModal(false)
   };
 
@@ -58,7 +74,7 @@ const Feedback = (props) => {
       alert('삭제될 데이터가 없습니다.')
       return
     }
-    dispatch(feedbackActions.deleteFeedBackDB(circles_id,projects_title))
+    dispatch(feedbackActions.deleteFeedBackDB(data))
   };
 
   return (
@@ -105,7 +121,7 @@ const Feedback = (props) => {
       <Modal style={{display:modal? 'block' : 'none'}}>
         <ModalInner>
           <Text margin="0 0 20px 0" size="1.5rem" bold>텍스트를 수정해주세요</Text>
-          <Input value={empty} margin="0 0 20px 0" padding="15px"></Input>
+          <Input _onChange={editChange} value={empty} margin="0 0 20px 0" padding="15px"></Input>
           <Button _onClick={editFeedback}>수정</Button>
         </ModalInner>
       </Modal>
