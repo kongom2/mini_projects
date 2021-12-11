@@ -1,11 +1,8 @@
-import { createAction, handleAction, handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
+import { deleteCookie, setCookie } from "../../shared/cookie";
 import { apis } from "../../api/axios";
-
-import { auth } from "../../shared/firebase";
-import firebase from "firebase/compat/app";
 
 // 액션
 const LOG_OUT = "LOG_OUT";
@@ -23,93 +20,85 @@ const initialStat = {
   is_login: false,
 };
 
-// const user_initial = {
-//     user_name:''
-// 
+const loginDB = (id, pwd) => {
+  return function (dispatch, getState, { history }) {
+    // 로그인 api
+    const user = {
+      userId: id,
+      pw: pwd,
+    };
+    console.log(user);
+    apis
+      .login(user)
+      .then((res) => {
+        const niceName = res.data.nickname;
 
-const loginDB = (id,pwd) => {
-    return function(dispatch,getState,{history}) {
-        
-        // 로그인 api
-        const user = {
-          userId:id,
-          pw:pwd
-        }
-        console.log(user)
-        apis
-        .login(user)
-        .then((res) => {
-            const niceName = res.data.nickname
-            console.log(niceName)
-            const jwtToken = res.data.token;
-            localStorage.setItem('token', jwtToken)
-            window.sessionStorage.setItem('id', id);
-            window.sessionStorage.setItem('nickname', niceName);
-            dispatch(setUser({id:id,user_name:id}));
-            alert('로그인이 완료되었습니다!')
-            history.push('/project')
-        }).catch((err) => {
-            console.log(err);
-            window.alert("회원정보가 일치하지 않습니다.(프론트)!");
-            return;
-        });
+        const jwtToken = res.data.token;
 
-    }
-}
+        localStorage.setItem("token", jwtToken);
+        window.sessionStorage.setItem("id", id);
+        window.sessionStorage.setItem("nickname", niceName);
 
-const signupDB = (id,userName,pwd,pwdCheck) => {
-    return function (dispatch,getState,{history}) {
+        dispatch(setUser({ id: id, user_name: id }));
+        alert("로그인이 완료되었습니다!");
+        history.push("/project");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("회원정보가 일치하지 않습니다.(프론트)!");
+        return;
+      });
+  };
+};
 
-        //api
-        const user = {
-            userId : id,
-            nickname: userName,
-            pw1: pwd,
-            pw2: pwdCheck,
-        }
-        apis
-        .signUp(user)
-        .then(() => {
-            window.alert("회원가입을 축하드립니다!");
-            history.push("/");
-        })
-        .catch((err) => {
-            console.log(err)
-            window.alert(err);
-        })
-
-
-    }
-}
+const signupDB = (id, userName, pwd, pwdCheck) => {
+  return function (dispatch, getState, { history }) {
+    //api
+    const user = {
+      userId: id,
+      nickname: userName,
+      pw1: pwd,
+      pw2: pwdCheck,
+    };
+    apis
+      .signUp(user)
+      .then(() => {
+        window.alert("회원가입을 축하드립니다!");
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert(err);
+      });
+  };
+};
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     const localToken = localStorage.getItem("token");
     const token = { token: localToken };
-    console.log(localToken)
     apis
       .loginCheck(token)
       .then((res) => {
         console.log(res);
-        dispatch(setUser([res]));
+        // dispatch(setUser([res]));
       })
       .catch((err) => {
         console.log(err);
         alert("로그인 정보가 없습니다.");
-        history.push("/");
       });
   };
 };
 
 // 토큰삭제
 const logoutDB = () => {
-    return function (dispatch,getState,{history}) {
-        dispatch(logOut());
-        alert('로그아웃 되었습니다.')
-        history.push("/");
-        window.location.reload()
-    }
-}
+  return function (dispatch, getState, { history }) {
+    dispatch(logOut());
+    alert("로그아웃 되었습니다.");
+    history.push("/");
+    window.location.reload();
+  };
+};
 
 //리듀서
 export default handleActions(
@@ -128,7 +117,7 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       }),
-      [GET_USER]: (state, action) =>
+    [GET_USER]: (state, action) =>
       produce(state, (draft) => {
         draft.user = action.payload.user;
         draft.is_login = true;

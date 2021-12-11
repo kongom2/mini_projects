@@ -12,7 +12,8 @@ const PATCH_CIRCLE = "PATCH_CIRCLE"; // 프로젝트 추가하기
 
 // Action Creators
 const getTodos = createAction(GET_TODOS, (todos_list) => ({ todos_list }));
-const addTodos = createAction(ADD_TODOS,
+const addTodos = createAction(
+  ADD_TODOS,
   (todos_id, todo_content, circles_id) => ({
     todos_id,
     todo_content,
@@ -32,12 +33,12 @@ const initialState = {
 // 미들웨어
 const getTodosDB = (circles_id) => {
   return function (dispatch, getState, { history }) {
-    console.log(circles_id)
+    console.log(circles_id);
     apis
       .getTodo(circles_id)
       .then((res) => {
         console.log("getTodosDB 접근 확인");
-        console.log(res)
+        console.log(res);
         let todos_list = res.data.result;
         dispatch(getTodos(todos_list));
       })
@@ -49,8 +50,7 @@ const getTodosDB = (circles_id) => {
 
 const addTodosDB = (circles_id, data) => {
   return function (dispatch, getState, { history }) {
-
-    console.log(circles_id,data)
+    console.log(circles_id, data);
     apis
       .addTodo(circles_id, data)
       .then((res) => {

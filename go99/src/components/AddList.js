@@ -1,38 +1,46 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../redux/configureStore";
+import { useDispatch } from "react-redux";
 
 const AddList = (props) => {
-
-  const {_onClick, circles_id, todos_id} = props
+  const { _onClick, circles_id, todos_id } = props;
 
   const dispatch = useDispatch();
 
-  const [todo_content, setTodoText] = useState();
+  const [todoText, setTodoText] = useState();
 
   const onChange = (e) => {
     setTodoText(e.target.value);
   };
 
-  let date = new Date()
+  let date = new Date();
   let day = date.getDate(); // 시
   let hours = date.getHours(); // 시
-  let minutes = date.getMinutes();  // 분
-  let seconds = date.getSeconds();  // 초
-  const moment = `${day}${hours}${minutes}${seconds}`
+  let minutes = date.getMinutes(); // 분
+  let seconds = date.getSeconds(); // 초
+  const moment = `${day}${hours}${minutes}${seconds}`;
 
-  const data = {  
-    circles_id:circles_id,
-    todo_content:todo_content,
-    todos_id:`${circles_id}_${moment}`,
-    todo_check:false
-  }
+  // const data = {
+  //   circles_id: circles_id,
+  //   todo_content: todoText,
+  //   todos_id: `${circles_id}_${moment}`,
+  // };
 
+  const data = {
+    circles_id: circles_id,
+    todo_content: todoText,
+    todos_id: `${circles_id}_${moment}`,
+    todo_check: false,
+  };
 
   const addTodos = () => {
+    if (todoText === "") {
+      window.alert("오늘 할 일을 입력해주세요!");
+      return;
+    }
+    setTodoText("");
     dispatch(detailActions.addTodosDB(circles_id, data));
   };
 
@@ -48,10 +56,15 @@ const AddList = (props) => {
           padding="16px"
           margin="0 20px 0 0"
           placeholder="오늘 할일은 무엇인가요?"
-          Value={todo_content}
+          Value={todoText}
           _onChange={onChange}
+          onSubmit={addTodos}
         />
-        <AddButton width="50px" padding="0 10.4px" _onClick={addTodos}></AddButton>
+        <AddButton
+          width="50px"
+          padding="0 10.4px"
+          _onClick={addTodos}
+        ></AddButton>
       </Grid>
     </React.Fragment>
   );

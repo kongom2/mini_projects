@@ -1,37 +1,35 @@
-import React, { useState,useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { history } from "../redux/configureStore";
 // component, element 불러오기
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { Text, Input, Button, Grid } from "../elements/elementsIndex";
-import { emailCheck,checkPassword } from "../shared/signupCheck";
-import { actionCreators as userActions } from '../redux/modules/user'
+// import { emailCheck, checkPassword } from "../shared/signupCheck";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Login = () => {
-  const history = useHistory();
-
   const dispatch = useDispatch();
-  const [id,setId] = useState('')
-  const [pwd,setPwd] = useState('')
+  const [id, setId] = useState("");
+  const [pwd, setPwd] = useState("");
 
-  const login = () => {   
-      if(id==='') {
-          alert('아이디를 입력해주세요.')
-          return;
-      }
-      if(pwd==='') {
-          alert('비밀번호를 입력해주세요.')
-          return;
-      }
-      dispatch(userActions.loginDB(id,pwd))
-  }
+  const login = () => {
+    if (id === "") {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+    if (pwd === "") {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+    dispatch(userActions.loginDB(id, pwd));
+  };
 
-  const is_session = localStorage.getItem("token")
+  const is_session = localStorage.getItem("token");
 
-  // useEffect(() => {
-  //   if(is_session) {
-  //     history.replace('/project')
-  //   }
-  // },[])
+  useEffect(() => {
+    if (is_session) {
+      history.replace("/project");
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -47,7 +45,9 @@ const Login = () => {
 
         <Input
           // 입력 변경 값 이벤트
-          _onChange={(e)=>{setId(e.target.value)}}
+          _onChange={(e) => {
+            setId(e.target.value);
+          }}
           padding="16px"
           margin="5px 0px"
           fontSize="16px"
@@ -57,8 +57,10 @@ const Login = () => {
         />
         <Input
           // 입력 변경 값 이벤트
-          _onChange={(e)=>{setPwd(e.target.value)}}
-          type='password' 
+          _onChange={(e) => {
+            setPwd(e.target.value);
+          }}
+          type="password"
           padding="16px"
           margin="5px 0 10px 0"
           fontSize="16px"

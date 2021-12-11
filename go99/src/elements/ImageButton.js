@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { useHistory } from "react-router-dom";
-import { actionCreators as projectActions } from "../redux/modules/project";
-import { useSelector, useDispatch } from "react-redux";
 
 const ImageButton = (props) => {
   // props
@@ -68,6 +65,7 @@ ImageButton.defaultProps = {
   margin: null,
   _onChange: () => {},
   onSubmit: () => {},
+  _onClick: () => {},
 };
 
 // ImageButton 스타일드 컴포넌트

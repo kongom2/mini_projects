@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-
 // 라우터 불러오기
 import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router"
-import { history } from '../redux/configureStore';
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configureStore";
 
 // 페이지 불러오기
 import { Header } from "../components/componentIndex";
@@ -18,7 +17,6 @@ import Signup from "../page/Signup";
 import NotFound from "../page/NotFound";
 
 function App() {
-
   return (
     <ConnectedRouter history={history}>
       <BackImg>
@@ -29,7 +27,11 @@ function App() {
             <Route path="/signup" exact component={Signup} />
 
             <Route path="/project" exact component={Project} />
-            <Route path="/project/:projectID/edit" exact component={EditProject} />
+            <Route
+              path="/project/:projectID/edit"
+              exact
+              component={EditProject}
+            />
 
             <Route path="/main/:projectID" exact component={Main} />
             <Route path="/main/:projectID/:detailID" exact component={Detail} />

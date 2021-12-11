@@ -1,9 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
-import { current, produce } from "immer";
+import { produce } from "immer";
 import { apis } from "../../api/axios";
-
-// api이후 삭제
-import axios from "axios";
 
 // Actions
 const SET_FEED = "SET_FEED"; // 프로젝트 조회하기
@@ -109,6 +106,42 @@ const deleteFeedBackDB = (data) => {
     }
 }
 
+
+// const deleteFeedBackDB = (circles_id, projects_title) => {
+//   return function (dispatch, getState, { history }) {
+//     const id = {
+//       projects_title: projects_title,
+//       circles_id: circles_id,
+//     };
+
+// //api
+// apis
+// .deleteFeedBack(circles_id,id)
+// .then((res) => {
+//     console.log('피드백을 삭제합니다.')
+//     const feedback = ''
+//     dispatch(deleteFeedBack(feedback))
+//     alert('피드백이 삭제되었습니다')
+//     window.location.reload()
+// })
+// .catch((err) => {
+//     console.log("에러", err);
+// });
+
+//     axios
+//       .get("https://run.mocky.io/v3/10c496e1-a5ba-4fcd-a0a9-d697131e9e17")
+//       .then((res) => {
+//         console.log("피드백을 삭제합니다.");
+//         const feedback = "";
+//         dispatch(deleteFeedBack(feedback));
+//         alert("피드백이 삭제되었습니다");
+//         window.location.reload();
+//       })
+//       .catch((err) => {
+//         console.log("에러", err);
+//       });
+//   };
+// };
 
 // Reducer
 export default handleActions(
