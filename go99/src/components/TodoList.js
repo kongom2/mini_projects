@@ -36,15 +36,6 @@ const TodoList = (props) => {
     setText(e.target.value);
   };
 
-  // 삭제확인 코드
-  const onRemove = () => {
-    if (window.confirm("정말 삭제합니까?")) {
-      alert("삭제되었습니다.");
-    } else {
-      alert("취소합니다.");
-    }
-  };
-
   const editText = () => {
     console.log(text);
     console.log(todo);
@@ -58,7 +49,16 @@ const TodoList = (props) => {
       {todo_list.map((item, index) => {
         const todos_id = item.todos_id;
         const todo_check = item.todo_check;
-
+        // 삭제확인 코드
+        const onRemove = () => {
+          if (window.confirm("정말 삭제합니까?") === true) {
+            deleteDB();
+            alert("삭제되었습니다.");
+          } else {
+            alert("취소합니다.");
+            return false;
+          }
+        };
         let todo = todo_check;
         const change = () => {
           if (!todo) {
@@ -100,7 +100,6 @@ const TodoList = (props) => {
               <ImageButton
                 _onClick={() => {
                   onRemove();
-                  deleteDB();
                 }}
                 size="25px"
                 margin="0px 10px"

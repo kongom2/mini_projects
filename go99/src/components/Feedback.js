@@ -89,7 +89,18 @@ const Feedback = (props) => {
           size="24px"
           height="24px"
           deleteIcon
-          _onClick={deleteFeedback}
+          _onClick={() => {
+            // 삭제확인 코드
+            const onRemove = () => {
+              if (window.confirm("정말 삭제합니까?") === true) {
+                deleteFeedback();
+              } else {
+                alert("취소합니다.");
+                return false;
+              }
+            };
+            onRemove();
+          }}
         ></ImageButton>
       </Grid>
       <Grid
@@ -110,6 +121,7 @@ const Feedback = (props) => {
           placeholder="이번주 미흡했던 부분을 적어주세요!!"
           margin="0 0 20px 0"
           padding="15px"
+          onSubmit={addComments}
         ></Input>
         <Button _onClick={addComments}>입력</Button>
       </Grid>
