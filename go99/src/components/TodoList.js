@@ -23,66 +23,62 @@ const TodoList = (props) => {
     const circles_id = props.circles_id;
     dispatch(detailActions.getTodosDB(circles_id));
   }, []);
+
   const [modal, setModal] = useState(false);
-  const [select, setSelect] = useState(false);
-  const [todos_id, setTodoId] = useState("");
-  const [todo_content, setTodoName] = useState("");
-  const [todoEditText, setTodoEditText] = useState("");
-  const [circles_id, setCirclesId] = useState("");
+  const [text, setText] = useState();
+  const [todo, setTodo] = useState();
 
-  // 삭제확인 코드
-  const onRemove = () => {
-    if (window.confirm("정말 삭제합니까?")) {
-      alert("삭제되었습니다.");
-    } else {
-      alert("취소합니다.");
-    }
-  };
-
-  // 텍스트 stste 변경
   const onChange = (e) => {
-    setTodoEditText(e.target.value);
-    console.log(e.target.value);
-  };
-
-  const editModal = () => {
-    if (!modal) {
-      setModal(true);
-    }
+    setText(e.target.value);
   };
   const data = {
     todo_content: todoEditText,
     circles_id: circles_id,
   };
 
-  const editTodos = () => {
+  const editText = () => {
+    console.log(text)
+    console.log(todo)
+    console.log(circles_id)
+    dispatch(detailActions.editTodosDB(todo,text,circles_id))
     setModal(false);
     dispatch(detailActions.editTodosDB(todos_id, data));
     console.log(todos_id, data);
   };
 
-  // 투두 완료 색상 체크
-  const change = () => {
-    if (!select) {
-      setSelect(true);
-    }
-    if (select) {
-      setSelect(false);
-    }
-  };
   return (
     <React.Fragment>
       {todo_list.map((item, index) => {
-        const todos_id = item.todos_id;
-        const todo_content = item.todo_content;
-        const circles_id = item.circles_id;
-        const deleteTodos = () => {
-          dispatch(detailActions.deleteTodosDB(todos_id, data));
+        const todos_id = item.todos_id
+        const todo_check = item.todo_check
+
+        let todo = todo_check
+        const change = () => {
+            if(!todo) {
+              todo = true
+            } else {
+              todo = false
+            }
+            dispatch(detailActions.patchCircleDB(todo,todos_id,circles_id))
+            
         };
+        const deleteDB = () => {
+          dispatch(detailActions.deleteTodosDB(todos_id,circles_id))
+        }
+
+        const editModal = () => {
+          if (!modal) {
+            setText(item.todo_content)
+            setTodo(todos_id)
+            setModal(true);
+          }
+        };
+
         return (
           <Grid padding="16px" key={index}>
             <Grid is_flex>
-              <CheckCircle _onClick={change} result={select} />
+              {todo_check === true? <CheckCircle _onClick={change} result={true} />: null}
+              {todo_check === false? <CheckCircle _onClick={change} result={false} />: null}
               <Text size="24px" bold="bold" color="#455154" margin="0px 10px">
                 {item.todo_content}
               </Text>
@@ -96,35 +92,23 @@ const TodoList = (props) => {
                 size="25px"
                 margin="0px 0px 0px auto"
               />
-              <ImageButton
-                size="25px"
-                margin="0px 10px"
-                deleteIcon
-                _onClick={() => {
-                  deleteTodos();
-                  onRemove();
-                }}
-              />
+              <ImageButton _onClick={deleteDB} size="25px" margin="0px 10px" deleteIcon />
             </Grid>
             <Hr />
           </Grid>
         );
       })}
-
+      {modal?
       <Modal style={{ display: modal ? "block" : "none" }}>
         <ModalInner>
           <Text margin="0 0 20px 0" size="1.5rem" bold>
             텍스트를 수정해주세요
           </Text>
-          <Input
-            margin="0 0 20px 0"
-            padding="15px"
-            defaultValue={todo_content}
-            _onChange={onChange}
-          ></Input>
-          <Button _onClick={editTodos}>수정</Button>
+          <Input _onChange={onChange} value={text} margin="0 0 20px 0" padding="15px"></Input>
+          <Button _onClick={editText}>수정</Button>
         </ModalInner>
       </Modal>
+      :null}
     </React.Fragment>
   );
 };

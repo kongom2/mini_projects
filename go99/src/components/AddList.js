@@ -5,13 +5,18 @@ import { actionCreators as detailActions } from "../redux/modules/detail";
 import { useDispatch } from "react-redux";
 
 const AddList = (props) => {
-  const { circles_id } = props;
+
+  const {_onClick, circles_id, todos_id} = props
 
   const dispatch = useDispatch();
 
-  const [todoText, setTodoText] = useState("");
+  const [todo_content, setTodoText] = useState();
 
-  let date = new Date();
+  const onChange = (e) => {
+    setTodoText(e.target.value);
+  };
+
+  let date = new Date()
   let day = date.getDate(); // 시
   let hours = date.getHours(); // 시
   let minutes = date.getMinutes(); // 분
@@ -24,13 +29,13 @@ const AddList = (props) => {
     todos_id: `${circles_id}_${moment}`,
   };
 
-  // console.log(moment);
-  // console.log(data);
+  const data = {  
+    circles_id:circles_id,
+    todo_content:todo_content,
+    todos_id:`${circles_id}_${moment}`,
+    todo_check:false
+  }
 
-  const onChange = (e) => {
-    setTodoText(e.target.value);
-    console.log(e.target.value);
-  };
 
   const addTodos = () => {
     if (todoText === "") {
@@ -53,17 +58,12 @@ const AddList = (props) => {
         <Input
           padding="16px"
           margin="0 20px 0 0"
-          placeholder="오늘의 할 일을 남겨주세요"
-          // ref={inputRef}
-          defaultValue={todoText}
+          placeholder="오늘 할일은 무엇인가요?"
+          Value={todo_content}
           _onChange={onChange}
           onSubmit={addTodos}
         />
-        <AddButton
-          width="50px"
-          padding="0 10.4px"
-          _onClick={addTodos}
-        ></AddButton>
+        <AddButton width="50px" padding="0 10.4px" _onClick={addTodos}></AddButton>
       </Grid>
     </React.Fragment>
   );

@@ -7,12 +7,13 @@ const instance = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    authorization: `Bearer ${localStorage.getItem("token")}`,
+    'authorization': `Bearer ${localStorage.getItem("token")}`,
   },
 });
 
 // instance.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];
+//   console.log(document.cookie)
 //   config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
 //   return config;
 // });
@@ -45,16 +46,11 @@ export const apis = {
   getTodo: (circles_id) => instance.get(`/api/todos?circles_id=${circles_id}`),
   // list = {todos_id :circleID+date(고유아이디) todo_content: content, circles_id: circleID}
   addTodo: (circles_id, data) =>
-    instance.post(`/api/todos?circles_id=${circles_id}`, data),
+    instance.post(`/api/todos?circles_id=${circles_id}`, data), 
   // data = { todos_id:id , todo_content: content, circles_id: circleID }
   editTodo: (todos_id, data) => instance.put(`/api/todos/${todos_id}`, data),
-  // data = { todos_id:id , circles_id: circleID }
-  deleteTodo: (todos_id, data) =>
-    instance.delete(`/api/todos/${todos_id}`, data),
-  // check = { todo_check : false or true , circles_id: circleID }
-  // check시에 체크사항이 바로 반영이 되나요??
-  checkTodo: (todos_id, check) =>
-    instance.patch(`/api/todos/${todos_id}`, check),
+  deleteTodo: (todos_id,circles) => instance.delete(`/api/todos/${todos_id}`,circles),
+  checkTodo: (todos_id, check) =>instance.patch(`/api/todos/${todos_id}`, check),
 
   // 피드백 투두리스트
   getFeedBack: (circles_id) =>

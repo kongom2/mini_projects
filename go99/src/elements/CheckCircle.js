@@ -1,11 +1,19 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 
 const CheckCircle = (props) => {
   const { result, _onClick } = props;
   // console.log(props.result)
 
+<<<<<<< HEAD
   if (result) {
+=======
+  const {result,_onClick} = props
+  const [change,setChange] = useState(result)
+  
+
+  if(change) {
+>>>>>>> c96c9c537219721ec64a4a037252619524f1acdd
     return (
       <React.Fragment>
         <CompleteColor onClick={_onClick}></CompleteColor>
@@ -35,7 +43,7 @@ const CompleteColor = styled.div`
 const DefaultColor = styled.div`
   width: 30px;
   height: 30px;
-  background-color: #707070;
+  background-color: #ccc;
   border-radius: 30px;
   cursor: pointer;
 `;

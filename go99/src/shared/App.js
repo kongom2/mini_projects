@@ -3,8 +3,13 @@ import styled from "styled-components";
 
 // 라우터 불러오기
 import { Route, Switch } from "react-router-dom";
+<<<<<<< HEAD
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
+=======
+import { ConnectedRouter } from "connected-react-router"
+import { history } from '../redux/configureStore';
+>>>>>>> c96c9c537219721ec64a4a037252619524f1acdd
 
 // 페이지 불러오기
 import { Header } from "../components/componentIndex";

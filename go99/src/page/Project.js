@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // component, element 불러오기
 import { ProjectList, ProjectAddList } from "../components/componentIndex";
@@ -6,10 +7,13 @@ import { Text, Grid } from "../elements/elementsIndex";
 import { history } from "../redux/configureStore";
 
 const Project = (props) => {
-  const id = window.sessionStorage.getItem("id");
-  const is_session = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const id = window.sessionStorage.getItem("nickname");
+  const is_session = localStorage.getItem("token")
 
-  useEffect(() => {
+  React.useEffect(() => {
+    dispatch(userActions.loginCheckDB())
+
     if (!is_session) {
       alert("로그인 정보가 없습니다!");
       history.replace("/");
