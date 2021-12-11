@@ -48,16 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   }
-
-=======
-<<<<<<< HEAD
-  },
-  "proxy": "http://13.125.149.78"
-=======
-  }
-
->>>>>>> c96c9c537219721ec64a4a037252619524f1acdd
->>>>>>> 919bbcdc7799e317f4abff0eedc8cd9a8231151b
 }
