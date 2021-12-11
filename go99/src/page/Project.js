@@ -19,9 +19,9 @@ const Project = (props) => {
   const is_session = localStorage.getItem("token")
 
   React.useEffect(() => {
-    dispatch(userActions.loginCheckDB())
-
-    if (!is_session) {
+    const token = localStorage.getItem("token")
+    console.log(token)
+    if (!token) {
       alert('로그인 정보가 없습니다!')
       history.replace("/");
     }

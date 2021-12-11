@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Button,Text } from "../elements/elementsIndex";
+import { Grid, Button } from "../elements/elementsIndex";
 import { HiChevronLeft } from "react-icons/hi";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
@@ -14,7 +14,10 @@ const Header = (props) => {
   const logOut = (props) => {
     dispatch(userActions.logoutDB());
   };
-  const id = localStorage.getItem("token")
+  const id = window.sessionStorage.getItem('id')
+  const cookie = getCookie("is_login");
+  const is_login = useSelector((state) => state.user.is_login);
+
   // 토큰의 유무로 분기점 설정
   if (id) {
     return (
@@ -27,13 +30,11 @@ const Header = (props) => {
               margin="0 auto 0 0"
               _onClick={() => {
                 history.goBack();
-                  
               }}
               cursor="pointer"
             >
               <HiChevronLeft size="40" color="#D85147" />
             </Grid>
-            <Text color='#555' margin='0 auto' bold>Todo 99</Text>
             <Button
               hover
               text="로그아웃"

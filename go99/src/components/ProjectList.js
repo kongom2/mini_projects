@@ -13,8 +13,13 @@ const ProjectList = () => {
   // 데이터 선택
   const project_list = useSelector((state) => state.project.list);
   const id = window.sessionStorage.getItem('id')
+
   // DB에서 불러오기
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    const id = window.sessionStorage.getItem('id')
+    console.log(token)
+    console.log(id)
     dispatch(projectActions.getProjectDB(id));
   }, []);
 

@@ -33,23 +33,25 @@ const loginDB = (id,pwd) => {
         apis
         .login(user)
         .then((res) => {
+          console.log(res)
             const niceName = res.data.nickname
 
             const jwtToken = res.data.token;
+            console.log(jwtToken)
 
             localStorage.setItem('token', jwtToken)
+
             window.sessionStorage.setItem('id', id);
             window.sessionStorage.setItem('nickname', niceName);
 
             dispatch(setUser({id:id,user_name:id}));
             alert('로그인이 완료되었습니다!')
-            history.push('/project')
+            window.location.href='/project'
         }).catch((err) => {
-            console.log(err);
+            console.log(err.data);
             window.alert("회원정보가 일치하지 않습니다.(프론트)!");
             return;
-        });
-
+        })
     }
 }
 
