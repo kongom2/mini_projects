@@ -14,10 +14,12 @@ const Text = (props) => {
     height,
     border,
     _onClick,
+    cursor,
   } = props;
 
   // props style
   const styles = {
+    cursor:cursor,
     border: border,
     bold: bold,
     color: color,
@@ -62,6 +64,7 @@ const TextStyle = styled.p`
   height: ${(props) => props.height};
   border-radius: ${(props) => props.border};
   word-break: break-all;
+  cursor: ${(props) => props.cursor};
 `;
 
 export default Text;

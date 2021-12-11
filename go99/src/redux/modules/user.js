@@ -45,12 +45,12 @@ const loginDB = (id, pwd) => {
         window.sessionStorage.setItem("id", id);
         window.sessionStorage.setItem("nickname", niceName);
         dispatch(setUser({ id: id, user_name: id }));
-        alert("로그인이 완료되었습니다!");
-        history.push("/project");
+        alert("이제부터 달려볼까요??");
+        window.location.href='/project'
       })
       .catch((err) => {
         console.log(err);
-        window.alert("회원정보가 일치하지 않습니다.(프론트)!");
+        window.alert(err.response.data.errorMessage);
         return;
       });
   };
@@ -72,8 +72,8 @@ const signupDB = (id, userName, pwd, pwdCheck) => {
         history.push("/");
       })
       .catch((err) => {
-        console.log(err);
-        window.alert(err);
+        const aa = {...err}
+        window.alert(err.response.data.errorMessage);
       });
   };
 };

@@ -62,6 +62,7 @@ const addProjectDB = (title) => {
       })
       .catch((err) => {
         console.log("Load 에러!", err);
+        alert(err.response.data.errorMessage);
       });
   };
 };
