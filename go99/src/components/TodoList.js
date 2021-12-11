@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import {
   Text,
   ImageButton,
@@ -14,12 +15,13 @@ import { useSelector, useDispatch } from "react-redux";
 const TodoList = (props) => {
   // 디스패치, 히스토리 선언
   const dispatch = useDispatch();
+  const { is_complete } = props;
 
-  // 투두리스트 불러오기
   const todo_list = useSelector((state) => state.detail.list);
 
   //서클아이디
   const circles_id = props.circles_id;
+
   // DB에서 불러오기
   useEffect(() => {
     const circles_id = props.circles_id;
@@ -33,9 +35,14 @@ const TodoList = (props) => {
   const onChange = (e) => {
     setText(e.target.value);
   };
-  const data = {
-    todo_content: todoEditText,
-    circles_id: circles_id,
+
+  // 삭제확인 코드
+  const onRemove = () => {
+    if (window.confirm("정말 삭제합니까?")) {
+      alert("삭제되었습니다.");
+    } else {
+      alert("취소합니다.");
+    }
   };
 
   const editText = () => {
@@ -44,8 +51,6 @@ const TodoList = (props) => {
     console.log(circles_id);
     dispatch(detailActions.editTodosDB(todo, text, circles_id));
     setModal(false);
-    dispatch(detailActions.editTodosDB(todos_id, data));
-    console.log(todos_id, data);
   };
 
   return (
@@ -88,17 +93,15 @@ const TodoList = (props) => {
                 {item.todo_content}
               </Text>
               <ImageButton
-                _onClick={() => {
-                  editModal();
-                  setTodoId(todos_id);
-                  setTodoName(todo_content);
-                  setCirclesId(circles_id);
-                }}
+                _onClick={editModal}
                 size="25px"
                 margin="0px 0px 0px auto"
               />
               <ImageButton
-                _onClick={deleteDB}
+                _onClick={() => {
+                  onRemove();
+                  deleteDB();
+                }}
                 size="25px"
                 margin="0px 10px"
                 deleteIcon
