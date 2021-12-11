@@ -8,8 +8,8 @@
 
 # 👨‍💻 프로젝트 기간 & 팀원
 2021년 12월 6일 ~ 2021년 12월 11일 (총 5일)
-F.E : 공성훈, 정연재 (프론트엔드 깃헙 주소)
-B.E : 김희경, 이건희, 이성진 (https://github.com/Johnberman-J/mini-project)
+- F.E : 공성훈, 정연재 (프론트엔드 깃헙 주소)
+- B.E : 김희경, 이건희, 이성진 (https://github.com/Johnberman-J/mini-project)
 
 
 # 🎬 시연영상
