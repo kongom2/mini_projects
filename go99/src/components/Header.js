@@ -14,7 +14,7 @@ const Header = (props) => {
     dispatch(userActions.logoutDB());
   };
   const id = window.sessionStorage.getItem('id')
-  const cookie = getCookie("is_login");
+
   const is_login = useSelector((state) => state.user.is_login);
 
   // 토큰의 유무로 분기점 설정
@@ -35,8 +35,9 @@ const Header = (props) => {
               <HiChevronLeft size="40" color="#D85147" />
             </Grid>
             <Text
-              margin="0 auto 0 0"
-              size="24px"
+              margin="0 0 0 45px"
+              size="1.5rem"
+              cursor="pointer"
               bold
               _onClick={() => {
                 history.push("/");
@@ -49,7 +50,8 @@ const Header = (props) => {
               text="로그아웃"
               bg="#fff"
               width="100px"
-              fontColor="#555"
+              fontColor="#777"
+              bold
               _onClick={logOut}
             ></Button>
           </Grid>
@@ -61,18 +63,7 @@ const Header = (props) => {
     <React.Fragment>
       <HeaderWrap>
         <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#fff">
-          <Grid
-            is_flex
-            width="40px"
-            height="40px"
-            margin="0 0 0 0"
-            _onClick={() => {
-              history.goBack();
-            }}
-            cursor="pointer"
-          >
-            <HiChevronLeft size="40" color="#D85147" />
-          </Grid>
+
         </Grid>
       </HeaderWrap>
     </React.Fragment>

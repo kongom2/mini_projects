@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Grid, Text } from "../elements/elementsIndex";
 import { TrackersList } from "../components/componentIndex";
 import { history } from "../redux/configureStore";
+import { useSelector } from "react-redux";
 
 const Main = (props) => {
   const pathName = history.location.pathname;
@@ -18,17 +19,41 @@ const Main = (props) => {
     }
   }, []);
 
+  // const day = useSelector((state) => state.main.circles[0])
+  // const data = {...day}
+  // const startDay = data.circles_date
+  // const [days,setDays] = useState()
+  // const now = new Date()
+  
+  // let year = now.getFullYear(); // 년도
+  // let month = now.getMonth() + 1;  // 월
+  // let date = now.getDate();  // 날짜
+  
+  // const stDate = new Date(startDay) ;
+  // const endDate = new Date(2021, 12, 12) ;
+ 
+  // const btMs = endDate.getTime() - stDate.getTime() ;
+  // const btDay = btMs / (1000*60*60*24) ;
+ 
+ 
+  // console.log(btDay)
+
+
+
   return (
     <React.Fragment>
       <Grid padding="104px 20px 0 20px" margin="0 0 10% 0">
         <Text id="2rem" bold>
           {nickName}님의
         </Text>{" "}
-        {/* 이후에 id값 */}
-        <Text size="3rem" bold>
-          {title[2]}99!!
+        <Grid is_flex>
+        <Text size="2.8rem" bold>
+          {title[2]}99
         </Text>{" "}
-        {/* 이후에 project값 */}
+        <Text size='1.5rem' margin='0 auto -1rem 20px' bold>
+
+        </Text>
+        </Grid>
       </Grid>
       <Grid padding="0 20px" width="100%" height="auto" is_flex>
         <TrackersList

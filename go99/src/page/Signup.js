@@ -14,6 +14,15 @@ const Signup = (props) => {
     const [pwdCheck, setPwdCheck] = useState('')
     const [userName, setUserName] = useState('')
 
+    const is_session = localStorage.getItem("token");
+
+    React.useEffect(() => {
+        if (is_session) {
+        history.replace("/project");
+        }
+    }, []);
+
+
     const singUp = () => {
         if(id===''||pwd===''||userName==='') {
             alert('입력사항을 전부 기입해주세요')
@@ -24,8 +33,12 @@ const Signup = (props) => {
             return;
         }
         if(!checkPassword(pwd)) {
-            alert('숫자+영문자 조합으로 6자리 이상 입력해주세요.')
+            alert('아이디가 포함되지 숫자+영문자 형식입니다')
             return;
+        }
+        if(pwd.includes(id)) {
+            alert('비밀번호에 아이디가 포함되어 있습니다.')
+            return
         }
         if(pwd !== pwdCheck) {
             alert('비밀번호가 다릅니다.')
@@ -56,7 +69,7 @@ const Signup = (props) => {
                         color={emailCheck(id) ? '#1fc40f' : '#ff5d5d'} 
                         bold margin='-20px 0px 13px 5px' 
                         size='0.75rem'
-                    >{emailCheck(id) ? '사용할 수 있는 아이디입니다' : '올바르지 않는 아이디 형식입니다.'}</Text>
+                    >{emailCheck(id) ? '올바른 양식의 아이디입니다' : '올바르지 않는 아이디 형식입니다.'}</Text>
                 </Grid>
                 <Input 
                     margin='0 0 30px 0' 
@@ -75,12 +88,12 @@ const Signup = (props) => {
                     placeholder='비밀번호를 입력해주세요' 
                     _onChange={(e)=>{setPwd(e.target.value)}}
                 ></Input>
-                <Grid hide={pwd === '' ? 'none' : null}>
+                <Grid hide={pwd === '' ? 'none' : null}>    
                     <Text 
-                        color={checkPassword(pwd) ? '#1fc40f' : '#ff5d5d'} 
+                        color={checkPassword(pwd)&&(pwd.includes(id))===false ? '#1fc40f' : '#ff5d5d'} 
                         bold margin='-30px 0px 13px 5px' 
                         size='0.75rem'
-                    >{checkPassword(pwd) ? '사용할 수 있는 비밀번호입니다' : '숫자+영문자+특수문자 8자리 이상 입력해주세요.'}</Text>
+                    >{checkPassword(pwd)&&(pwd.includes(id))===false ? '사용할 수 있는 비밀번호입니다' : '아이디가 포함되지 않은 숫자+영문자 형식입니다.'}</Text>
                 </Grid>
                 <Input 
                     type='password' 

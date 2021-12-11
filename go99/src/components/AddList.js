@@ -36,7 +36,7 @@ const AddList = (props) => {
   };
 
   const addTodos = () => {
-    if (todoText === "") {
+    if (todoText === undefined || todoText === null || todoText===' ') {
       window.alert("오늘 할 일을 입력해주세요!");
       return;
     }

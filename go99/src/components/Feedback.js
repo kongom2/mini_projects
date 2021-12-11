@@ -76,7 +76,7 @@ const Feedback = (props) => {
   return (
     <Grid height="200px" padding="20px" bg="#F4F6F6">
       <Grid is_flex height="auto" margin="0 0 10px 0">
-        <Text align="center" margin="0 0 0 0" size="1.5rem" bold>
+        <Text bg='#F4F6F6' align="center" margin="0 0 0 0" size="1.5rem" bold>
           피드백
         </Text>
         <ImageButton
