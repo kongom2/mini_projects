@@ -1,10 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/axios";
-import { firestore } from "../../shared/firebase";
-
-// api이후 삭제
-import axios from "axios";
 
 // Actions
 const GET_PROJECT = "GET_PROJECT"; // 프로젝트 조회하기
@@ -37,19 +33,13 @@ const initialState = {
   editList: [],
 };
 
-const initialStateProject = {
-  // projects_name: "",
-  // projects_id: "",
-  // date: "",
-};
-
 // DB
 const getProjectDB = (id) => {
   return function (dispatch, getState, { history }) {
     // apis.getProjects
-    const user = {
-      userId: id,
-    };
+    // const user = {
+    //   userId: id,
+    // };
     apis
       .getProjects(id)
       .then((res) => {
@@ -107,7 +97,7 @@ const deleteProjectDB = (projects_id, userId) => {
       .then((res) => {
         const list = res.data;
         console.log(list);
-        window.alert("삭제 했습니다!");
+        // window.alert("삭제 했습니다!");
         dispatch(deleteProject(list, userId));
       })
       .catch((err) => {

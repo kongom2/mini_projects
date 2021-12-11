@@ -7,6 +7,7 @@ const Text = (props) => {
     children,
     bold,
     color,
+    bg,
     size,
     margin,
     align,
@@ -21,6 +22,7 @@ const Text = (props) => {
     bold: bold,
     color: color,
     size: size,
+    bg: bg,
     margin: margin,
     height: height,
     align: align, // center,start,end
@@ -41,6 +43,7 @@ Text.defaultProps = {
   _onClick: () => {},
   bold: false,
   color: "#333",
+  bg: "#fff",
   size: "18px",
   margin: "0",
   align: null,
@@ -52,6 +55,7 @@ const TextStyle = styled.p`
   margin: ${(props) => props.margin};
   font-weight: ${(props) => (props.bold ? "700" : "200")};
   color: ${(props) => props.color};
+  background-color: ${(props) => props.bg};
   font-size: ${(props) => props.size};
   margin: ${(props) => props.margin};
   align-self: ${(props) => props.align};

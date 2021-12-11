@@ -1,23 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { apis } from "../api/axios";
 import { history } from "../redux/configureStore";
 
 // component, element 불러오기
 import { AddList, TodoList, Feedback } from "../components/componentIndex";
 import { Text, Grid } from "../elements/elementsIndex";
-import { useSelector, useDispatch } from "react-redux";
 
 const Detail = (props) => {
-  // 디스패치, 히스토리 선언
-
-  const { history } = props;
   const pathName = history.location.pathname;
   const name = pathName.split("/");
 
   const is_session = localStorage.getItem("token");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!is_session) {
       alert("로그인 정보가 없습니다!");
       history.replace("/");

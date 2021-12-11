@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Button } from "../elements/elementsIndex";
+import { Grid, Button, Text } from "../elements/elementsIndex";
 import { HiChevronLeft } from "react-icons/hi";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { useHistory } from "react-router-dom";
+import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCookie, getCookie, setCookie } from "../shared/cookie";
+// import { getCookie } from "../shared/cookie";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const logOut = (props) => {
     dispatch(userActions.logoutDB());
   };
-  const id = window.sessionStorage.getItem('id')
-  const cookie = getCookie("is_login");
-  const is_login = useSelector((state) => state.user.is_login);
+  const id = window.sessionStorage.getItem("id");
+  // const cookie = getCookie("is_login");
+  // const is_login = useSelector((state) => state.user.is_login);
 
   // 토큰의 유무로 분기점 설정
   if (id) {
@@ -27,7 +26,7 @@ const Header = (props) => {
             <Grid
               width="40px"
               height="40px"
-              margin="0 auto 0 0"
+              margin="0 0 0 0"
               _onClick={() => {
                 history.goBack();
               }}
@@ -35,6 +34,16 @@ const Header = (props) => {
             >
               <HiChevronLeft size="40" color="#D85147" />
             </Grid>
+            <Text
+              margin="0 auto 0 0"
+              size="24px"
+              bold
+              _onClick={() => {
+                history.push("/");
+              }}
+            >
+              Todo 99
+            </Text>
             <Button
               hover
               text="로그아웃"
@@ -53,9 +62,10 @@ const Header = (props) => {
       <HeaderWrap>
         <Grid is_flex padding="10px 20px" margin="0 0 0px 0" bg="#fff">
           <Grid
+            is_flex
             width="40px"
             height="40px"
-            margin="0 auto 0 0"
+            margin="0 0 0 0"
             _onClick={() => {
               history.goBack();
             }}

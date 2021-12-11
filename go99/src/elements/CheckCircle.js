@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const CheckCircle = (props) => {
+  const { result, _onClick } = props;
+  // console.log(props.result)
 
-  const {result,_onClick} = props
-  console.log(props.result)
-
-  if(result) {
+  if (result) {
     return (
       <React.Fragment>
         <CompleteColor onClick={_onClick}></CompleteColor>
@@ -20,7 +19,6 @@ const CheckCircle = (props) => {
     </React.Fragment>
   );
 };
-
 
 CheckCircle.defaultProps = {
   completeColor: false,
