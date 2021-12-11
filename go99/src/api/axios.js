@@ -7,16 +7,18 @@ const instance = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    'authorization': `Bearer ${localStorage.getItem("token")}`,
+    authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 });
 
-// instance.interceptors.request.use(function (config) {
-//   const accessToken = document.cookie.split("=")[1];
-//   console.log(document.cookie)
-//   config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
+// instance.interceptors.request.use((config) => {
+//   config.headers["Content-Type"] = "application/json; charset=utf-8";
+//   config.headers["X-Requested-With"] = "XMLHttpRequest";
+//   config.headers["authorization"] = getToken() ? `${getToken()}` : "";
+//   config.headers.Accept = "application/json";
 //   return config;
 // });
+
 
 export const apis = {
   // 로그인
@@ -65,5 +67,5 @@ export const apis = {
     instance.delete(`/api/circles/${circles_id}/feedback`, data),
 
   // 본인확인
-  loginCheck: (token) => instance.post("/api/users/me", token),
+  loginCheck: () => instance.get("/api/users/me"),
 };
