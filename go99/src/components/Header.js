@@ -13,7 +13,7 @@ const Header = (props) => {
   const logOut = (props) => {
     dispatch(userActions.logoutDB());
   };
-  const id = localStorage.getItem("token")
+  const id = localStorage.getItem("token");
   // 토큰의 유무로 분기점 설정
   if (id) {
     return (
@@ -26,7 +26,6 @@ const Header = (props) => {
               margin="0 0 0 0"
               _onClick={() => {
                 history.goBack();
-                  
               }}
               cursor="pointer"
             >
@@ -48,7 +47,17 @@ const Header = (props) => {
               bg="#fff"
               width="100px"
               fontColor="#555"
-              _onClick={logOut}
+              _onClick={() => {
+                // 삭제확인 코드
+                const onRemove = () => {
+                  if (window.confirm("로그아웃 하시겠습니까?") === true) {
+                    logOut();
+                  } else {
+                    return false;
+                  }
+                };
+                onRemove();
+              }}
             ></Button>
           </Grid>
         </HeaderWrap>

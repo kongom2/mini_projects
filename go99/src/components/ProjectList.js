@@ -28,15 +28,6 @@ const ProjectList = (props) => {
   const [projectName, setProjectName] = useState("");
   const [newProjectName, setNewProjectName] = useState("");
 
-  // 삭제확인 코드
-  const onRemove = () => {
-    if (window.confirm("정말 삭제합니까?")) {
-      alert("삭제되었습니다.");
-    } else {
-      alert("취소합니다.");
-    }
-  };
-
   const editModal = () => {
     if (!modal) {
       setModal(true);
@@ -60,6 +51,16 @@ const ProjectList = (props) => {
         const projects_title = item.project_title;
         const deleteDB = () => {
           dispatch(projectActions.deleteProjectDB(projects_id, id));
+        };
+        // 삭제확인 코드
+        const onRemove = () => {
+          if (window.confirm("정말 삭제합니까?") === true) {
+            deleteDB();
+            alert("삭제되었습니다.");
+          } else {
+            alert("취소합니다.");
+            return false;
+          }
         };
         const test = () => {
           console.log("1");
@@ -97,7 +98,6 @@ const ProjectList = (props) => {
                 deleteIcon
                 key={index}
                 _onClick={() => {
-                  deleteDB();
                   onRemove();
                 }}
               />
