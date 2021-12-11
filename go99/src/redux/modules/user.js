@@ -1,9 +1,11 @@
-import { createAction, handleActions } from "redux-actions";
+import { createAction, handleAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-import { deleteCookie, setCookie } from "../../shared/cookie";
+import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
 import { apis } from "../../api/axios";
 
+import { auth } from "../../shared/firebase";
+import firebase from "firebase/compat/app";
 
 // 액션
 const LOG_OUT = "LOG_OUT";
@@ -21,6 +23,10 @@ const initialStat = {
   is_login: false,
 };
 
+// const user_initial = {
+//     user_name:''
+// 
+
 const loginDB = (id,pwd) => {
     return function(dispatch,getState,{history}) {
         
@@ -35,15 +41,12 @@ const loginDB = (id,pwd) => {
         .then((res) => {
           console.log(res)
             const niceName = res.data.nickname
-
+            console.log(niceName)
             const jwtToken = res.data.token;
-            console.log(jwtToken)
-
             localStorage.setItem('token', jwtToken)
 
             window.sessionStorage.setItem('id', id);
             window.sessionStorage.setItem('nickname', niceName);
-
             dispatch(setUser({id:id,user_name:id}));
             alert('로그인이 완료되었습니다!')
             window.location.href='/project'
@@ -84,17 +87,17 @@ const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     const localToken = localStorage.getItem("token");
     const token = { token: localToken };
-
+    console.log(localToken)
     apis
       .loginCheck(token)
       .then((res) => {
         console.log(res);
-        // dispatch(setUser([res]));
+        dispatch(setUser([res]));
       })
       .catch((err) => {
         console.log(err);
         alert("로그인 정보가 없습니다.");
-
+        history.push("/");
       });
   };
 };

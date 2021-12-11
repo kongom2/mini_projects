@@ -1,12 +1,11 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Grid, AddButton, Input } from "../elements/elementsIndex";
 
 import { actionCreators as projectActions } from "../redux/modules/project";
 import { useSelector, useDispatch } from "react-redux";
 
 const AddList = (props) => {
-
-  const id = window.sessionStorage.getItem('id')
+  const id = window.sessionStorage.getItem("id");
 
   const dispatch = useDispatch();
   const [projects_name, setProjectText] = useState("");
@@ -15,16 +14,20 @@ const AddList = (props) => {
     setProjectText(e.target.value);
   };
 
-  const inputRef = useRef()
+  const inputRef = useRef();
 
-  const addProject =() => {
-    const data = {
-      project_title:projects_name,
-      userId:id,
+  const addProject = () => {
+    if (setProjectText === "") {
+      window.alert("오늘 할 일을 입력해주세요!");
+      return;
     }
+    const data = {
+      project_title: projects_name,
+      userId: id,
+    };
     setProjectText("");
     dispatch(projectActions.addProjectDB(data));
-  }
+  };
 
   return (
     <React.Fragment>

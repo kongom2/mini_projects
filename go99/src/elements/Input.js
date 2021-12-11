@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
@@ -67,6 +67,7 @@ Input.defaultProps = {
   onSubmit: () => {},
   _onChange: () => {},
   _onClick: () => {},
+  value: "",
 };
 
 // Input 스타일드 컴포넌트

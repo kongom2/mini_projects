@@ -16,12 +16,13 @@ import { history } from "../redux/configureStore";
 const Project = (props) => {
   const dispatch = useDispatch();
   const id = window.sessionStorage.getItem("nickname");
+  const [projects_name, setProjectText] = useState("");
+
+
   const is_session = localStorage.getItem("token")
 
   React.useEffect(() => {
-    const token = localStorage.getItem("token")
-    console.log(token)
-    if (!token) {
+    if (!is_session) {
       alert('로그인 정보가 없습니다!')
       history.replace("/");
     }

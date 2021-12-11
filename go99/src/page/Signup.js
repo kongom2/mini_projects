@@ -24,11 +24,8 @@ const Signup = (props) => {
             return;
         }
         if(!checkPassword(pwd)) {
-            alert('숫자+영문자+특수문자 조합으로 4자리 이상 입력해주세요.')
+            alert('숫자+영문자 조합으로 6자리 이상 입력해주세요.')
             return;
-        }
-        if(pwd.includes(id)) {
-            alert('비밀번호는 아이디를 포함할 수 없습니다')
         }
         if(pwd !== pwdCheck) {
             alert('비밀번호가 다릅니다.')
@@ -80,10 +77,10 @@ const Signup = (props) => {
                 ></Input>
                 <Grid hide={pwd === '' ? 'none' : null}>
                     <Text 
-                        color={checkPassword(pwd) && (pwd.includes(id)) === false ? '#1fc40f' : '#ff5d5d'} 
+                        color={checkPassword(pwd) ? '#1fc40f' : '#ff5d5d'} 
                         bold margin='-30px 0px 13px 5px' 
                         size='0.75rem'
-                    >{checkPassword(pwd) && (pwd.includes(id)) === false ? '사용할 수 있는 비밀번호입니다' : '아이디를 포함하지 않은 영문자+숫자 4자리이상이 필요합니다'}</Text>
+                    >{checkPassword(pwd) ? '사용할 수 있는 비밀번호입니다' : '숫자+영문자+특수문자 8자리 이상 입력해주세요.'}</Text>
                 </Grid>
                 <Input 
                     type='password' 
