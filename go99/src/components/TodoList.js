@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import {
   Text,
   ImageButton,
@@ -15,8 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 const TodoList = (props) => {
   // 디스패치, 히스토리 선언
   const dispatch = useDispatch();
-  const { is_complete } = props;
 
+  // 투두리스트 불러오기
   const todo_list = useSelector((state) => state.detail.list);
 
   //서클아이디
@@ -34,6 +33,10 @@ const TodoList = (props) => {
   const onChange = (e) => {
     setText(e.target.value);
   };
+  const data = {
+    todo_content: todoEditText,
+    circles_id: circles_id,
+  };
 
   const editText = () => {
     console.log(text);
@@ -41,6 +44,8 @@ const TodoList = (props) => {
     console.log(circles_id);
     dispatch(detailActions.editTodosDB(todo, text, circles_id));
     setModal(false);
+    dispatch(detailActions.editTodosDB(todos_id, data));
+    console.log(todos_id, data);
   };
 
   return (
@@ -83,7 +88,12 @@ const TodoList = (props) => {
                 {item.todo_content}
               </Text>
               <ImageButton
-                _onClick={editModal}
+                _onClick={() => {
+                  editModal();
+                  setTodoId(todos_id);
+                  setTodoName(todo_content);
+                  setCirclesId(circles_id);
+                }}
                 size="25px"
                 margin="0px 0px 0px auto"
               />
