@@ -7,12 +7,13 @@ const instance = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    authorization: `Bearer ${localStorage.getItem("token")}`,
+    'authorization': `Bearer ${localStorage.getItem("token")}`,
   },
 });
 
 // instance.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];
+//   console.log(document.cookie)
 //   config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
 //   return config;
 // });
