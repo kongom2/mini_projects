@@ -20,10 +20,12 @@ const addTodos = createAction(
     circles_id,
   })
 );
-const editTodos = createAction(EDIT_TODOS, (list) => ({list}));
-const deleteTodos = createAction(DELETE_TODOS, (list) => ({list}));
-const patchCircle = createAction(PATCH_CIRCLE, (todos_id,list) => ({ todos_id,list }));
-
+const editTodos = createAction(EDIT_TODOS, (list) => ({ list }));
+const deleteTodos = createAction(DELETE_TODOS, (list) => ({ list }));
+const patchCircle = createAction(PATCH_CIRCLE, (todos_id, list) => ({
+  todos_id,
+  list,
+}));
 
 // initialState
 const initialState = {
@@ -33,12 +35,12 @@ const initialState = {
 // 미들웨어
 const getTodosDB = (circles_id) => {
   return function (dispatch, getState, { history }) {
-    console.log(circles_id);
+    // console.log(circles_id);
     apis
       .getTodo(circles_id)
       .then((res) => {
-        console.log("getTodosDB 접근 확인");
-        console.log(res);
+        // console.log("getTodosDB 접근 확인");
+        // console.log(res);
         let todos_list = res.data.result;
         dispatch(getTodos(todos_list));
       })
@@ -50,33 +52,32 @@ const getTodosDB = (circles_id) => {
 
 const addTodosDB = (circles_id, data) => {
   return function (dispatch, getState, { history }) {
-    console.log(circles_id, data);
+    // console.log(circles_id, data);
     apis
       .addTodo(circles_id, data)
       .then((res) => {
-        console.log(res)
+        // console.log(res);
         dispatch(addTodos(data));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
-        alert('오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.')
+        alert("오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.");
       });
   };
 };
 
-const editTodosDB = (todos_id,contents,circles) => {
+const editTodosDB = (todos_id, contents, circles) => {
   return function (dispatch, getState, { history }) {
-
     const circles_id = {
-      todo_content:contents,
+      todo_content: contents,
       circles_id: circles,
-      todos_id:todos_id
-    }
+      todos_id: todos_id,
+    };
 
     apis
-      .editTodo(todos_id,circles_id)
+      .editTodo(todos_id, circles_id)
       .then((res) => {
-        console.log(res)
+        // console.log(res);
         dispatch(editTodos(res));
       })
       .catch((err) => {
@@ -85,49 +86,45 @@ const editTodosDB = (todos_id,contents,circles) => {
   };
 };
 
-const deleteTodosDB = (todos_id,circles_id) => {
+const deleteTodosDB = (todos_id, circles_id) => {
   return function (dispatch, getState, { history }) {
-
     const circles = {
-      data:{
-        circles_id:circles_id
-      }
-    }
+      data: {
+        circles_id: circles_id,
+      },
+    };
 
     apis
-      .deleteTodo(todos_id,circles)
+      .deleteTodo(todos_id, circles)
       .then((res) => {
-        console.log(res)
+        // console.log(res);
         dispatch(deleteTodos(res));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
-
       });
   };
 };
 
-const patchCircleDB = (todoCheck,todos_id,circles_id) => {
+const patchCircleDB = (todoCheck, todos_id, circles_id) => {
   return function (dispatch, getState, { history }) {
-
-    const data ={
-      todo_check : todoCheck,
-      circles_id : circles_id,
-    }
+    const data = {
+      todo_check: todoCheck,
+      circles_id: circles_id,
+    };
 
     apis
       .checkTodo(todos_id, data)
       .then((res) => {
-        console.log(res.data)
-        dispatch(patchCircle(todos_id,res.data))
+        // console.log(res.data);
+        dispatch(patchCircle(todos_id, res.data));
       })
       .catch((err) => {
         console.log("Load 에러!", err);
-        alert('오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.')
+        alert("오늘이 아닌 날짜의 TodoList는 수정할 수 없습니다.");
       });
   };
 };
-
 
 // Reducer
 export default handleActions(
@@ -138,25 +135,25 @@ export default handleActions(
       }),
     [ADD_TODOS]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.todos_id)
+        // console.log(action.payload.todos_id);
         draft.list.push(action.payload.todos_id);
       }),
 
     [EDIT_TODOS]: (state, action) =>
       produce(state, (draft) => {
-
-        draft.list = action.payload.list.data.result
-    }),
+        draft.list = action.payload.list.data.result;
+      }),
     [DELETE_TODOS]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.list.data.result
-
-    }),
+        draft.list = action.payload.list.data.result;
+      }),
     [PATCH_CIRCLE]: (state, action) =>
-      produce(state, (draft) => { 
-        let idx = draft.list.findIndex((p) => p.todos_id === action.payload.todos_id)
-        let arr = [...state.list]
-        draft.list = action.payload.list.result
+      produce(state, (draft) => {
+        let idx = draft.list.findIndex(
+          (p) => p.todos_id === action.payload.todos_id
+        );
+        let arr = [...state.list];
+        draft.list = action.payload.list.result;
       }),
   },
   initialState
@@ -175,8 +172,7 @@ const actionCreators = {
   deleteTodosDB,
   deleteTodos,
   editTodos,
-  editTodosDB
-
+  editTodosDB,
 };
 
 export { actionCreators }; // 내보내기
