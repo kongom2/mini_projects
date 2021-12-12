@@ -20,11 +20,12 @@ const setCirclesDB = (id) => {
     // 프로젝트 아이디만 구하면 된다.
     const project_id = id;
     const userId = window.sessionStorage.getItem("id");
-    console.log(project_id, userId);
+    // console.log(project_id, userId);
     apis
       .getCircles(project_id, userId)
       .then((res) => {
-        console.log(res.data.circles);
+        // console.log(res.data.circles);
+        // console.log("정상적으로 circle를 가져왔습니다.");
         const circleArr = res.data.circles;
         console.log("4번째 정상적으로 circle를 가져왔습니다.");
         dispatch(setCircles(circleArr));

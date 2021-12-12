@@ -37,9 +37,9 @@ const TodoList = (props) => {
   };
 
   const editText = () => {
-    console.log(text);
-    console.log(todo);
-    console.log(circles_id);
+    // console.log(text);
+    // console.log(todo);
+    // console.log(circles_id);
     dispatch(detailActions.editTodosDB(todo, text, circles_id));
     setModal(false);
   };

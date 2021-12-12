@@ -34,12 +34,12 @@ const loginDB = (id, pwd) => {
       userId: id,
       pw: pwd,
     };
-    console.log(user);
+    // console.log(user);
     apis
       .login(user)
       .then((res) => {
         const niceName = res.data.nickname;
-        console.log(niceName);
+        // console.log(niceName);
         const jwtToken = res.data.token;
         localStorage.setItem("token", jwtToken);
         window.sessionStorage.setItem("id", id);

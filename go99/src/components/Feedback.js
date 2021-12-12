@@ -41,7 +41,7 @@ const Feedback = (props) => {
   };
 
   const addComments = () => {
-    console.log(data);
+    // console.log(data);
     dispatch(feedbackActions.addFeedBackDB(data));
   };
 
@@ -60,7 +60,7 @@ const Feedback = (props) => {
   };
 
   const editFeedback = () => {
-    console.log(editData);
+    // console.log(editData);
     dispatch(feedbackActions.editFeedBackDB(editData));
     setModal(false);
   };
