@@ -95,7 +95,6 @@ const Feedback = (props) => {
               if (window.confirm("정말 삭제합니까?") === true) {
                 deleteFeedback();
               } else {
-                alert("취소합니다.");
                 return false;
               }
             };

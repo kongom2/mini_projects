@@ -62,7 +62,6 @@ const ProjectList = (props) => {
             deleteDB();
             alert("삭제되었습니다.");
           } else {
-            alert("취소합니다.");
             return false;
           }
         };

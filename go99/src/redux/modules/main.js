@@ -15,6 +15,7 @@ const initialState = {
 // middlewear
 const setCirclesDB = (id) => {
   return function (dispatch, getState, { history }) {
+    console.log('3번째 미들웨어 시작')
     console.log(id);
     // 프로젝트 아이디만 구하면 된다.
     const project_id = id;
@@ -25,7 +26,7 @@ const setCirclesDB = (id) => {
       .then((res) => {
         console.log(res.data.circles);
         const circleArr = res.data.circles;
-        console.log("정상적으로 circle를 가져왔습니다.");
+        console.log("4번째 정상적으로 circle를 가져왔습니다.");
         dispatch(setCircles(circleArr));
       })
       .catch((err) => {
@@ -39,6 +40,7 @@ export default handleActions(
   {
     [SET_CIRCLE]: (state, action) =>
       produce(state, (draft) => {
+        console.log('5번째 리덕스')
         draft.circles = action.payload.list;
       }),
   },

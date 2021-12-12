@@ -2,26 +2,34 @@ import React, { useEffect,useState } from "react";
 import { Grid, Text } from "../elements/elementsIndex";
 import { TrackersList } from "../components/componentIndex";
 import { history } from "../redux/configureStore";
-import { useSelector } from "react-redux";
-
+import { useSelector,useDispatch } from "react-redux";
+import { actionCreators as circleActions } from '../redux/modules/main'
 const Main = (props) => {
+  const dispatch = useDispatch()
   const pathName = history.location.pathname;
   const name = pathName.split("_");
   const title = name[0].split('/')
-  const id = window.sessionStorage.getItem('id')
   const nickName = window.sessionStorage.getItem("nickname");
-  const is_session = localStorage.getItem("token")
+
+
+
+  console.log('1번째 페이지 로딩')
 
   useEffect(() => {
-    if (!is_session) {
-      alert("로그인 정보가 없습니다!");
-      history.replace("/");
-    }
+
+    console.log('2번째 유즈이펙트 시작')
+    dispatch(circleActions.setCirclesDB(name[1]))
   }, []);
 
-  // const day = useSelector((state) => state.main.circles[0])
-  // const data = {...day}
-  // const startDay = data.circles_date
+  const day = useSelector((state) => state.main.circles[0])
+  
+  console.log(day)
+  console.log('6번째는 아니겠지')
+
+
+
+
+
   // const [days,setDays] = useState()
   // const now = new Date()
   
